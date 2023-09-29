@@ -1,0 +1,122 @@
+@import 'components/footer.scss';
+@import 'components/header.scss';
+@import 'components/mixin.scss';
+@import 'components/fonts.scss';
+@import 'components/responsive.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica';
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+.input-error {
+    border: 2px solid red !important;
+}
+.container{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+    color: #2A383A;
+}
+img{
+    object-fit: cover;
+}
+.helper{
+    color: red;
+}
+.flex-center-left {
+    @include flex(center, flex-start);
+}
+.flex-center-right {
+    @include flex(center, flex-end);
+}
+.flex-center {
+    @include flex(center, center);
+}
+.flex-center-between {
+    @include flex(center, space-between);
+}
+.flex-center-around {
+    @include flex(center, space-around);
+}
+.flex-center-evenly {
+    @include flex(center, space-evenly);
+}
+.flex-center-end{
+    @include flex(flex-end,space-between);
+}
+.flex-stretch-between{
+    @include flex(stretch,space-between);
+}
+.flex-column{
+    @include flex-column(normal,normal);
+}
+.flex-column-between{
+    @include flex-column(normal,space-between);
+}
+.d-flex{
+    display: flex !important;
+}
+.padding-0{
+    @include padding(0) ;
+}
+.m-0{
+    margin: 0;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+.d-block{
+    display: block !important;
+}
+.d-none{
+    display: none !important;
+}
+.w-100{
+    width: 100%;
+}
+.h-100{
+    height: 100%;
+}
+.position-relative{
+    position: relative;
+}
+.position-absolute{
+    position: absolute;
+}
+.position-fixed{
+    position: fixed;
+}
+.position-sticky{
+    position: sticky;
+}
+.text-center{
+    text-align: center;
+}
+.text-white{
+    color: white !important;
+}
+.img-fluid{
+    max-width: 100%;
+    height: auto;
+}
+
+.mx-auto{
+    margin: 0 auto;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+// Body
+
