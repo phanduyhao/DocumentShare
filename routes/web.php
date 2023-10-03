@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,12 +43,18 @@ Route::middleware(['auth'])->group(function() {
     });
     Route::middleware(['auth', 'checkLevel'])->group(function() {
         Route::prefix('admin')->group(function () {
-        Route::get('/',[HomeController::class,'home'])->name('admin');
-        Route::get('/user',[UsersController::class,'user'])->name('user');
-        Route::get('/userAdmin',[UsersController::class,'userAdmin'])->name('userAdmin');
-        Route::post('/user/store',[UsersController::class,'store'])->name('user.store');
-        Route::patch('/user/update/{user}',[UsersController::class,'update'])->name('user.update');
-        Route::delete('/users/{id}', [UsersController::class,'destroy'])->name('users.destroy');
+            Route::get('/',[HomeController::class,'home'])->name('admin');
+
+//            User
+            Route::get('/user',[UsersController::class,'user'])->name('user');
+            Route::get('/userAdmin',[UsersController::class,'userAdmin'])->name('userAdmin');
+            Route::post('/user/store',[UsersController::class,'store'])->name('user.store');
+            Route::patch('/user/update/{user}',[UsersController::class,'update'])->name('user.update');
+            Route::delete('/users/{id}', [UsersController::class,'destroy'])->name('users.destroy');
+//            Categories
+            Route::resource('cates', CategoryController::class);
+            Route::delete('/cates/{id}', [CategoryController::class,'destroy'])->name('cates.destroy');
+
         });
     });
 });

@@ -15,6 +15,9 @@
                             <h1 class="modal-title fs-5" id="createUserLabel">Thêm mới tài khoản quản trị.</h1>
                         </div>
                         <div class="card-body">
+                            <div class="error">
+                                @include('admin.error')
+                            </div>
                             <form method='POST' action='{{route('user.store')}}'>
                                 @csrf
                                 <div class='mb-3'>
@@ -128,7 +131,7 @@
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
                             <td class="d-flex justify-content-between">
-                                <button type="button" data-id="{{$user->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                                <button type="button" data-url="/admin/users/{{$user->id}}" data-id="{{$user->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 <button type="button" data-id="{{$user->id}}" class="btn btn-info btnEditUser text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editUser{{$user->id}}">Sửa</button>
                             </td>
 
@@ -140,7 +143,7 @@
                                             <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa bản ghi này vĩnh viễn không ?</h1>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="delete-user btn btn-danger" data-id="{{ $user->id }}">Xóa</button>
+                                            <button class="delete-forever btn btn-danger" data-id="{{ $user->id }}">Xóa</button>
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                         </div>
                                     </div>

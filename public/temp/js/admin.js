@@ -31,10 +31,19 @@ $(document).ready(function () {
 
 // tạo Alias tự động
 $(document).ready(function () {
-    $('#title').on('input', function () {
+    $('#title-store').on('input', function () {
         var title = $(this).val();
         var slug = slugify(title);
-        $('#slug').val(slug);
+        $('#slug-store').val(slug);
+    });
+    $('.form_cate_update').each(function () {
+        var form_id = $(this).data('id');
+        $('#title-edit-'+form_id).on('input',function () {
+            var title = $(this).val();
+            var slug = slugify(title);
+            $('#slug-edit-'+form_id).val(slug); // Sửa chỗ này
+            console.log('#slug-edit-'+form_id);
+        });
     });
 
     function slugify(text) {
@@ -49,24 +58,26 @@ $(document).ready(function () {
             .replace(/\-\-+/g, '-')
             .replace(/^-+|-+$/g, '');
     }
+
 });
 
 // Xóa dữ liệu không load lại trang
+
 $(document).ready(function () {
     $('.btnDeleteAsk').on('click', function () {
-        const user_id = $(this).data('id');
-
+        const id = $(this).data('id');
+        const url = $(this).data('url');
         // Xóa vĩnh viễn
-        $('.delete-user').click(function(){
+        $('.delete-forever').click(function(){
             $.ajax({
-                url: '/admin/users/' + user_id,
+                url: url ,
                 type: 'DELETE',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 success: function(data){
                     console.log(data);
                     $('#deleteModal').modal('hide'); // Ẩn modal sau khi xóa thành công
                     $('.modal-backdrop.fade.show').addClass('d-none');
-                    $(`tr[data-id="${user_id}"]`).remove(); // Xóa hàng trong bảng
+                    $(`tr[data-id="${id}"]`).remove(); // Xóa hàng trong bảng
                     setTimeout(function () {
                         alert('Đã xóa thành công !');
                     },300)
@@ -79,12 +90,10 @@ $(document).ready(function () {
     });
 });
 
-// Edit user
-$(document).ready(function () {
-    $('.btnEditUser').on('click',function () {
-        const userId = $(this).data('id');
 
-    })
-});
-
-
+// Show Modal check validate
+// $(document).ready(function () {
+//     $('.alert-error').each(function () {
+//         $(this).closest('.modal').modal('show')
+//     })
+// })

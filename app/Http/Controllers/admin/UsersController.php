@@ -94,6 +94,7 @@ class UsersController extends Controller
             $user->delete();
             return response()->json(['message' => 'Người dùng đã được xóa thành công']);
         } catch (AuthorizationException $e) {
-            abort(403, 'Bạn không có quyền thực hiện hành động này!');}
+            abort(403, 'Bạn không có quyền thực hiện hành động này!');
         }
+    }
 }
