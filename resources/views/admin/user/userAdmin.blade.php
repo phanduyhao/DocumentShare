@@ -200,7 +200,7 @@
                                                         type='password'
                                                         id='password'
                                                         class='form-control'
-                                                        value="{{$user->password}}"
+                                                        value=""
                                                         placeholder='Input Password'
                                                         name='password'
                                                     />

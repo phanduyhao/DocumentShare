@@ -78,8 +78,10 @@ class UsersController extends Controller
             $user->email = $request->email;
             $user->role = $request->role;
             $user->level = $request->level;
-            $user->password = bcrypt($request->password);
-            $user->save();
+             if ($request->has('password') && !empty($request->password)) {
+                 $user->password = bcrypt($request->password);
+             }
+             $user->save();
             return redirect()->back();
          } catch (AuthorizationException $e) {
              abort(403, 'Bạn không có quyền thực hiện');

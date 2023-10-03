@@ -7,7 +7,6 @@
                 <h5 class=" fw-bold">Danh sách danh mục</h5>
                 <button type="button" data-id="" class="btn btn-success text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#createCate">Thêm mới</button>
             </div>
-
             <div class="modal fade" id="createCate" tabindex="-1" aria-labelledby="createCateLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -15,12 +14,12 @@
                             <h1 class="modal-title fs-5" id="createCateLabel">Thêm mới danh mục.</h1>
                         </div>
                         <div class="card-body">
-
+                            <div class="error">
+                                @include('admin.error')
+                            </div>
                             <form id="form_cate_store" method='POST' action='{{route('cates.store')}}'>
                                 @csrf
-                                <div class="error">
-                                    @include('admin.error')
-                                </div>
+
                                 <div class='mb-3'>
                                     <label
                                         class='form-label'
@@ -151,13 +150,13 @@
                                         <h1 class="modal-title fs-5" id="createCateLabel">Chỉnh sửa danh mục.</h1>
                                     </div>
                                     <div class="card-body">
-
+                                        <div class="error">
+                                            @include('admin.error')
+                                        </div>
                                         <form class="form_cate_update" data-id="{{$cate->id}}" method='post' action='{{ route('cates.update',['cate' => $cate]) }}'>
                                             @method('PATCH')
                                             @csrf
-                                            <div class="error">
-                                                @include('admin.error')
-                                            </div>
+
                                             <div class='mb-3'>
                                                 <label
                                                     class='form-label'

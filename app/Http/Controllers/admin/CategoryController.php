@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categories;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -17,16 +18,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Categories $request)
     {
-        $this->validate($request,[
-            'title' => 'required',
-            'slug' => 'required|unique:categories'
-        ],[
-            'title.required' => 'Vui lòng nhập tiêu đề danh mục !',
-            'slug.required' => 'Vui lòng nhập Slug!',
-            'slug.unique' => 'Slug đã tồn tại, vui lòng thay đổi slug!'
-        ] );
+
         // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
         $cate = new Category;
         $cate->title = $request->title;
@@ -42,17 +36,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $cate)
+    public function update(Categories $request, Category $cate)
     {
-        $this->validate($request,[
-            'title' => 'required',
-            'alias' => 'required|unique:categories'
-        ],[
-            'title.required' => 'Vui lòng nhập tiêu đề danh mục !',
-            'alias.required' => 'Vui lòng nhập Slug',
-            'slug.unique' => 'Slug đã tồn tại, vui lòng thay đổi slug!'
 
-        ]);
         // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
         $cate->title = $request->title;
         $cate->desc = $request->desc;
