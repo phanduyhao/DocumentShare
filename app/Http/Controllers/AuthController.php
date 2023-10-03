@@ -85,9 +85,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             if (Auth::user()->level == 0) {
-                return redirect()->route('/');
+                return redirect('/');
             } else {
-                return redirect()->intended('admin');
+                return redirect('/admin');
             }
         }
 
