@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -34,18 +35,25 @@ class UsersController extends Controller
             $this->authorize('create', User::class);
             $this->validate($request,[
                 'name' => 'required',
-                'email' => 'required',
+                'email' => 'required|unique:users',
                 'role' => 'required',
                 'level' => 'required'
             ],[
                 'name.required' => 'Vui lòng nhập tên !',
                 'email.required' => 'Vui lòng nhập email',
+                'email.unique' => 'Email này đã tồn tại',
                 'role.required' => 'Vui lòng phân quyền',
                 'level.required' => 'Vui lòng nhập level',
             ]);
-            // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
             $user = new User;
             $user->name = $request->name;
+            $name = $user->name;
+            $avatar = $request->file('avatar'); // Lấy file ảnh từ file Upload
+            if ($avatar) {
+                $fileName = Str::slug($name) . '.jpg'; // Tên ảnh theo Slug Title
+                $avatar->storeAs('public/images/avatars', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
+                $user->avatar = $fileName; // Lưu tên file ảnh theo slug Title
+            }
             $user->email = $request->email;
             $user->role = $request->role;
             $user->level = $request->level;
@@ -74,7 +82,15 @@ class UsersController extends Controller
                 'level.required' => 'Vui lòng nhập level',
             ]);
             // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
+
             $user->name = $request->name;
+             $name = $user->name;
+             $avatar = $request->file('avatar'); // Lấy file ảnh từ file Upload
+             if ($avatar) {
+                 $fileName = Str::slug($name) . '.jpg'; // Tên ảnh theo Slug Title
+                 $avatar->storeAs('public/images/avatars', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
+                 $user->avatar = $fileName; // Lưu tên file ảnh theo slug Title
+             }
             $user->email = $request->email;
             $user->role = $request->role;
             $user->level = $request->level;

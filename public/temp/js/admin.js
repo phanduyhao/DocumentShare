@@ -12,6 +12,50 @@ $(document).ready(function(){
     });
 });
 
+
+// Thêm ảnh
+function previewImages(event, formID) {
+    var previewContainer = $('#image-preview-' + formID);
+    var files = event.target.files;
+    previewContainer.empty(); // Xóa tất cả ảnh hiện có
+
+    $.each(files, function (index, file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var imgContainer = $('<div>').addClass('image-container');
+            var imgElement = $('<img>').attr('src', e.target.result).css('max-width', '200px');
+            var deleteButton = $('<button>').html('X').addClass('delete-button').attr('type', 'button');
+
+            deleteButton.on('click', function () {
+                var container = $(this).parent();
+                container.remove();
+                updateFileInput(formID);
+            });
+
+            imgContainer.append(imgElement).append(deleteButton);
+            previewContainer.append(imgContainer);
+        }
+
+        reader.readAsDataURL(file);
+    });
+
+    updateFileInput(formID);
+}
+
+function updateFileInput(formID) {
+    var fileInput = $('#file-input-' + formID);
+    var previewContainer = $('#image-preview-' + formID);
+    var imageContainers = previewContainer.find('.image-container');
+
+    if (imageContainers.length > 0) {
+        fileInput.attr('multiple', 'multiple');
+    } else {
+        fileInput.removeAttr('multiple');
+    }
+}
+
+
 // Thêm xóa active giữa các mục Sidebar
 $(document).ready(function () {
     var currentPath = window.location.href;
@@ -42,7 +86,6 @@ $(document).ready(function () {
             var title = $(this).val();
             var slug = slugify(title);
             $('#slug-edit-'+form_id).val(slug); // Sửa chỗ này
-            console.log('#slug-edit-'+form_id);
         });
     });
 
@@ -62,7 +105,6 @@ $(document).ready(function () {
 });
 
 // Xóa dữ liệu không load lại trang
-
 $(document).ready(function () {
     $('.btnDeleteAsk').on('click', function () {
         const id = $(this).data('id');
@@ -78,9 +120,7 @@ $(document).ready(function () {
                     $('#deleteModal').modal('hide'); // Ẩn modal sau khi xóa thành công
                     $('.modal-backdrop.fade.show').addClass('d-none');
                     $(`tr[data-id="${id}"]`).remove(); // Xóa hàng trong bảng
-                    setTimeout(function () {
-                        alert('Đã xóa thành công !');
-                    },300)
+                    window.location.reload()
                 },
                 error: function(error){
                     alert('Bạn không có quyền thực hiện hành động này!')
@@ -91,52 +131,43 @@ $(document).ready(function () {
 });
 
 // Show Modal check validate
-$(document).ready(function () {
-    $('.alert-error').each(function () {
-        $(this).closest('.modal').modal('show')
-    })
-})
+// $(document).ready(function () {
+//     $('.alert-error').each(function () {
+//         $(this).closest('.modal').modal('show')
+//     })
+// })
 
-
-
-// TEST
+// Thêm mới dữ liệu
 $(document).ready(function(){
-    $('body form button[type="submit"]').on('click', function(e){
+
+    // Create
+    $('body .form-create button[type="submit"]').on('click', function(e){
         e.preventDefault();
         let form = $(this).closest('form');
         let formID = form.attr('id');
-        let formAction = form.data('action'); // Lấy route action từ thuộc tính data-action
         if(validateForm(`#${formID}`)) {
-            let formData = form.serialize(); // được sử dụng khi bạn muốn gửi dữ liệu của form dưới dạng chuỗi để thực hiện các yêu cầu HTTP như POST hoặc GET.
-            $.ajax({
-                type: "POST",
-                url: formAction, // Sử dụng route action tương ứng của form
-                data: formData,
-                success: function(response) {
-                    alert('Đã gửi thành công !');
-                    // Xóa Các Dữ liệu cũ trong các ô Input
-                    $(`#${formID} input[type=text], #${formID} input[type=email], #${formID} textarea`).val('');
-                },
-                error: function() {
-                    console.log("An error occurred.");
-                }
-            });
-        } else {
-            alert('Các trường có dấu * là bắt buộc');
+            form.submit();
+        }
+    });
+
+    // Edit
+    $('body .form-edit button[type="submit"]').on('click', function(e){
+        e.preventDefault();
+        let form = $(this).closest('form');
+        let formID = form.attr('id');
+        if(validateForm(`#${formID}`)) {
+            form.submit();
         }
     });
 
     // Click để xóa các thông báo đỏ của check dữ liệu
-    $('body').on('click', '.input-field', function(e){
-        e.preventDefault();
-        $(this).parent().find('.helper').remove();
-        $(this).removeClass('input-error'); //
-    });
-    // Add click event listener to the entire body
-    $('body').on('click', function(e) {
-        $('.helper').remove(); // Remove error helpers
-        $('.input-error').removeClass('input-error'); // Remove input-error class
-    });
+    $('form .input-field').each(function () {
+        $(this).click(function () {
+            $(this).parent().find('.helper').remove();
+            $(this).removeClass('input-error'); //
+        })
+    })
+
     // Prevent click events within the form from triggering the body click event
     $('body form').on('click', function(e) {
         e.stopPropagation();
@@ -149,26 +180,24 @@ $(document).ready(function(){
             let value = $(this).val();
             let fieldType = $(this).attr('type'); // Get input field type
             $(this).removeClass('input-error'); // Remove input-error class
-
-            if(value == null || value == '' || value == undefined) {
-                checkValid = false;
-                $(this).addClass('input-error');
-                let htmlAlert = `<span class="helper" style="z-index: 999;margin-top: 75px;">${$(this).data('require')}</span>`;
-                $(this).parent().append(htmlAlert);
-            }
             // Check if the field is an email input and validate the format
-            if (fieldType === 'email' && value !== '') {
+            if (fieldType == 'email' && value !== '') {
                 if (!isValidEmail(value)) {
                     checkValid = false;
                     $(this).addClass('input-error');
-                    let emailAlert = `<span class="helper" style="z-index: 999;margin-top: 75px;">Chưa nhập đúng kiểu email</span>`;
+                    let emailAlert = `<span class="helper text-danger" style="z-index: 999;margin-top: 75px;">Chưa nhập đúng kiểu email</span>`;
                     $(this).parent().append(emailAlert);
                 }
+            }
+            if(value == null || value == '' || value == undefined) {
+                checkValid = false;
+                $(this).addClass('input-error');
+                let htmlAlert = `<span class="helper text-danger" style="z-index: 999;margin-top: 75px;">${$(this).data('require')}</span>`;
+                $(this).parent().append(htmlAlert);
             }
         });
         return checkValid;
     }
-
     // Check xem có đúng kiểu Email khi nhập vào không ?
     function isValidEmail(email) {
         // Basic email format validation using regular expression
@@ -176,5 +205,3 @@ $(document).ready(function(){
         return emailPattern.test(email);
     }
 });
-
-

@@ -38,7 +38,6 @@ class CategoryController extends Controller
      */
     public function update(Categories $request, Category $cate)
     {
-
         // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
         $cate->title = $request->title;
         $cate->desc = $request->desc;

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DocumentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,14 +47,18 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/',[HomeController::class,'home'])->name('admin');
 
 //            User
-            Route::get('/user',[UsersController::class,'user'])->name('user');
             Route::get('/userAdmin',[UsersController::class,'userAdmin'])->name('userAdmin');
-            Route::post('/user/store',[UsersController::class,'store'])->name('user.store');
-            Route::patch('/user/update/{user}',[UsersController::class,'update'])->name('user.update');
+            Route::get('/user',[UsersController::class,'user'])->name('user');
+            Route::post('/userAdmin',[UsersController::class,'store'])->name('user.store');
+            Route::patch('/userAdmin/{user}',[UsersController::class,'update'])->name('user.update');
             Route::delete('/users/{id}', [UsersController::class,'destroy'])->name('users.destroy');
 //            Categories
             Route::resource('cates', CategoryController::class);
+            Route::post('cates/{cate}',[CategoryController::class,'update'])->name('cates.update');
             Route::delete('/cates/{id}', [CategoryController::class,'destroy'])->name('cates.destroy');
+
+//            Documents
+            Route::resource('documents', DocumentController::class);
 
         });
     });

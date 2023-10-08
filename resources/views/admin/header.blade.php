@@ -30,3 +30,24 @@
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="/temp/admin/assets/js/config.js"></script>
+<style>
+    .image-container {
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    .delete-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: red;
+        color: white;
+        border: none;
+        width: 20px;
+        display: flex;
+        height: 20px;
+        border-radius: 50%;
+        align-items: center;
+    }
+</style>

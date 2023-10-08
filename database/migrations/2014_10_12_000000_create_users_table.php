@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->string('avatar',255)->after('level')->nullable();
             $table->string('sex')->after('avatar')->nullable();
+            $table->integer('score')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

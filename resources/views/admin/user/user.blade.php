@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('contents')
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-fluid flex-grow-1 container-p-y">
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
@@ -11,12 +11,12 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Avatar</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Level</th>
                         <th>Created_at</th>
-                        <th>Updated_at</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -24,12 +24,14 @@
                     @foreach($users as $user)
                     <tr data-id="{{$user->id}}">
                         <td>{{$user->id}}</td>
+                        <td>
+                            <img width="100" src="{{ asset('storage/images/avatars/'. $user->avatar) }}" alt="Avatar">
+                        </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->role}}</td>
                         <td>{{$user->level}}</td>
                         <td>{{$user->created_at}}</td>
-                        <td>{{$user->updated_at}}</td>
                         <td>
                             <button type="button" data-url="/admin/users/{{$user->id}}" data-id="{{$user->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                         </td>

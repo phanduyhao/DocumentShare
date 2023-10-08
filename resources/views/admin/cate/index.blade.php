@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('contents')
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-fluid flex-grow-1 container-p-y">
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
@@ -17,9 +17,8 @@
                             <div class="error">
                                 @include('admin.error')
                             </div>
-                            <form id="form_cate_store" method='POST' action='{{route('cates.store')}}'>
+                            <form id="form_cate_store" class="form-create" method='POST' action='{{route('cates.store')}}'>
                                 @csrf
-
                                 <div class='mb-3'>
                                     <label
                                         class='form-label'
@@ -27,10 +26,10 @@
                                     >Title</label>
                                     <input
                                         type='text'
-                                        class='form-control title '
+                                        class='form-control title input-field '
                                         id='title-store'
                                         placeholder='Input Title'
-                                        name='title'
+                                        name='title' data-require='Mời nhập Tiêu đề'
                                     />
                                 </div>
                                 <div class='mb-3'>
@@ -40,10 +39,10 @@
                                     >Slug</label>
                                     <input
                                         type='text'
-                                        class='form-control slug'
+                                        class='form-control slug input-field'
                                         id='slug-store'
                                         placeholder='Input Slug'
-                                        name='slug'
+                                        name='slug' data-require='Mời nhập Slug'
                                     />
                                 </div>
                                 <div class='mb-3'>
@@ -122,8 +121,8 @@
                             </td>
                             <td>{{$cate->tag}}</td>
                             <td class="d-flex justify-content-between">
-                                <button type="button" data-url="/admin/cates/{{$cate->id}}" data-id="{{$cate->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
-                                <button type="button" data-id="{{$cate->id}}" class="btn btn-info btnEditCate text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editCate{{$cate->id}}">Sửa</button>
+                                <button type="button" data-url="/admin/cates/{{$cate->id}}" data-id="{{$cate->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                                <button type="button" data-id="{{$cate->id}}" class="btn btn-edit btn-info btnEditCate text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editCate{{$cate->id}}">Sửa</button>
                             </td>
 
                             <!-- Modal Delete -->
@@ -143,96 +142,97 @@
                         </tr>
 
                         <!-- Modal Edit -->
-                        <div class="modal fade" id="editCate{{$cate->id}}" tabindex="-1" aria-labelledby="editCate{{$cate->id}}Label" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="createCateLabel">Chỉnh sửa danh mục.</h1>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="error">
-                                            @include('admin.error')
-                                        </div>
-                                        <form class="form_cate_update" data-id="{{$cate->id}}" method='post' action='{{ route('cates.update',['cate' => $cate]) }}'>
-                                            @method('PATCH')
-                                            @csrf
 
-                                            <div class='mb-3'>
-                                                <label
-                                                    class='form-label'
-                                                    for='basic-default-fullname'
-                                                >Title</label>
-                                                <input
-                                                    type='text'
-                                                    class='form-control title'
-                                                    id='title-edit-{{$cate->id}}'
-                                                    placeholder='Input Title'
-                                                    name='title'
-                                                    value="{{$cate->title}}"
-                                                />
-                                            </div>
-                                            <div class='mb-3'>
-                                                <label
-                                                    class='form-label'
-                                                    for='basic-default-company'
-                                                >Slug</label>
-                                                <input
-                                                    type='text'
-                                                    class='form-control slug'
-                                                    id='slug-edit-{{$cate->id}}'
-                                                    placeholder='Input Slug'
-                                                    name='slug'
-                                                    value="{{$cate->slug}}"
-                                                />
-                                            </div>
-                                            <div class='mb-3'>
-                                                <label
-                                                    class='form-label'
-                                                    for='basic-default-email'
-                                                >Description</label>
-                                                <div class='input-group input-group-merge'>
-                                                    <input
-                                                        type='text'
-                                                        id='desc'
-                                                        class='form-control'
-                                                        placeholder='Input Description'
-                                                        name='desc'
-                                                        value="{{$cate->desc}}"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-3">
-                                                <label class='form-label'
-                                                       for='basic-default-email'>Parent Id</label>
-                                                <select name="parent_id" class="form-control" id="parent_id">
-                                                    <option value="">Chọn danh mục cha</option>
-                                                    @foreach($cates as $cate)
-                                                        <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class='form-label'
-                                                       for='basic-default-email'>Tag</label>
-                                                <select name="tag" class="form-control" id="tag">
-                                                    <option value="">Chọn danh mục cha</option>
-                                                    @foreach($cates as $cate)
-                                                        <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type='submit' class='btn btn-success fw-semibold text-dark'>Cập nhật</button>
-                                                <button type="button" class="btn btn-secondary fw-semibold" data-bs-dismiss="modal">Đóng</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     @endforeach
                     </tbody>
                 </table>
+                @foreach($cates as $cate)
+                    <div class="modal fade" id="editCate{{$cate->id}}" tabindex="-1" aria-labelledby="editCate{{$cate->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="createCateLabel">Chỉnh sửa danh mục.</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="error">
+                                    @include('admin.error')
+                                </div>
+                                <form class="form_cate_update form-edit" id="form_cate_update-{{$cate->id}}" data-id="{{$cate->id}}" method='post' action='{{ route('cates.update',['cate' => $cate]) }}'>
+                                    @csrf
+                                    <div class='mb-3'>
+                                        <label
+                                            class='form-label'
+                                            for='basic-default-fullname'
+                                        >Title</label>
+                                        <input
+                                            type='text'
+                                            class='form-control title input-field'
+                                            id='title-edit-{{$cate->id}}'
+                                            placeholder='Input Title'
+                                            name='title' data-require='Mời nhập Tiêu đề'
+                                            value="{{$cate->title}}"
+                                        />
+                                    </div>
+                                    <div class='mb-3'>
+                                        <label
+                                            class='form-label'
+                                            for='basic-default-company'
+                                        >Slug</label>
+                                        <input
+                                            type='text'
+                                            class='form-control slug input-field'
+                                            id='slug-edit-{{$cate->id}}'
+                                            placeholder='Input Slug'
+                                            name='slug' data-require='Mời nhập Slug'
+                                            value="{{$cate->slug}}"
+                                        />
+                                    </div>
+                                    <div class='mb-3'>
+                                        <label
+                                            class='form-label'
+                                            for='basic-default-email'
+                                        >Description</label>
+                                        <div class='input-group input-group-merge'>
+                                            <input
+                                                type='text'
+                                                id='desc'
+                                                class='form-control'
+                                                placeholder='Input Description'
+                                                name='desc'
+                                                value="{{$cate->desc}}"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class='form-label'
+                                               for='basic-default-email'>Parent Id</label>
+                                        <select name="parent_id" class="form-control" id="parent_id">
+                                            <option value="">Chọn danh mục cha</option>
+                                            @foreach($cates as $cate)
+                                                <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class='form-label'
+                                               for='basic-default-email'>Tag</label>
+                                        <select name="tag" class="form-control" id="tag">
+                                            <option value="">Chọn danh mục cha</option>
+                                            @foreach($cates as $cate)
+                                                <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type='submit' class='btn btn-success fw-semibold text-dark'>Cập nhật</button>
+                                        <button type="button" class="btn btn-secondary fw-semibold" data-bs-dismiss="modal">Đóng</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
                 <div class="pagination mt-4 pb-4">
                     {{ $cates->links() }}
                 </div>

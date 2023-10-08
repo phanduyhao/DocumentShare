@@ -53,12 +53,17 @@
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-layout'></i>
-                <div data-i18n='Layouts'>Danh mục tài liệu</div>
+                <div data-i18n='Layouts'>Quản lý tài liệu</div>
             </a>
             <ul class='menu-sub'>
                 <li class='menu-item'>
                     <a href='{{route('cates.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách danh mục</div>
+                        <div data-i18n='Without menu'>Danh mục tài liệu</div>
+                    </a>
+                </li>
+                <li class='menu-item'>
+                    <a href='{{route('documents.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách tài liệu</div>
                     </a>
                 </li>
             </ul>
