@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\UsersController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DocumentController;
+use App\Http\Controllers\admin\StatusController;
+use App\Http\Controllers\admin\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,12 +56,17 @@ Route::middleware(['auth'])->group(function() {
             Route::delete('/users/{id}', [UsersController::class,'destroy'])->name('users.destroy');
 //            Categories
             Route::resource('cates', CategoryController::class);
-            Route::post('cates/{cate}',[CategoryController::class,'update'])->name('cates.update');
             Route::delete('/cates/{id}', [CategoryController::class,'destroy'])->name('cates.destroy');
 
 //            Documents
             Route::resource('documents', DocumentController::class);
+//            Route::get('/documents/{filename}', [DocumentController::class, 'show'])->name('documents.show');
 
+//            Status
+            Route::resource('statuses', StatusController::class);
+
+//            Tag
+            Route::resource('tags', TagController::class);
         });
     });
 });

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('title',255);
-            $table->string('alias',255);
-            $table->string('description');
+            $table->string('slug',255);
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')
                 ->references('id')
@@ -27,15 +27,20 @@ return new class extends Migration
                 ->on('categories')
                 ->onDelete('cascade');
             $table->integer('score');
-            $table->string('type',255);
-            $table->integer('status');
-            $table->string('source');
+            $table->string('type',255)->nullable();
+            $table->unsignedBigInteger('status')->nullable();
+            $table->foreign('status')
+                ->references('id')
+                ->on('statuses')
+                ->onDelete('cascade');
+            $table->string('source')->nullable();
+            $table->string('file',255)->nullable();
 //            $table->unsignedBigInteger('tag_id')->nullable();
 //            $table->foreign('tag_id')
 //                ->references('id')
 //                ->on('tag')
 //                ->onDelete('cascade');
-//            $table->timestamps();
+            $table->timestamps();
         });
     }
 

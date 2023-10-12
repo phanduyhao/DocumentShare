@@ -9,5 +9,25 @@ class Category extends Model
 {
     use HasFactory;
     protected $table = 'categories';
+    use HasFactory;
+    protected $casts = [
+        'created_at' => 'datetime:d/m/Y', // Định dạng ngày tháng năm
+    ];
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d/m/Y', strtotime($value)); // Định dạng theo 'Ngày/Tháng/Năm'
+    }
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
 
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+    public function Tag()
+    {
+        return $this->belongsTo( Tag::class, 'tag','id');
+    }
 }

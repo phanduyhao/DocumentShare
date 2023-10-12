@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="/temp/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet" href="/temp/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
+<link rel="stylesheet" href="/temp/dist/viewer.css'">
 
 <!-- Page CSS -->
 

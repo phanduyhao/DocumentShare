@@ -68,7 +68,32 @@
                 </li>
             </ul>
         </li>
-
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-layout'></i>
+                <div data-i18n='Layouts'>Quản lý trạng thái</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('statuses.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách trạng thái</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-layout'></i>
+                <div data-i18n='Layouts'>Quản lý thẻ Tag</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('tags.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách thẻ tag</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class='menu-header small text-uppercase'>
             <span class='menu-header-text'>Pages</span>
         </li>

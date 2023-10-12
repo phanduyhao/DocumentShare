@@ -158,6 +158,7 @@
                                     @include('admin.error')
                                 </div>
                                 <form class="form_cate_update form-edit" id="form_cate_update-{{$cate->id}}" data-id="{{$cate->id}}" method='post' action='{{ route('cates.update',['cate' => $cate]) }}'>
+                                    @method('Patch')
                                     @csrf
                                     <div class='mb-3'>
                                         <label

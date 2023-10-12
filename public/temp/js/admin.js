@@ -101,7 +101,6 @@ $(document).ready(function () {
             .replace(/\-\-+/g, '-')
             .replace(/^-+|-+$/g, '');
     }
-
 });
 
 // Xóa dữ liệu không load lại trang
@@ -205,3 +204,26 @@ $(document).ready(function(){
         return emailPattern.test(email);
     }
 });
+
+//
+// $(document).ready(function() {
+//     const canvas = $('#pdfCanvas')[0]; // Sử dụng [0] để truy cập phần tử DOM thực sự
+//     const context = canvas.getContext('2d');
+//     const scale = 1.5;
+//    $('.link-file').each(function () {
+//        var pdfPath = $(this).data('href'); // Đường dẫn đến tệp PDF
+//        var loadingTask = pdfjsLib.getDocument(pdfPath);
+//        loadingTask.promise.then(function(pdf) {
+//            pdf.getPage(1).then(function(page) {
+//                var viewport = page.getViewport({ scale });
+//                canvas.height = viewport.height;
+//                canvas.width = viewport.width;
+//                var renderContext = {
+//                    canvasContext: context,
+//                    viewport: viewport
+//                };
+//                page.render(renderContext);
+//            });
+//        });
+//    })
+// });
