@@ -24,3 +24,4 @@
 <script src="/temp/pdf/build/pdf.js"></script>
 <script src="/temp/pdf/build/pdf.worker.js"></script>
 <script src="/temp/pdf/build/pdf.sandbox.js"></script>
+<script src="/temp/viewer/dist/viewer.js"></script>

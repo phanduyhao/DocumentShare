@@ -153,7 +153,7 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$document->title}}</td>
                             <td>
-                                <iframe src="https://docs.google.com/viewerng/viewer?url={{asset('storage/files/' . $document->file)}}" width="100%" height="500px" frameborder="0"></iframe>
+                                <a target="_blank" href="{{ route('documents.show', ['filename' => $document->file]) }}">Xem tệp tin</a>
                             </td>
                             <td>{{$document->cate_id}}</td>
                             <td>{{$document->tag_id}}</td>

@@ -18,7 +18,8 @@
         "phpoffice/phpword": "^1.1",
         "spatie/laravel-responsecache": "^7.4",
         "spatie/pdf-to-image": "^1.2",
-        "tecnickcom/tcpdf": "^6.6"
+        "tecnickcom/tcpdf": "^6.6",
+        "vish4395/laravel-file-viewer": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

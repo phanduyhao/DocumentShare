@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/temp/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
 <link rel="stylesheet" href="/temp/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
-<link rel="stylesheet" href="/temp/dist/viewer.css'">
+<link rel="stylesheet" href="/temp/viewer/dist/viewer.css">
 
 <!-- Page CSS -->
 
@@ -31,6 +31,7 @@
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="/temp/admin/assets/js/config.js"></script>
+
 <style>
     .image-container {
         position: relative;

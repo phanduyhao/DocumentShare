@@ -7,10 +7,11 @@ use App\Models\Category;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Settings;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+//use PhpOffice\PhpWord\IOFactory;
+//use PhpOffice\PhpWord\Settings;
+//use Dompdf\Dompdf;
+//use Dompdf\Options;
+use LaravelFileViewer;
 
 class DocumentController extends Controller
 {
@@ -50,78 +51,44 @@ class DocumentController extends Controller
              'file.required' => 'Vui lòng upload file',
          ]);
 
-         // Kiểm tra xem document_id có tồn tại trong bảng Document hay không
+
          $document = new Document;
          $document->title = $request->title;
-//         if ($request->hasFile('file')) {
-//             $file = $request->file('file');
-//             $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
-//             // Lưu file vào thư mục lưu trữ
-//             $file->storeAs('public/files', $fileName);
-//             $document->file = $fileName;
-//         }
+         if ($request->hasFile('file')) {
+             $file = $request->file('file');
+             $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
+             // Lưu file vào thư mục lưu trữ
+             $file->storeAs('public/files', $fileName);
+             $document->file = $fileName;
+         }
+
+//         Chuyển PDF
 
 //         if ($request->hasFile('file')) {
 //             $file = $request->file('file');
-//             $fileName = $file->getClientOriginalName(); // Get the original file name
+//             $fileName = $file->getClientOriginalName();
 //             $fileNameWithoutExtension = pathinfo($fileName, PATHINFO_FILENAME);
 //
-//             // Store the file in the storage directory
 //             $file->storeAs('public/files', $fileName);
 //
-//             // Set the DomPDF path
 //             $domPdfPath = base_path('vendor/dompdf/dompdf');
 //             Settings::setPdfRendererPath($domPdfPath);
 //             Settings::setPdfRendererName('DomPDF');
 //
-//             // Load the Word document
 //             $content = IOFactory::load(storage_path("app/public/files/{$fileName}"));
 //
-//             // Create a writer to convert to PDF
 //             $pdfWriter = IOFactory::createWriter($content, 'PDF');
 //
-//             // Set source and destination paths for the PDF file
 //             $sourcePath = storage_path("app/public/PdfFiles/{$fileNameWithoutExtension}.pdf");
 //             $destinationPath = storage_path("app/public/PdfFiles/{$fileNameWithoutExtension}.pdf");
 //
-//             // Save the PDF file
 //             $pdfWriter->save($sourcePath);
 //
-//// Move the PDF file from source to destination
+//             // Move the PDF file from source to destination
 //             rename($sourcePath, $destinationPath);
 //
-//// Set the PDF file name for the document's file attribute
 //             $document->file = "{$fileNameWithoutExtension}.pdf";
 //         }
-
-
-         if ($request->hasFile('file')) {
-             $file = $request->file('file');
-             $fileName = $file->getClientOriginalName();
-             $fileNameWithoutExtension = pathinfo($fileName, PATHINFO_FILENAME);
-
-             $file->storeAs('public/files', $fileName);
-
-             $domPdfPath = base_path('vendor/dompdf/dompdf');
-             Settings::setPdfRendererPath($domPdfPath);
-             Settings::setPdfRendererName('DomPDF');
-
-             $content = IOFactory::load(storage_path("app/public/files/{$fileName}"));
-
-             $pdfWriter = IOFactory::createWriter($content, 'PDF');
-
-             $sourcePath = storage_path("app/public/PdfFiles/{$fileNameWithoutExtension}.pdf");
-             $destinationPath = storage_path("app/public/PdfFiles/{$fileNameWithoutExtension}.pdf");
-
-             $pdfWriter->save($sourcePath);
-
-             // Move the PDF file from source to destination
-             rename($sourcePath, $destinationPath);
-
-             $document->file = "{$fileNameWithoutExtension}.pdf";
-         }
-
-
 
          $document->description = $request->desc;
          $document->slug = $request->slug;
@@ -163,10 +130,19 @@ class DocumentController extends Controller
         return response()->json(['message' => 'Danh mục đã được xóa thành công']);
     }
 
-//    public function show($filename)
-//    {
-//        return view('admin.document.pdf_viewer', compact('filename'),[
-//            'title' => $filename
-//        ]);
-//    }
+//    Dùng LaravelFileViewer
+    public function show($filename)
+    {
+        $filepath = storage_path("app/public/files/{$filename}");
+        $file_url = asset("storage/files/{$filename}");
+        $file_data = [
+            [
+                'label' => __('Label'),
+                'value' => "Value"
+            ]
+        ];
+        return view('vendor.laravel-file-viewer.previewFileOffice', compact('filename', 'filepath', 'file_data','file_url'),[
+            'title' => $filename
+        ]);
+    }
 }
