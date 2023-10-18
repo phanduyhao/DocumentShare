@@ -13,7 +13,7 @@
         "CreatePass": "echo bcrypt('12345')",
         "CreateMigration": "php artisan make:migration updateDocument",
         "makeMigration": "php artisan migrate",
-        "makeOnlyMigration": "php artisan migrate --path=database/migrations/2023_10_11_032540_create_tags_table.php",
+        "makeOnlyMigration": "php artisan migrate --path=database/migrations/2023_10_18_025429_update_document.php",
         "makeFormRequest": "php artisan make:request Menu/CreateFormRequest",
         "list": "php artisan route:list",
         "storage": "php artisan storage:link",

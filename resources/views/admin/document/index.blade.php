@@ -31,6 +31,14 @@
                                         name='file' data-require='Mời chọn file'
                                     />
                                 </div>
+                                <div class="mb-3 d-flex flex-column image-gallery" id="image-gallery-form_document_store">
+                                    <label
+                                        class='form-label'
+                                        for='basic-default-fullname'
+                                    >Thumb</label>
+                                    <input type="file" name="thumb" class="file-input" id="file-input-form_document_store" multiple onchange="previewImages(event, 'form_document_store')">
+                                    <div class="image-preview" id="image-preview-form_document_store"></div>
+                                </div>
                                 <div class='mb-3'>
                                     <label
                                         class='form-label'
@@ -104,7 +112,17 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class='form-label'
-                                           for='basic-default-email'>Cate Id</label>
+                                           for='basic-default-email'>Trạng thái</label>
+                                    <select name="status" class="form-control input-field" data-require="Chọn trạng thái" id="status">
+                                        <option value="">Trạng thái</option>
+                                        @foreach($statuses as $status)
+                                            <option value="{{ $status->id }}">{{ $status->status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class='form-label'
+                                           for='basic-default-email'>Danh mục</label>
                                     <select name="cate_id" class="form-control" id="cate_id">
                                         <option value="">Chọn danh mục</option>
                                         @foreach($cates as $cate)
@@ -114,11 +132,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class='form-label'
-                                           for='basic-default-email'>Tag</label>
+                                           for='basic-default-email'>Thẻ Tag</label>
                                     <select name="tag" class="form-control" id="tag">
-                                        <option value="">Chọn danh mục cha</option>
-                                        @foreach($documents as $document)
-                                            <option value="{{ $document->id }}">{{ $document->id }}-{{ $document->title }}</option>
+                                        <option value="">Chọn thẻ tag</option>
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -138,12 +156,12 @@
                     <tr>
                         <th>STT</th>
                         <th>Title</th>
-                        <th>Cate ID</th>
-                        <th>Tag ID</th>
-                        <th>Status</th>
-                        <th>Score</th>
+                        <th>File</th>
                         <th>Type</th>
-                        <th>Source</th>
+                        <th>Category</th>
+                        <th>Tag</th>
+                        <th>Score</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -153,16 +171,41 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$document->title}}</td>
                             <td>
-                                <a target="_blank" href="{{ route('documents.show', ['filename' => $document->file]) }}">Xem tệp tin</a>
+                                <a target="_blank" href="{{ route('documents.show', ['slug' => $document->slug]) }}">Xem tệp tin</a>
                             </td>
-                            <td>{{$document->cate_id}}</td>
-                            <td>{{$document->tag_id}}</td>
-                            <td>{{$document->score}}</td>
                             <td>{{$document->type}}</td>
-                            <td>{{$document->source}}</td>
-                            <td class="d-flex justify-content-between">
+                            <td>
+                                @if($document->cate_id != null)
+                                    {{$document->Category->title}}
+                                @else
+                                    Chưa chọn danh mục
+                                @endif
+                            </td>
+                            <td>
+                                @if($document->tag_id != null)
+                                    {{$document->Tag->tag_name}}
+                                @else
+                                    Chưa có thẻ tag
+                                @endif
+                            </td>
+                            <td>{{$document->score}}</td>
+                            <td class="">
+                               <div class="d-flex align-items-center">
+                                   @if($document->status == 1)
+                                       <i class='bx bx-check fs-2 fw-bold text-success'></i>
+                                       <h5 class="info-details ms-4 mb-0 text-success">{{$document->Status->status}}</h5>
+                                   @elseif($document->status == 2)
+                                       <i class='bx bx-loader-circle fs-2 fw-bold text-warning'></i>
+                                       <h5 class="info-details ms-4 mb-0 text-warning">{{$document->Status->status}}</h5>
+                                   @elseif($document->status == 3)
+                                       <i class='bx bxs-x-square fs-2 fw-bold text-danger'></i>
+                                       <h5 class="info-details ms-4 mb-0 text-danger">{{$document->Status->status}}</h5>
+                                   @endif
+                               </div>
+                            </td>
+                            <td class="">
                                 <button type="button" data-url="/admin/documents/{{$document->id}}" data-id="{{$document->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
-                                <button type="button" data-id="{{$document->id}}" class="btn btn-edit btn-info btnEditDocument text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document->id}}">Sửa</button>
+                                <button type="button" data-id="{{$document->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document->id}}">Sửa</button>
                             </td>
 
                             <!-- Modal Delete -->
@@ -191,15 +234,35 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="createDocumentLabel">Chỉnh sửa danh mục.</h1>
+                                    <h1 class="modal-title fs-5" id="createDocumentLabel">Chỉnh sửa tài liệu.</h1>
                                 </div>
                                 <div class="card-body">
                                     <div class="error">
                                         @include('admin.error')
                                     </div>
-                                    <form class="form_document_update form-edit" id="form_document_update-{{$document->id}}" data-id="{{$document->id}}" method='post' action='{{ route('documents.update',['document' => $document]) }}'>
+                                    <form enctype="multipart/form-data" class="form_document_update form-edit" id="form_document_update-{{$document->id}}" data-id="{{$document->id}}" method='post' action='{{ route('documents.update',['document' => $document]) }}'>
                                         @method('Patch')
                                         @csrf
+                                        <div class='mb-3'>
+                                            <label
+                                                class='form-label'
+                                                for='basic-default-fullname'
+                                            >File</label>
+                                            <input
+                                                type='file'
+                                                class='form-control file'
+                                                id='file-store-{{$document->id}}'
+                                                name='file'
+                                            />
+                                        </div>
+                                        <div class="mb-3 d-flex flex-column image-gallery" id="image-gallery-{{$document->id}}">
+                                            <label
+                                                class='form-label'
+                                                for='basic-default-fullname'
+                                            >Thumb</label>
+                                            <input type="file" name="thumb" class="file-input" id="file-input-{{$document->id}}" multiple onchange="previewImages(event,{{$document->id}})">
+                                            <div class="image-preview" id="image-preview-{{$document->id}}"></div>
+                                        </div>
                                         <div class='mb-3'>
                                             <label
                                                 class='form-label'
@@ -207,8 +270,8 @@
                                             >Title</label>
                                             <input
                                                 type='text'
-                                                class='form-control title input-field'
-                                                id='title-edit-{{$document->id}}'
+                                                class='form-control title input-field '
+                                                id='title-store-{{$document->id}}'
                                                 placeholder='Input Title'
                                                 name='title' data-require='Mời nhập Tiêu đề'
                                                 value="{{$document->title}}"
@@ -222,7 +285,7 @@
                                             <input
                                                 type='text'
                                                 class='form-control slug input-field'
-                                                id='slug-edit-{{$document->id}}'
+                                                id='slug-store-{{$document->id}}'
                                                 placeholder='Input Slug'
                                                 name='slug' data-require='Mời nhập Slug'
                                                 value="{{$document->slug}}"
@@ -236,31 +299,86 @@
                                             <div class='input-group input-group-merge'>
                                                 <input
                                                     type='text'
-                                                    id='desc'
+                                                    id='desc-{{$document->id}}'
                                                     class='form-control'
                                                     placeholder='Input Description'
                                                     name='desc'
-                                                    value="{{$document->desc}}"
+                                                    value="{{$document->description}}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class='mb-3'>
+                                            <label
+                                                class='form-label'
+                                                for='basic-default-email'
+                                            >Source</label>
+                                            <div class='input-group input-group-merge'>
+                                                <input
+                                                    type='number'
+                                                    id='Source-{{$document->id}}'
+                                                    class='form-control'
+                                                    placeholder='Input Source'
+                                                    name='Source'
+                                                    value="{{$document->source}}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class='mb-3'>
+                                            <label
+                                                class='form-label'
+                                                for='basic-default-email'
+                                            >Score</label>
+                                            <div class='input-group input-group-merge'>
+                                                <input
+                                                    type='number'
+                                                    id='score-{{$document->id}}'
+                                                    class='form-control'
+                                                    placeholder='Input score'
+                                                    name='score'
+                                                    value="{{$document->score}}"
                                                 />
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label class='form-label'
-                                                   for='basic-default-email'>Parent Id</label>
-                                            <select name="cate_id" class="form-control" id="cate_id">
-                                                <option value="">Chọn danh mục cha</option>
-                                                @foreach($documents as $document)
-                                                    <option value="{{ $document->id }}">{{ $document->id }}-{{ $document->title }}</option>
+                                                   for='basic-default-email'>Trạng thái</label>
+                                            <select name="status" class="form-control" id="status-{{$document->id}}">
+                                                <option value="">Trạng thái</option>
+                                                @foreach($statuses as $status)
+                                                    <option value="{{ $status->id }}">{{ $status->status }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class='form-label'
+                                                   for='basic-default-email'>Danh mục</label>
+                                            <select name="cate_id" class="form-control" id="cate_id-{{$document->id}}">
+                                                @if($document->cate_id != null)
+                                                    @foreach($cates as $cate)
+                                                        @if($cate->id == $document->cate_id)
+                                                            <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <option value="">Chọn danh mục</option>
+                                                @endif
+                                                @foreach($cates as $cate)
+                                                    <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class='form-label'
-                                                   for='basic-default-email'>Tag</label>
-                                            <select name="tag" class="form-control" id="tag">
-                                                <option value="">Chọn danh mục cha</option>
-                                                @foreach($documents as $document)
-                                                    <option value="{{ $document->id }}">{{ $document->id }}-{{ $document->title }}</option>
+                                                   for='basic-default-email'>Thẻ Tag</label>
+                                            <select name="tag_id" class="form-control" id="tag-{{$document->id}}">
+                                                <option value="">Chọn thẻ tag</option>
+                                                @foreach($tags as $tag)
+                                                    @if($tag->id == $document->cate_id)
+                                                        <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                                    @endif
+                                                @endforeach
+                                                @foreach($tags as $tag)
+                                                    <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

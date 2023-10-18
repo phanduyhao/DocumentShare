@@ -5,7 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Document;
+use App\Models\User;
+use App\Models\status;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 //use PhpOffice\PhpWord\IOFactory;
 //use PhpOffice\PhpWord\Settings;
@@ -20,19 +24,21 @@ class DocumentController extends Controller
      */
     public function index()
     {
+        $tags = Tag::all();
+        $statuses = status::all();
         $cates = Category::all();
         $documents = Document::paginate(10);
-        return view('admin.document.index',compact('documents','cates'),[
+        return view('admin.document.index',compact('documents','cates','tags','statuses'),[
             'title' => 'Quản lý tài liệu'
         ]);
     }
-
-    public function showEmbedView($url)
-    {
-        $info = Embed::create($url);
-
-        return view('admin.document.index', ['info' => $info]);
-    }
+//
+//    public function showEmbedView($url)
+//    {
+//        $info = Embed::create($url);
+//
+//        return view('admin.document.index', ['info' => $info]);
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -44,20 +50,29 @@ class DocumentController extends Controller
              'title' => 'required',
              'slug' => 'required|unique:documents',
              'file' => 'required',
+             'status' => 'required',
          ],[
              'title.required' => 'Vui lòng nhập tiêu đề !',
              'slug.required' => 'Vui lòng nhập slug',
              'slug.unique' => 'Slug này đã có',
              'file.required' => 'Vui lòng upload file',
+             'status.required' => 'Chọn trạng thái',
          ]);
 
 
          $document = new Document;
          $document->title = $request->title;
+         $title = $document->title;
+         $thumb = $request->file('thumb'); // Lấy file ảnh từ file Upload
+         if ($thumb) {
+             $fileName = Str::slug($title) . '.jpg'; // Tên ảnh theo Slug Title
+             $thumb->storeAs('public/images/thumb_files', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
+             $document->thumb = $fileName; // Lưu tên file ảnh theo slug Title
+         }
          if ($request->hasFile('file')) {
              $file = $request->file('file');
              $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
-             // Lưu file vào thư mục lưu trữ
+             $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
              $file->storeAs('public/files', $fileName);
              $document->file = $fileName;
          }
@@ -89,15 +104,15 @@ class DocumentController extends Controller
 //
 //             $document->file = "{$fileNameWithoutExtension}.pdf";
 //         }
-
          $document->description = $request->desc;
          $document->slug = $request->slug;
          $document->score = $request->score;
          $document->source = $request->source;
-         $document->type = $request->type;
+         $document->type = $fileExtension;
          $document->user_id = Auth::id();
          $document->cate_id = $request->cate_id;
-//         $document->tag = $request->tag;
+         $document->tag_id = $request->tag_id;
+         $document->status = $request->status;
          $document->save();
          // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
          return redirect()->back();
@@ -108,12 +123,38 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
-        // Kiểm tra xem document_id có tồn tại trong bảng Document hay không
+        $this->validate($request,[
+            'title' => 'required',
+            'slug' => 'required',
+        ],[
+            'title.required' => 'Vui lòng nhập tiêu đề !',
+            'slug.required' => 'Vui lòng nhập slug',
+        ]);
+
         $document->title = $request->title;
-        $document->desc = $request->desc;
+        $title = $document->title;
+        $thumb = $request->file('thumb'); // Lấy file ảnh từ file Upload
+        if ($thumb) {
+            $fileName = Str::slug($title) . '.jpg'; // Tên ảnh theo Slug Title
+            $thumb->storeAs('public/images/thumb_files', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
+            $document->thumb = $fileName; // Lưu tên file ảnh theo slug Title
+        }
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
+            $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
+            $file->storeAs('public/files', $fileName);
+            $document->file = $fileName;
+            $document->type = $fileExtension;
+        }
+        $document->description = $request->desc;
         $document->slug = $request->slug;
-        $document->parent_id = $request->parent_id;
-        $document->tag = $request->tag;
+        $document->score = $request->score;
+        $document->source = $request->source;
+        $document->user_id = Auth::id();
+        $document->cate_id = $request->cate_id;
+        $document->tag_id = $request->tag_id;
+        $document->status = $request->status;
         $document->save();
         // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
         return redirect()->back();
@@ -130,9 +171,27 @@ class DocumentController extends Controller
         return response()->json(['message' => 'Danh mục đã được xóa thành công']);
     }
 
-//    Dùng LaravelFileViewer
-    public function show($filename)
+    public function show($slug)
     {
+        // Tìm tài liệu dựa trên trường 'slug'
+        $document = Document::where('slug', $slug)->first();
+        $status = status::find($document->status);
+        $status = $status->status;
+        $cate = Category::find($document->cate_id);
+        if($document->cate_id) {
+            $cate_title = $cate->title;
+        } else {
+            $cate_title = "Chưa có danh mục !";
+        }
+        $user = User::find($document->user_id);
+        $username = $user->name;
+        $tag = Tag::find($document->tag_id);
+        if($document->tag_id) {
+            $tag_name = $tag->tag_name;
+        } else {
+            $tag_name = "Chưa có thẻ tag !";
+        }
+        $filename = $document->file;
         $filepath = storage_path("app/public/files/{$filename}");
         $file_url = asset("storage/files/{$filename}");
         $file_data = [
@@ -141,8 +200,9 @@ class DocumentController extends Controller
                 'value' => "Value"
             ]
         ];
-        return view('vendor.laravel-file-viewer.previewFileOffice', compact('filename', 'filepath', 'file_data','file_url'),[
+        return view('vendor.laravel-file-viewer.previewFileOffice', compact('filename', 'filepath', 'file_data','file_url','document','username','cate_title','tag_name','status'),[
             'title' => $filename
         ]);
     }
+
 }

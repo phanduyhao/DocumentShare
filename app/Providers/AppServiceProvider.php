@@ -28,5 +28,12 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('name', $name)->with('role', $role);
         });
+        View::composer('admin.layout_office_admin', function ($view) {
+            $user = Auth::user();
+            $name = $user->name;
+            $role = $user->role;
+
+            $view->with('name', $name)->with('role', $role);
+        });
     }
 }

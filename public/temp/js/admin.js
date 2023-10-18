@@ -80,12 +80,13 @@ $(document).ready(function () {
         var slug = slugify(title);
         $('#slug-store').val(slug);
     });
-    $('.form_cate_update').each(function () {
-        var form_id = $(this).data('id');
-        $('#title-edit-'+form_id).on('input',function () {
-            var title = $(this).val();
-            var slug = slugify(title);
-            $('#slug-edit-'+form_id).val(slug); // Sửa chỗ này
+    $('.form-edit').each(function () {
+        var title = $(this).find('.form-control.title')
+        var slug = $(this).find('.form-control.slug')
+        title.on('input',function () {
+            var title_val = $(this).val();
+            var slug_val = slugify(title_val);
+            slug.val(slug_val); // Sửa chỗ này
         });
     });
 
@@ -129,12 +130,6 @@ $(document).ready(function () {
     });
 });
 
-// Show Modal check validate
-// $(document).ready(function () {
-//     $('.alert-error').each(function () {
-//         $(this).closest('.modal').modal('show')
-//     })
-// })
 
 // Thêm mới dữ liệu
 $(document).ready(function(){
@@ -204,28 +199,3 @@ $(document).ready(function(){
         return emailPattern.test(email);
     }
 });
-
-//
-// $(document).ready(function() {
-//     const canvas = $('#pdfCanvas')[0]; // Sử dụng [0] để truy cập phần tử DOM thực sự
-//     const context = canvas.getContext('2d');
-//     const scale = 1.5;
-//    $('.link-file').each(function () {
-//        var pdfPath = $(this).data('href'); // Đường dẫn đến tệp PDF
-//        var loadingTask = pdfjsLib.getDocument(pdfPath);
-//        loadingTask.promise.then(function(pdf) {
-//            pdf.getPage(1).then(function(page) {
-//                var viewport = page.getViewport({ scale });
-//                canvas.height = viewport.height;
-//                canvas.width = viewport.width;
-//                var renderContext = {
-//                    canvasContext: context,
-//                    viewport: viewport
-//                };
-//                page.render(renderContext);
-//            });
-//        });
-//    })
-// });
-
-

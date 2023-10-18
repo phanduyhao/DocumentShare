@@ -11,7 +11,7 @@
 {{--            @foreach ($file_data as $fd)--}}
 {{--            <div class="d-sm-inline-block d-block pr-1 pl-1 border-right">{{$fd['label']}}<label>: {{$fd['value']}}</div>--}}
 {{--            @endforeach--}}
-{{--                --}}
+
 {{--        </div>--}}
 {{--    </div>--}}
 {{--</div>--}}

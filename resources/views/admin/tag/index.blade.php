@@ -32,38 +32,20 @@
                                         name='title' data-require='Mời nhập Tiêu đề'
                                     />
                                 </div>
-                                <div class='mb-3'>
-                                    <label
-                                        class='form-label'
-                                        for='basic-default-company'
-                                    >Slug</label>
-                                    <input
-                                        type='text'
-                                        class='form-control slug input-field'
-                                        id='slug-store'
-                                        placeholder='Input Slug'
-                                        name='slug' data-require='Mời nhập Slug'
-                                    />
-                                </div>
-                                <div class='mb-3'>
-                                    <label
-                                        class='form-label'
-                                        for='basic-default-email'
-                                    >Description</label>
-                                    <div class='input-group input-group-merge'>
-                                        <input
-                                            type='text'
-                                            id='desc'
-                                            class='form-control'
-                                            placeholder='Input Description'
-                                            name='desc'
-                                        />
-                                    </div>
-                                </div>
                                 <div class="form-group mb-3">
                                     <label class='form-label'
                                            for='basic-default-email'>Parent Id</label>
                                     <select name="parent_id" class="form-control" id="parent_id">
+                                        <option value="">Chọn danh mục cha</option>
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class='form-label'
+                                           for='basic-default-email'>Tag</label>
+                                    <select name="tag" class="form-control" id="tag">
                                         <option value="">Chọn danh mục cha</option>
                                         @foreach($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>

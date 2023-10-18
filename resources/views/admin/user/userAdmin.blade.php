@@ -135,10 +135,8 @@
                             <td>{{$user->level}}</td>
                             <td>{{$user->created_at}}</td>
                             <td class="">
-                                <div class="d-flex justify-content-between">
                                     <button type="button" data-url="/admin/users/{{$user->id}}" data-id="{{$user->id}}" class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                     <button type="button" data-id="{{$user->id}}" class="btn btn-edit btn-info btnEditUser text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editUser{{$user->id}}">Sửa</button>
-                                </div>
                             </td>
 
                             <!-- Modal Delete -->

@@ -5,15 +5,16 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $cate_parents = Category::all();
+        $tags = Tag::all();
         $cates = Category::paginate(10);
-        return view('admin.cate.index',compact('cates','cate_parents'),[
+        return view('admin.cate.index',compact('cates','tags'),[
             'title' => 'Quản lý danh mục'
         ]);
     }

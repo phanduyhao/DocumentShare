@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @include('layout.head')
 </head>
-@include('layout.head')
 <body>
 <div class="layout-site position-relative">
     <!-- header -->

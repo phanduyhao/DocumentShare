@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function() {
 
 //            Documents
             Route::resource('documents', DocumentController::class);
-            Route::get('/documents/{filename}', [DocumentController::class, 'show'])->name('documents.show');
+            Route::get('/documents/{slug}', [DocumentController::class, 'show'])->name('documents.show');
 
 //            Status
             Route::resource('statuses', StatusController::class);

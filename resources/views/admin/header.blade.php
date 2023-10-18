@@ -52,4 +52,7 @@
         border-radius: 50%;
         align-items: center;
     }
+    .text-black-main{
+        color: black;
+    }
 </style>

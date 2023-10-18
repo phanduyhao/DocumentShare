@@ -74,9 +74,9 @@
                                     <label class='form-label'
                                            for='basic-default-email'>Tag</label>
                                     <select name="tag" class="form-control" id="tag">
-                                        <option value="">Chọn danh mục cha</option>
-                                        @foreach($cates as $cate)
-                                            <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
+                                        <option value="">Chọn thẻ Tag</option>
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->tag_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -89,7 +89,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
@@ -97,9 +96,8 @@
                         <th>STT</th>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Slug</th>
                         <th>Desc</th>
-                        <th>Parent_Id</th>
+                        <th>Parent_Cate</th>
                         <th>Tag</th>
                         <th>Actions</th>
                     </tr>
@@ -110,21 +108,25 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$cate->id}}</td>
                             <td>{{$cate->title}}</td>
-                            <td>{{$cate->slug}}</td>
                             <td>{{$cate->desc}}</td>
                             <td>
-                            @foreach($cate_parents as $cate_parent)
-                                @if($cate->parent_id == $cate_parent->id)
-                                    {{$cate_parent->id}} - {{$cate_parent->title}}
+                                @if($cate->parent_id == null)
+                                    0
+                                @else
+                                    {{$cate->parent->title}}
                                 @endif
-                            @endforeach
                             </td>
-                            <td>{{$cate->tag}}</td>
-                            <td class="d-flex justify-content-between">
+                            <td>
+                                @if($cate->tag_id == null)
+                                    0
+                                @else
+                                    {{$cate->Tag->tag_name}}
+                                @endif
+                            </td>
+                            <td class="">
                                 <button type="button" data-url="/admin/cates/{{$cate->id}}" data-id="{{$cate->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 <button type="button" data-id="{{$cate->id}}" class="btn btn-edit btn-info btnEditCate text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editCate{{$cate->id}}">Sửa</button>
                             </td>
-
                             <!-- Modal Delete -->
                             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -142,7 +144,6 @@
                         </tr>
 
                         <!-- Modal Edit -->
-
                     @endforeach
                     </tbody>
                 </table>
@@ -218,9 +219,9 @@
                                         <label class='form-label'
                                                for='basic-default-email'>Tag</label>
                                         <select name="tag" class="form-control" id="tag">
-                                            <option value="">Chọn danh mục cha</option>
-                                            @foreach($cates as $cate)
-                                                <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
+                                            <option value="">Chọn thẻ Tag</option>
+                                            @foreach($tags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->tag_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
