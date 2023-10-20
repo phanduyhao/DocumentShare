@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DocumentController;
 use App\Http\Controllers\admin\StatusController;
 use App\Http\Controllers\admin\TagController;
+use App\Http\Controllers\admin\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,16 +58,26 @@ Route::middleware(['auth'])->group(function() {
 //            Categories
             Route::resource('cates', CategoryController::class);
             Route::delete('/cates/{id}', [CategoryController::class,'destroy'])->name('cates.destroy');
+            Route::post('cates/delete-all', [CategoryController::class,'deleteAllCates'])->name('deleteAllCate');
+
 
 //            Documents
             Route::resource('documents', DocumentController::class);
             Route::get('/documents/{slug}', [DocumentController::class, 'show'])->name('documents.show');
+            Route::post('/documents/delete-all', [DocumentController::class,'deleteAllDoc'])->name('deleteAllDoc');
+
 
 //            Status
             Route::resource('statuses', StatusController::class);
 
 //            Tag
             Route::resource('tags', TagController::class);
+            Route::post('tags/delete-all', [TagController::class,'deleteAllTag'])->name('deleteAllTag');
+
+//            Menu
+            Route::resource('menus', MenuController::class);
+            Route::post('menus/delete-all', [MenuController::class,'deleteAllMenus'])->name('deleteAllMenu');
+
         });
     });
 });

@@ -92,6 +92,10 @@ $page_title=$filename;
                 <h4 class="info-title text-black-main">Point :</h4>
                 <h5 class="info-details ms-4">{{$document->score}}</h5>
             </div>
+            <div class="info-item border-bottom mb-3">
+                <h4 class="info-title text-black-main">Size :</h4>
+                <h5 class="info-details ms-4">{{$document->size}}</h5>
+            </div>
             @if($document->source != null)
                 <div class="info-item border-bottom mb-3">
                     <h4 class="info-title text-black-main">Source :</h4>

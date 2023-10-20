@@ -66,4 +66,9 @@ class TagController extends Controller
         // Chuyển hướng về trang danh sách tag hoặc trang khác (tuỳ ý)
         return response()->json(['message' => 'Tag đã được xóa thành công']);
     }
+
+    public function deleteAllTag() {
+        Tag::truncate(); // Xóa tất cả bản ghi
+        return redirect()->back();
+    }
 }

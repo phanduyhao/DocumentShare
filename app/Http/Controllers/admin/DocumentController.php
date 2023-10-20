@@ -71,6 +71,9 @@ class DocumentController extends Controller
          }
          if ($request->hasFile('file')) {
              $file = $request->file('file');
+             $fileSize = $file->getSize();
+             $fileSizeKB = $fileSize / 1024;
+             $document->size = round($fileSizeKB,2) . ' KB';
              $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
              $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
              $file->storeAs('public/files', $fileName);
@@ -141,6 +144,9 @@ class DocumentController extends Controller
         }
         if ($request->hasFile('file')) {
             $file = $request->file('file');
+            $fileSize = $file->getSize();
+            $fileSizeKB = $fileSize / 1024;
+            $document->size = round($fileSizeKB,2) . ' KB';
             $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
             $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
             $file->storeAs('public/files', $fileName);
@@ -203,6 +209,11 @@ class DocumentController extends Controller
         return view('vendor.laravel-file-viewer.previewFileOffice', compact('filename', 'filepath', 'file_data','file_url','document','username','cate_title','tag_name','status'),[
             'title' => $filename
         ]);
+    }
+
+    public function deleteAllDoc() {
+        Document::truncate(); // Xóa tất cả bản ghi
+        return redirect()->back();
     }
 
 }

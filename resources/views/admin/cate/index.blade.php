@@ -5,7 +5,24 @@
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
                 <h5 class=" fw-bold">Danh sách danh mục</h5>
-                <button type="button" data-id="" class="btn btn-success text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#createCate">Thêm mới</button>
+                <div>
+                    <button type="button" data-id="" class="btn btn-success text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#createCate">Thêm mới</button>
+                    <button type="button"class="btn btn-danger me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModalAll">Xóa tất cả</button>
+                    <div class="modal fade" id="deleteModalAll" tabindex="-1" aria-labelledby="deleteModalAllLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa tất cả bản ghi không ?</h1>
+                                </div>
+                                <form action="{{route('deleteAllMenu')}}" method="post" class="modal-footer">
+                                    @csrf
+                                    <button class="delete-forever btn btn-danger fw-bolder">Xóa</button>
+                                    <button type="button" class="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Đóng</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal fade" id="createCate" tabindex="-1" aria-labelledby="createCateLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -209,7 +226,11 @@
                                         <label class='form-label'
                                                for='basic-default-email'>Parent Id</label>
                                         <select name="parent_id" class="form-control" id="parent_id">
-                                            <option value="">Chọn danh mục cha</option>
+                                            @if($cate->parent_id != null)
+                                                <option value="{{ $cate->parent->id }}">{{ $cate->parent->id }}-{{ $cate->parent->title }}</option>
+                                            @else
+                                                <option value="">Chọn danh mục cha</option>
+                                            @endif
                                             @foreach($cates as $cate)
                                                 <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
                                             @endforeach
@@ -219,7 +240,11 @@
                                         <label class='form-label'
                                                for='basic-default-email'>Tag</label>
                                         <select name="tag" class="form-control" id="tag">
-                                            <option value="">Chọn thẻ Tag</option>
+                                            @if($cate->tag_id != null)
+                                                <option value="{{ $cate->Tag->id }}">{{ $cate->Tag->id }}-{{ $cate->Tag->tag_name }}</option>
+                                            @else
+                                                <option value="">Chọn thẻ tag</option>
+                                            @endif
                                             @foreach($tags as $tag)
                                                 <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->tag_name }}</option>
                                             @endforeach

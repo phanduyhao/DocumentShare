@@ -76,4 +76,8 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Danh mục đã được xóa thành công']);
     }
 
+    public function deleteAllCates() {
+        Category::truncate(); // Xóa tất cả bản ghi
+        return redirect()->back();
+    }
 }

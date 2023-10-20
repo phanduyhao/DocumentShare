@@ -5,7 +5,24 @@
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
                 <h5 class=" fw-bold">Danh sách danh mục</h5>
-                <button type="button" data-id="" class="btn btn-success text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#createTag">Thêm mới</button>
+                <div>
+                    <button type="button" data-id="" class="btn btn-success text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#createTag">Thêm mới</button>
+                    <button type="button"class="btn btn-danger me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModalAll">Xóa tất cả</button>
+                    <div class="modal fade" id="deleteModalAll" tabindex="-1" aria-labelledby="deleteModalAllLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa tất cả bản ghi không ?</h1>
+                                </div>
+                                <form action="{{route('deleteAllTag')}}" method="post" class="modal-footer">
+                                    @csrf
+                                    <button class="delete-forever btn btn-danger fw-bolder">Xóa</button>
+                                    <button type="button" class="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Đóng</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal fade" id="createTag" tabindex="-1" aria-labelledby="createTagLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -27,38 +44,28 @@
                                     <input
                                         type='text'
                                         class='form-control title input-field '
-                                        id='title-store'
-                                        placeholder='Input Title'
-                                        name='title' data-require='Mời nhập Tiêu đề'
+                                        id='tag_name-store'
+                                        placeholder='Input Tag Name'
+                                        name='tag_name' data-require='Mời nhập tiêu đề'
                                     />
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class='form-label'
-                                           for='basic-default-email'>Parent Id</label>
-                                    <select name="parent_id" class="form-control" id="parent_id">
-                                        <option value="">Chọn danh mục cha</option>
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                           for='basic-default-email'>Tài liệu</label>
+                                    <select name="document_id" class="form-control" id="tag">
+                                        <option value="">Chọn tài liệu</option>
+                                        @foreach($documents as $document)
+                                            <option value="{{ $document->id }}">{{ $document->id }}-{{ $document->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ">
                                     <label class='form-label'
-                                           for='basic-default-email'>Tag</label>
-                                    <select name="tag" class="form-control" id="tag">
-                                        <option value="">Chọn danh mục cha</option>
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class='form-label'
-                                           for='basic-default-email'>Tag</label>
-                                    <select name="tag" class="form-control" id="tag">
-                                        <option value="">Chọn danh mục cha</option>
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                           for='basic-default-email'>Danh mục tài liệu</label>
+                                    <select name="cate_id" class="form-control" id="tag">
+                                        <option value="">Chọn danh mục tài liệu</option>
+                                        @foreach($cates as $cate)
+                                            <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -79,8 +86,8 @@
                         <th>STT</th>
                         <th>ID</th>
                         <th>Tag Name</th>
-                        <th>Cate Id</th>
-                        <th>Document Id</th>
+                        <th>Category</th>
+                        <th>Document</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -90,17 +97,15 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$tag->id}}</td>
                             <td>{{$tag->tag_name}}</td>
-                            <td>{{$tag->cate_id}}</td>
-                            <td>{{$tag->desc}}</td>
+                            <td>{{$tag->Category->title}}</td>
                             <td>
-                            @foreach($tag_parents as $tag_parent)
-                                @if($tag->parent_id == $tag_parent->id)
-                                    {{$tag_parent->id}} - {{$tag_parent->title}}
+                                @if($tag->Document->title == null)
+                                    null
+                                @else
+                                    {{$tag->Document->title}}
                                 @endif
-                            @endforeach
                             </td>
-                            <td>{{$tag->tag}}</td>
-                            <td class="d-flex justify-content-between">
+                            <td >
                                 <button type="button" data-url="/admin/tags/{{$tag->id}}" data-id="{{$tag->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 <button type="button" data-id="{{$tag->id}}" class="btn btn-edit btn-info btnEditTag text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editTag{{$tag->id}}">Sửa</button>
                             </td>
@@ -147,60 +152,38 @@
                                         >Title</label>
                                         <input
                                             type='text'
-                                            class='form-control title input-field'
-                                            id='title-edit-{{$tag->id}}'
-                                            placeholder='Input Title'
-                                            name='title' data-require='Mời nhập Tiêu đề'
-                                            value="{{$tag->title}}"
+                                            class='form-control title input-field '
+                                            id='tag_name-store-{{$tag->id}}'
+                                            placeholder='Input Tag Name'
+                                            value="{{$tag->tag_name}}"
+                                            name='tag_name' data-require='Mời nhập tiêu đề'
                                         />
-                                    </div>
-                                    <div class='mb-3'>
-                                        <label
-                                            class='form-label'
-                                            for='basic-default-company'
-                                        >Slug</label>
-                                        <input
-                                            type='text'
-                                            class='form-control slug input-field'
-                                            id='slug-edit-{{$tag->id}}'
-                                            placeholder='Input Slug'
-                                            name='slug' data-require='Mời nhập Slug'
-                                            value="{{$tag->slug}}"
-                                        />
-                                    </div>
-                                    <div class='mb-3'>
-                                        <label
-                                            class='form-label'
-                                            for='basic-default-email'
-                                        >Description</label>
-                                        <div class='input-group input-group-merge'>
-                                            <input
-                                                type='text'
-                                                id='desc'
-                                                class='form-control'
-                                                placeholder='Input Description'
-                                                name='desc'
-                                                value="{{$tag->desc}}"
-                                            />
-                                        </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class='form-label'
-                                               for='basic-default-email'>Parent Id</label>
-                                        <select name="parent_id" class="form-control" id="parent_id">
-                                            <option value="">Chọn danh mục cha</option>
-                                            @foreach($tags as $tag)
-                                                <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                               for='basic-default-email'>Tài liệu</label>
+                                        <select name="document_id" class="form-control" id="tag">
+                                            @if($tag->document_id != null)
+                                                <option value="{{ $tag->Document->id }}">{{ $tag->Document->id }}-{{ $tag->Document->title }}</option>
+                                            @else
+                                                <option value="">Chọn tài liệu</option>
+                                            @endif
+                                            @foreach($documents as $document)
+                                                <option value="{{ $document->id }}">{{ $document->id }}-{{ $document->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group ">
                                         <label class='form-label'
-                                               for='basic-default-email'>Tag</label>
-                                        <select name="tag" class="form-control" id="tag">
-                                            <option value="">Chọn danh mục cha</option>
-                                            @foreach($tags as $tag)
-                                                <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                               for='basic-default-email'>Danh mục tài liệu</label>
+                                        <select name="cate_id" class="form-control" id="tag">
+                                            @if($tag->cate_id != null)
+                                                <option value="{{ $tag->Category->id }}">{{ $tag->Category->id }}-{{ $tag->Category->title }}</option>
+                                            @else
+                                                <option value="">Chọn tài liệu</option>
+                                            @endif
+                                            @foreach($cates as $cate)
+                                                <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>

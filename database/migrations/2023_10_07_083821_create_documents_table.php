@@ -29,6 +29,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('score');
             $table->string('type',255)->nullable();
+            $table->string('size',255)->nullable();
             $table->unsignedBigInteger('status')->nullable();
             $table->foreign('status')
                 ->references('id')
@@ -36,11 +37,11 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('source')->nullable();
             $table->string('file',255)->nullable();
-//            $table->unsignedBigInteger('tag_id')->nullable();
-//            $table->foreign('tag_id')
-//                ->references('id')
-//                ->on('tag')
-//                ->onDelete('cascade');
+            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->foreign('tag_id')
+                ->references('id')
+                ->on('tag')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

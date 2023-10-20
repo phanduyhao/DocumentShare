@@ -55,4 +55,8 @@
     .text-black-main{
         color: black;
     }
+    .circle-active{
+        width: 10px;
+        height: 10px;
+    }
 </style>
