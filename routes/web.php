@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\DocumentController;
 use App\Http\Controllers\admin\StatusController;
 use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\MenuController;
+use App\Http\Controllers\admin\FileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,6 +78,9 @@ Route::middleware(['auth'])->group(function() {
 //            Menu
             Route::resource('menus', MenuController::class);
             Route::post('menus/delete-all', [MenuController::class,'deleteAllMenus'])->name('deleteAllMenu');
+
+//            Files
+            Route::resource('files', FileController::class);
 
         });
     });

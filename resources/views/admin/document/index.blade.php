@@ -129,16 +129,6 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class='form-label'
-                                           for='basic-default-email'>Trạng thái</label>
-                                    <select name="status" class="form-control input-field" data-require="Chọn trạng thái" id="status">
-                                        <option value="">Trạng thái</option>
-                                        @foreach($statuses as $status)
-                                            <option value="{{ $status->id }}">{{ $status->status }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class='form-label'
                                            for='basic-default-email'>Danh mục</label>
                                     <select name="cate_id" class="form-control" id="cate_id">
                                         <option value="">Chọn danh mục</option>
@@ -189,6 +179,8 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$document->title}}</td>
                             <td>
+                                <iframe src="{{ asset('storage/files/'. $document->file) }}" width="100%" height="600"></iframe>
+
                                 <a target="_blank" href="{{ route('documents.show', ['slug' => $document->slug]) }}">Xem tệp tin</a>
                             </td>
                             <td>{{$document->type}}</td>

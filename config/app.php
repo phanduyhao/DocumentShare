@@ -171,7 +171,6 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Vish4395\LaravelFileViewer\LaravelFileViewerServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -188,7 +187,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'LaravelFileViewer' => Vish4395\LaravelFileViewer\LaravelFileViewerFacade::class,
     ])->toArray(),
 
 ];
