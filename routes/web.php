@@ -44,7 +44,9 @@ Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/', function () {
-        return view('welcome');
+        return view('welcome',[
+            'title' => 'Trang chủ'
+        ]);
     });
     Route::middleware(['auth', 'checkLevel'])->group(function() {
         Route::prefix('admin')->group(function () {
@@ -81,7 +83,9 @@ Route::middleware(['auth'])->group(function() {
 
 //            Files
             Route::resource('files', FileController::class);
+            Route::post('files/delete-all', [FileController::class,'deleteAllFiles'])->name('deleteAllFile');
 
+//            Comments
         });
     });
 });

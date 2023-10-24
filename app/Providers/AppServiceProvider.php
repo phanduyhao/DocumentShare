@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
@@ -28,12 +29,9 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('name', $name)->with('role', $role);
         });
-        View::composer('admin.layout_office_admin', function ($view) {
-            $user = Auth::user();
-            $name = $user->name;
-            $role = $user->role;
-
-            $view->with('name', $name)->with('role', $role);
+        View::composer('layout.header', function ($view) {
+            $menus = Menu::all();
+            $view->with('menus', $menus);
         });
     }
 }

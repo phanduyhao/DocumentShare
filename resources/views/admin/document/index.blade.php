@@ -48,14 +48,6 @@
                                         name='file' data-require='Mời chọn file'
                                     />
                                 </div>
-                                <div class="mb-3 d-flex flex-column image-gallery" id="image-gallery-form_document_store">
-                                    <label
-                                        class='form-label'
-                                        for='basic-default-fullname'
-                                    >Thumb</label>
-                                    <input type="file" name="thumb" class="file-input" id="file-input-form_document_store" multiple onchange="previewImages(event, 'form_document_store')">
-                                    <div class="image-preview" id="image-preview-form_document_store"></div>
-                                </div>
                                 <div class='mb-3'>
                                     <label
                                         class='form-label'
@@ -178,10 +170,12 @@
                         <tr data-id="{{$document->id}}">
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$document->title}}</td>
-                            <td>
-                                <iframe src="{{ asset('storage/files/'. $document->file) }}" width="100%" height="600"></iframe>
-
-                                <a target="_blank" href="{{ route('documents.show', ['slug' => $document->slug]) }}">Xem tệp tin</a>
+                            <td style="width: 250px">
+                                <p class="position-relative mb-0" style="width: max-content">
+                                    <iframe src="{{ asset('storage/files/'. $document->file) }}" width="220px"></iframe>
+                                    <a class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' => $document->slug]) }}"></a>
+{{--                                    <a href="{{ asset('storage/filesOrigin/'. $document->file .'.'. $document->type) }}" class="">Tải xuống</a>--}}
+                                </p>
                             </td>
                             <td>{{$document->type}}</td>
                             <td>{{$document->size}}</td>
@@ -266,14 +260,6 @@
                                                 name='file'
                                             />
                                         </div>
-                                        <div class="mb-3 d-flex flex-column image-gallery" id="image-gallery-{{$document->id}}">
-                                            <label
-                                                class='form-label'
-                                                for='basic-default-fullname'
-                                            >Thumb</label>
-                                            <input type="file" name="thumb" class="file-input" id="file-input-{{$document->id}}" multiple onchange="previewImages(event,{{$document->id}})">
-                                            <div class="image-preview" id="image-preview-{{$document->id}}"></div>
-                                        </div>
                                         <div class='mb-3'>
                                             <label
                                                 class='form-label'
@@ -349,20 +335,6 @@
                                                     value="{{$document->score}}"
                                                 />
                                             </div>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label class='form-label'
-                                                   for='basic-default-email'>Trạng thái</label>
-                                            <select name="status" class="form-control" id="status-{{$document->id}}">
-                                                @if($document->status != null)
-                                                    <option value="{{ $document->Status->id }}">{{ $document->Status->status }}</option>
-                                                @else
-                                                    <option value="">Trạng thái</option>
-                                                @endif
-                                                @foreach($statuses as $status)
-                                                    <option value="{{ $status->id }}">{{ $status->id }}-{{ $status->status }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label class='form-label'

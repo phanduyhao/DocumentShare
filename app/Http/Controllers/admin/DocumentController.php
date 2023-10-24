@@ -9,14 +9,8 @@ use App\Models\User;
 use App\Models\status;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-//use PhpOffice\PhpWord\IOFactory;
-//use PhpOffice\PhpWord\Settings;
-//use Dompdf\Dompdf;
-//use Dompdf\Options;
 use ConvertApi\ConvertApi;
-//use LaravelFileViewer;
 
 class DocumentController extends Controller
 {
@@ -33,13 +27,6 @@ class DocumentController extends Controller
             'title' => 'Quản lý tài liệu'
         ]);
     }
-//
-//    public function showEmbedView($url)
-//    {
-//        $info = Embed::create($url);
-//
-//        return view('admin.document.index', ['info' => $info]);
-//    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,12 +45,8 @@ class DocumentController extends Controller
              'file.required' => 'Vui lòng upload file',
          ]);
 
-
          $document = new Document;
          $document->title = $request->title;
-         $title = $document->title;
-         $thumb = $request->file('thumb'); // Lấy file ảnh từ file Upload
-
          if ($request->hasFile('file')) {
              $file = $request->file('file');
              $fileSize = $file->getSize();
@@ -94,50 +77,6 @@ class DocumentController extends Controller
              // Xóa tệp tin tạm thời
              unlink($tempFilePath);
          }
-
-//         if ($thumb) {
-//             $fileName = Str::slug($title) . '.jpg'; // Tên ảnh theo Slug Title
-//             $thumb->storeAs('public/images/thumb_files', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
-//             $document->thumb = $fileName; // Lưu tên file ảnh theo slug Title
-//         }
-//         if ($request->hasFile('file')) {
-//             $file = $request->file('file');
-//             $fileSize = $file->getSize();
-//             $fileSizeKB = $fileSize / 1024;
-//             $document->size = round($fileSizeKB,2) . ' KB';
-//             $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
-//             $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
-//             $file->storeAs('public/files', $fileName);
-//             $document->file = $fileName;
-//         }
-
-//         Chuyển PDF
-
-//         if ($request->hasFile('file')) {
-//             $file = $request->file('file');
-//             $fileName = $file->getClientOriginalName();
-//             $fileNameWithoutExtension = pathinfo($fileName, PATHINFO_FILENAME);
-//
-//             $file->storeAs('public/files', $fileName);
-//
-//             $domPdfPath = base_path('vendor/dompdf/dompdf');
-//             Settings::setPdfRendererPath($domPdfPath);
-//             Settings::setPdfRendererName('DomPDF');
-//
-//             $content = IOFactory::load(storage_path("app/public/files/{$fileName}"));
-//
-//             $pdfWriter = IOFactory::createWriter($content, 'PDF');
-//
-//             $sourcePath = storage_path("app/public/PdfFiles/{$fileNameWithoutExtension}.pdf");
-//             $destinationPath = storage_path("app/public/PdfFiles/{$fileNameWithoutExtension}.pdf");
-//
-//             $pdfWriter->save($sourcePath);
-//
-//             // Move the PDF file from source to destination
-//             rename($sourcePath, $destinationPath);
-//
-//             $document->file = "{$fileNameWithoutExtension}.pdf";
-//         }
          $document->description = $request->desc;
          $document->slug = $request->slug;
          $document->score = $request->score;
@@ -166,23 +105,35 @@ class DocumentController extends Controller
         ]);
 
         $document->title = $request->title;
-        $title = $document->title;
-        $thumb = $request->file('thumb'); // Lấy file ảnh từ file Upload
-        if ($thumb) {
-            $fileName = Str::slug($title) . '.jpg'; // Tên ảnh theo Slug Title
-            $thumb->storeAs('public/images/thumb_files', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
-            $document->thumb = $fileName; // Lưu tên file ảnh theo slug Title
-        }
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileSize = $file->getSize();
             $fileSizeKB = $fileSize / 1024;
-            $document->size = round($fileSizeKB,2) . ' KB';
+            $document->size = round($fileSizeKB, 2) . ' KB';
             $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
             $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
+            $file->storeAs('public/filesOrigin', $fileName);
+
+            // Lưu tệp tin tạm thời
             $file->storeAs('public/files', $fileName);
-            $document->file = $fileName;
-            $document->type = $fileExtension;
+
+            // Đường dẫn tệp tin tạm thời
+            $tempFilePath = storage_path('app/public/files/' . $fileName);
+
+            // Chuyển đổi tệp thành PDF
+            ConvertApi::setApiSecret('6QSfRhA7Nr905F3u'); // Thay 'your-api-secret' bằng API Secret của bạn
+            $result = ConvertApi::convert('pdf', ['File' => $tempFilePath]);
+
+            // Lưu tệp PDF
+            $pdfFileName = pathinfo($fileName, PATHINFO_FILENAME);
+            $pdfFilePath = storage_path('app/public/files/' . $pdfFileName);
+            $result->getFile()->save($pdfFilePath);
+
+            // Gán tên tệp PDF vào thuộc tính 'file'
+            $document->file = $pdfFileName;
+
+            // Xóa tệp tin tạm thời
+            unlink($tempFilePath);
         }
         $document->description = $request->desc;
         $document->slug = $request->slug;
@@ -233,17 +184,6 @@ class DocumentController extends Controller
         return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status'),[
             'title' => $filename
         ]);
-//        $filepath = storage_path("app/public/files/{$filename}.pdf");
-//        $file_url = asset("storage/files/{$filename}.pdf");
-//        $file_data = [
-//            [
-//                'label' => __('Label'),
-//                'value' => "Value"
-//            ]
-//        ];
-//        return view('vendor.laravel-file-viewer.previewFileOffice', compact('filename', 'filepath', 'file_data','file_url','document','username','cate_title','tag_name','status'),[
-//            'title' => $filename
-//        ]);
     }
 
     public function deleteAllDoc() {

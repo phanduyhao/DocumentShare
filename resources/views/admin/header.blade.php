@@ -59,4 +59,11 @@
         width: 10px;
         height: 10px;
     }
+    .btn-show__details-file{
+        transition: .3s all;
+    }
+    .btn-show__details-file:hover{
+        background: rgba(0, 0, 0, 0.43);
+        transition: .3s all;
+    }
 </style>
