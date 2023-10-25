@@ -135,7 +135,7 @@ $(document).ready(function () {
 $(document).ready(function(){
 
     // Create
-    $('body .form-create button[type="submit"]').on('click', function(e){
+    $('.form-create button[type="submit"]').on('click', function(e){
         e.preventDefault();
         let form = $(this).closest('form');
         let formID = form.attr('id');
@@ -145,7 +145,7 @@ $(document).ready(function(){
     });
 
     // Edit
-    $('body .form-edit button[type="submit"]').on('click', function(e){
+    $('.form-edit button[type="submit"]').on('click', function(e){
         e.preventDefault();
         let form = $(this).closest('form');
         let formID = form.attr('id');

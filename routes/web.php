@@ -10,6 +10,9 @@ use App\Http\Controllers\admin\StatusController;
 use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\FileController;
+use App\Http\Controllers\admin\CommentController;
+use App\Http\Controllers\CommentMainController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +44,9 @@ Route::post('/forgot-password', [AuthController::class,'sendResetLinkEmail'])->n
 Route::get('/reset-password/{token}', [AuthController::class,'showResetForm'])->name('password.reset');
 // Route xử lý việc đặt lại mật khẩu
 Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
+
+// Comment
+Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/', function () {
@@ -85,7 +91,9 @@ Route::middleware(['auth'])->group(function() {
             Route::resource('files', FileController::class);
             Route::post('files/delete-all', [FileController::class,'deleteAllFiles'])->name('deleteAllFile');
 
-//            Comments
+//            Comments Admin
+            Route::resource('comments', CommentController::class);
+
         });
     });
 });

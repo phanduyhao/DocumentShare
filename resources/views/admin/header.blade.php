@@ -66,4 +66,7 @@
         background: rgba(0, 0, 0, 0.43);
         transition: .3s all;
     }
+    .admin th, .admin h5{
+        color: black !important;
+    }
 </style>

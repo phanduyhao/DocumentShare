@@ -73,4 +73,75 @@
             </div>
         </div>
     </div>
+
+
+
+
+{{--  COMMENT  --}}
+
+    <div class="comment container-width" id="comment_area">
+        <!-- TEST -->
+        <form id="boxCommentForm" class="comment-box" data-action="{{route('sendComment')}}">
+            @csrf
+            <input type="hidden" name="document" value="{{ $document->id }}"> <!-- Đặt parent_comment_id -->
+            <div class="form-comment w-100">
+                <textarea name="comment" class="input-field textarea-note w-100" id="" rows="5" placeholder="Nhập bình luận *" data-require="Vui lòng nhập nội dung!"></textarea>
+            </div>
+            <button type="submit" class="send-comment">Gửi bình luận</button>
+        </form>
+        <!-- TEST -->
+
+
+        <div class="comment-list">
+            @foreach($comments->sortByDesc('created_at') as $comment)
+                @if($comment->parent_comment_id == null)
+                    <div class="comment-user ">
+                        <p class="id_user d-none" >{{ $comment->id }}</p>
+                        <div class="d-flex" style="align-items: flex-start;">
+                            <p class="type">{{ $comment->comment }}</p>
+                        </div>
+                        <div class="reply">
+                            <p class="reply-text">
+                                <a class="reply-text__link" href="">
+                                    Trả lời
+                                    <span class="id_user d-none" >{{ $comment->id }}</span>
+                                </a>
+                            </p>
+                            <!-- TEST -->
+                            <form  id="boxCommentFormReply_{{ $comment->id }}" class="comment-box child d-none" data-action="{{route('sendComment')}}" style="background: #FFFFFFB2">
+                                <p id="{{ $comment->id }}" class="boxCommentFormReplyID d-none"></p>
+                                @csrf
+                                <input type="hidden" name="document" value="{{ $document->id }}"> <!-- Đặt parent_comment_id -->
+                                <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}"> <!-- Đặt parent_comment_id -->
+                                <div class="form-comment w-100">
+                                    <textarea name="comment" class="input-field textarea-note w-100" id="" rows="5" placeholder="Nhập bình luận *" data-require="Vui lòng nhập nội dung!"></textarea>
+                                </div>
+                                <button type="submit" class="send-comment">Gửi bình luận</button>
+                            </form>
+                            <!-- TEST -->
+                        @if($comment->hasChildren()) <!-- Kiểm tra nếu có comment con -->
+                            <div class="reply-box">
+                                @php
+                                    $comment_childs = $comments;
+                                @endphp
+                                <div class="comment-list__child-{{ $comment->id }}">
+                                    @foreach($comment_childs->sortByDesc('created_at') as $comment_child)
+                                        @if($comment_child->parent_comment_id == $comment->id)
+                                            <div style="margin-bottom: 30px">
+                                                <p class="reply-content">
+                                                    {{ $comment_child->comment }}
+                                                </p>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+    </div>
+
 @endsection

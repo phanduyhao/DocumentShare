@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Document;
 use App\Models\User;
 use App\Models\status;
@@ -161,6 +162,7 @@ class DocumentController extends Controller
 
     public function show($slug)
     {
+        $comments = Comment::all();
         // Tìm tài liệu dựa trên trường 'slug'
         $document = Document::where('slug', $slug)->first();
         $status = status::find($document->status);
@@ -181,7 +183,7 @@ class DocumentController extends Controller
         }
         $filename = $document->file;
 
-        return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status'),[
+        return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments'),[
             'title' => $filename
         ]);
     }

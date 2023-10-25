@@ -16,12 +16,12 @@ class Comment extends Model
     {
         return $this->belongsTo( Document::class, 'document_id','id');
     }
-    public function parentComment()
+    public function Parent()
     {
-        return $this->belongsTo(comments::class, 'parent_comment_id');
+        return $this->belongsTo(Comment::class, 'parent_comment_id');
     }
     public function hasChildren()
     {
-        return $this->hasMany(comments::class, 'parent_comment_id')->exists();
+        return $this->hasMany(Comment::class, 'parent_comment_id')->exists();
     }
 }

@@ -20,18 +20,13 @@ class CommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        // Chuyển hướng về trang danh sách cate hoặc trang khác (tuỳ ý)
+        return response()->json(['message' => 'Bình luận đã được xóa thành công']);
     }
 }
