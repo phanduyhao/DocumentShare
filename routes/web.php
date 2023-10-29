@@ -12,7 +12,9 @@ use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\FileController;
 use App\Http\Controllers\admin\CommentController;
 use App\Http\Controllers\CommentMainController;
-
+use App\Http\Controllers\admin\FavouriteController;
+use App\Http\Controllers\admin\RateController;
+use App\Http\Controllers\admin\DownloadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,6 +96,14 @@ Route::middleware(['auth'])->group(function() {
 //            Comments Admin
             Route::resource('comments', CommentController::class);
 
+//            Favourites Admin
+            Route::resource('favourites',FavouriteController::class);
+
+//            Rates Admin
+            Route::resource('rates',RateController::class);
+
+//            Downloads Admin
+            Route::resource('downloads',DownloadController::class);
         });
     });
 });

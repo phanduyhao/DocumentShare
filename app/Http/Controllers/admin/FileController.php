@@ -51,7 +51,7 @@ class FileController extends Controller
             $pdfFileName = pathinfo($fileName, PATHINFO_FILENAME);
             $pdfFilePath = storage_path('app/public/files/' . $pdfFileName);
             $result->getFile()->save($pdfFilePath);
-
+            $files->path =  $pdfFilePath;
             // Gán tên tệp PDF vào thuộc tính 'file'
             $files->file = $pdfFileName;
 

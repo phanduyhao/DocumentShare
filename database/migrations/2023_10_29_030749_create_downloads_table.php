@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('downloads', function (Blueprint $table) {
             $table->id();
-            $table->string('file',255);
-            $table->string('size',255);
-            $table->string('path',255)->nullable();
-            $table->unsignedBigInteger('document_id')
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('document_id')->nullable();
+            $table->foreign('document_id')
                 ->references('id')
                 ->on('documents')
                 ->onDelete('cascade');
+            $table->integer('download_time');
+            $table->integer('views');
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('downloads');
     }
 };

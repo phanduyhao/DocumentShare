@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug',255);
             $table->string('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->float('rate')->nullable();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

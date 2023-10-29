@@ -1,7 +1,7 @@
-@extends('layout.layout2')
+@extends('layout.layout')
 @section('content')
     <section class="vh-100 pt-5" >
-        <h1 class="text-center">Đăng ký tài khoản</h1>
+        <h1 class="text-center mt-5 fw-bold">Đăng ký tài khoản</h1>
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
@@ -9,7 +9,6 @@
                          class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-
                     <form action="{{ route('registerForm') }}" method="POST">
                         @csrf
                         <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
@@ -18,7 +17,6 @@
                                 <img src="/temp/images/icon/google.png" width="20" alt="">
                             </a>
                         </div>
-
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0">Or</p>
                         </div>
@@ -47,15 +45,12 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-
-
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-primary btn-lg"
                                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng ký</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0"><a href="{{route('login')}}"
-                                                                                              class="link-danger">Đăng nhập</a></p>
+                                                                       class="link-danger">Đăng nhập</a></p>
                         </div>
-
                     </form>
                 </div>
             </div>

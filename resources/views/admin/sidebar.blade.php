@@ -132,6 +132,38 @@
                 </li>
             </ul>
         </li>
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-layout'></i>
+                <div data-i18n='Layouts'>Quản lý yêu thích</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('favourites.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách yêu thích</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-layout'></i>
+                <div data-i18n='Layouts'>Quản lý đánh giá</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('rates.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách đánh giá</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class='menu-item'>
+            <a href='{{route('downloads.index')}}' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-layout'></i>
+                <div data-i18n='Layouts'>Quản lý tải xuống</div>
+            </a>
+        </li>
         <li class='menu-header small text-uppercase'>
             <span class='menu-header-text'>Pages</span>
         </li>
