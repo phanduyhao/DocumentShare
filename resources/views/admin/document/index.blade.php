@@ -14,7 +14,7 @@
                                <div class="modal-header">
                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa tất cả bản ghi không ?</h1>
                                </div>
-                               <form action="{{route('deleteAllDoc')}}" method="post" class="modal-footer">
+                               <form action="{{route('deleteAllOk')}}" method="post" class="modal-footer">
                                    @csrf
                                    <button class="delete-forever btn btn-danger fw-bolder">Xóa</button>
                                    <button type="button" class="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Đóng</button>
@@ -173,8 +173,12 @@
                             <td style="width: 250px">
                                 <p class="position-relative mb-0" style="width: max-content">
                                     <iframe src="{{ asset('storage/files/'. $document->file) }}" width="220px"></iframe>
-                                    <a class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' => $document->slug]) }}"></a>
-{{--                                    <a href="{{ asset('storage/filesOrigin/'. $document->file .'.'. $document->type) }}" class="">Tải xuống</a>--}}
+                                    <a data-id="{{$document->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document->slug]) }}">
+                                        <a href="" data-id="{{$document->id}}" class="position-absolute end-0 z-3 me-3 btn-favourite">
+                                            <i class='bx bxs-heart fs-3 icon-favourite' ></i>
+                                        </a>
+                                    </a>
+
                                 </p>
                             </td>
                             <td>{{$document->type}}</td>
@@ -195,22 +199,17 @@
                             </td>
                             <td>{{$document->score}}</td>
                             <td class="">
-                               <div class="d-flex align-items-center">
-                                   @if($document->status == 1)
-                                       <i class='bx bx-check fs-2 fw-bold text-success'></i>
-                                       <h5 class="info-details ms-4 mb-0 text-success">{{$document->Status->status}}</h5>
-                                   @elseif($document->status == 2)
-                                       <i class='bx bx-loader-circle fs-2 fw-bold text-warning'></i>
-                                       <h5 class="info-details ms-4 mb-0 text-warning">{{$document->Status->status}}</h5>
-                                   @elseif($document->status == 3)
-                                       <i class='bx bxs-x-square fs-2 fw-bold text-danger'></i>
-                                       <h5 class="info-details ms-4 mb-0 text-danger">{{$document->Status->status}}</h5>
-                                   @endif
-                               </div>
+                                <div class="d-flex align-items-center">
+                                    <i class='bx bx-check fs-2 fw-bold text-success'></i>
+                                    <h5 class="info-details ms-4 mb-0 text-success">{{$document->Status->status}}</h5>
+                                </div>
                             </td>
                             <td class="">
                                 <button type="button" data-url="/admin/documents/{{$document->id}}" data-id="{{$document->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 <button type="button" data-id="{{$document->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document->id}}">Sửa</button>
+                                <a data-id="{{$document->id}}" data-user-id="{{ Auth::id() }}" href="{{ asset('storage/filesOrigin/'. $document->file .'.'. $document->type) }}" download class="download-file">
+                                    <i class='bx bxs-downvote fs-3' ></i>
+                                </a>
                             </td>
 
                             <!-- Modal Delete -->

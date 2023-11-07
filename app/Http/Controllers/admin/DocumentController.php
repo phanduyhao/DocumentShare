@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Document;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\status;
 use App\Models\Tag;
@@ -18,21 +19,66 @@ class DocumentController extends Controller
     /**
      * Display a listing of the resource.
      */
+//    Tài liệu đã duyệt
     public function index()
     {
         $tags = Tag::all();
         $statuses = status::all();
         $cates = Category::all();
-        $documents = Document::paginate(10);
+        $documents = Document::where('status','1')->paginate(10);
         return view('admin.document.index',compact('documents','cates','tags','statuses'),[
-            'title' => 'Quản lý tài liệu'
+            'title' => 'Tài liệu đã duyệt'
         ]);
     }
 
+//    Tài liệu chờ duyệt
+    public function loading()
+    {
+        $tags = Tag::all();
+        $statuses = status::all();
+        $cates = Category::all();
+        $documents = Document::where('status','2')->paginate(10);
+        return view('admin.document.loading',compact('documents','cates','tags','statuses'),[
+            'title' => 'Tài liệu chờ duyệt'
+        ]);
+    }
+
+//    Tài liệu bị hủy
+    public function cancel()
+    {
+        $tags = Tag::all();
+        $statuses = status::all();
+        $cates = Category::all();
+        $documents = Document::where('status','3')->paginate(10);
+        return view('admin.document.cancel',compact('documents','cates','tags','statuses'),[
+            'title' => 'Tài liệu đã hủy'
+        ]);
+    }
+
+//    Duyệt bài
+    public function ok(Request $request, Document $document)
+    {
+        $score = Setting::first();
+        $document->status = 1;
+        $document->score = $score->score_doc_ok;
+        $document->save();
+        // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
+        return redirect()->back();
+    }
+
+//    Hủy bài
+    public function cancelAction(Request $request, Document $document)
+    {
+        $document->status = 3;
+        $document->save();
+        // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
+        return redirect()->back();
+    }
     /**
      * Store a newly created resource in storage.
      */
 
+//    Thêm mới
      public function store(Request $request)
      {
          $this->validate($request,[
@@ -95,6 +141,7 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
+//    Cập nhật
     public function update(Request $request, Document $document)
     {
         $this->validate($request,[
@@ -152,6 +199,7 @@ class DocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+//    Xóa
     public function destroy($id)
     {
         $document = Document::findOrFail($id);
@@ -160,36 +208,52 @@ class DocumentController extends Controller
         return response()->json(['message' => 'Danh mục đã được xóa thành công']);
     }
 
+//    Xem chi tiết
     public function show($slug)
     {
-        $comments = Comment::all();
-        // Tìm tài liệu dựa trên trường 'slug'
         $document = Document::where('slug', $slug)->first();
-        $status = status::find($document->status);
-        $status = $status->status;
-        $cate = Category::find($document->cate_id);
-        if($document->cate_id) {
-            $cate_title = $cate->title;
-        } else {
-            $cate_title = "Chưa có danh mục !";
-        }
-        $user = User::find($document->user_id);
-        $username = $user->name;
-        $tag = Tag::find($document->tag_id);
-        if($document->tag_id) {
-            $tag_name = $tag->tag_name;
-        } else {
-            $tag_name = "Chưa có thẻ tag !";
-        }
-        $filename = $document->file;
+        if($document){
+           $comments = Comment::all();
+           // Tìm tài liệu dựa trên trường 'slug'
+           $status = status::find($document->status);
+           $status = $status->status;
+           $cate = Category::find($document->cate_id);
+           if($document->cate_id) {
+               $cate_title = $cate->title;
+           } else {
+               $cate_title = "Chưa có danh mục !";
+           }
+           $user = User::find($document->user_id);
+           $username = $user->name;
+           $tag = Tag::find($document->tag_id);
+           if($document->tag_id) {
+               $tag_name = $tag->tag_name;
+           } else {
+               $tag_name = "Chưa có thẻ tag !";
+           }
+           $filename = $document->file;
 
-        return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments'),[
-            'title' => $filename
-        ]);
+           return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments'),[
+               'title' => $filename
+           ]);
+       }
     }
 
-    public function deleteAllDoc() {
-        Document::truncate(); // Xóa tất cả bản ghi
+//    Xóa tất cả tài liệu đã duyệt
+    public function deleteAllDocOk() {
+        Document::where('status', 1)->delete(); // Xóa tất cả bản ghi có status = 2
+        return redirect()->back();
+    }
+
+//    Xóa tất cả tài liệu đang chờ
+    public function deleteAllDocLoading() {
+        Document::where('status', 2)->delete(); // Xóa tất cả bản ghi có status = 2
+        return redirect()->back();
+    }
+
+//    Xóa tất cả tài liệu bị hủy
+    public function deleteAllDocCancel() {
+        Document::where('status', 3)->delete(); // Xóa tất cả bản ghi có status = 2
         return redirect()->back();
     }
 

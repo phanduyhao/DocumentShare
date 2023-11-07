@@ -4,29 +4,31 @@
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
-                <h5 class=" fw-bold">Danh sách yêu thích</h5>
+                <h5 class=" fw-bold">Danh sách lượt xem</h5>
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
                     <tr class="text-center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>User</th>
-                        <th>Favourite Document</th>
+                        <th>Document</th>
+                        <th>Views</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0 text-center">
-                    @foreach($favourites as $favourite)
-                        <tr data-id="{{$favourite->id}}">
-                            <td>{{$favourite->id}}</td>
-                            <td>{{$favourite->User->name}}</td>
-                            <td>{{$favourite->Document->title}}</td>
+                    @foreach($views as $view)
+                        <tr data-id="{{$view->id}}">
+                            <td> {{ $loop->iteration }}</td>
+                            <td>{{$view->User->name}}</td>
+                            <td>{{$view->Document->title}}</td>
+                            <td>{{$view->view_count}}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <div class="pagination mt-4 pb-4">
-                    {{ $favourites->links() }}
+                    {{ $views->links() }}
                 </div>
             </div>
         </div>

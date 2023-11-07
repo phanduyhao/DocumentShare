@@ -4,47 +4,31 @@
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
-                <h5 class=" fw-bold">Danh sách đánh giá</h5>
+                <h5 class=" fw-bold">Danh sách tải xuống</h5>
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
                     <tr class="text-center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>User</th>
-                        <th>Rating Document</th>
-                        <th>Rate</th>
+                        <th>Document</th>
+                        <th>Downloads</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0 text-center">
-                    @foreach($rates as $rate)
-                        <tr data-id="{{$rate->id}}">
-                            <td>{{$rate->id}}</td>
-                            <td>{{$rate->User->name}}</td>
-                            <td>{{$rate->Document->title}}</td>
-                            <td>{{$rate->rate}}/10</td>
-                            <td>
-                                <button type="button" data-url="/admin/rates/{{$rate->id}}" data-id="{{$rate->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
-                            </td>
-                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa bản ghi này vĩnh viễn không ?</h1>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="delete-forever btn btn-danger" data-id="{{ $rate->id }}">Xóa</button>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    @foreach($downloads as $download)
+                        <tr data-id="{{$download->id}}">
+                            <td> {{ $loop->iteration }}</td>
+                            <td>{{$download->User->name}}</td>
+                            <td>{{$download->Document->title}}</td>
+                            <td>{{$download->download_count}}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <div class="pagination mt-4 pb-4">
-                    {{ $rates->links() }}
+                    {{ $downloads->links() }}
                 </div>
             </div>
         </div>

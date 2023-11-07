@@ -15,6 +15,9 @@ use App\Http\Controllers\CommentMainController;
 use App\Http\Controllers\admin\FavouriteController;
 use App\Http\Controllers\admin\RateController;
 use App\Http\Controllers\admin\DownloadController;
+use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\ActionController;
+use App\Http\Controllers\admin\ViewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,8 +50,21 @@ Route::get('/reset-password/{token}', [AuthController::class,'showResetForm'])->
 // Route xử lý việc đặt lại mật khẩu
 Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 
+//    Get User Name Comment
+Route::get('/getUserName/{user_id}', [CommentController::class],'getUserName');
+
 // Comment
 Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
+
+//    Download
+Route::post('/download', [ActionController::class,'download']);
+
+//    View
+Route::post('/view', [ActionController::class,'view']);
+
+//    Favourite
+Route::post('/favourite', [ActionController::class,'favourite']);
+
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/', function () {
@@ -74,8 +90,14 @@ Route::middleware(['auth'])->group(function() {
 
 //            Documents
             Route::resource('documents', DocumentController::class);
+            Route::get('/documents-loading', [DocumentController::class, 'loading'])->name('documents.loading');
+            Route::get('/documents-cancel', [DocumentController::class, 'cancel'])->name('documents.cancel');
+            Route::patch('/documents/ok/{document}', [DocumentController::class, 'ok'])->name('documents.ok');
+            Route::patch('/documents/cancel/{document}', [DocumentController::class, 'cancelAction'])->name('documents.cancelAction');
             Route::get('/documents/{slug}', [DocumentController::class, 'show'])->name('documents.show');
-            Route::post('/documents/delete-all', [DocumentController::class,'deleteAllDoc'])->name('deleteAllDoc');
+            Route::post('/documents/delete-all-ok', [DocumentController::class,'deleteAllDocOk'])->name('deleteAllOk');
+            Route::post('/documents/delete-all-load', [DocumentController::class,'deleteAllDocLoading'])->name('deleteAllLoad');
+            Route::post('/documents/delete-all-cancel', [DocumentController::class,'deleteAllDocCancel'])->name('deleteAllCancel');
 
 
 //            Status
@@ -104,6 +126,12 @@ Route::middleware(['auth'])->group(function() {
 
 //            Downloads Admin
             Route::resource('downloads',DownloadController::class);
+
+//            Downloads Admin
+            Route::resource('views',ViewController::class);
+
+//            Settings Admin
+            Route::resource('settings',SettingController::class);
         });
     });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\UsersAdmin;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $score = Setting::first();
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
@@ -50,6 +52,7 @@ class AuthController extends Controller
                     'password' => bcrypt($request->password),
                     'role' => 'user', // Gán mặc định là 'user'
                     'level' => 0, // Gán mặc định là 0
+                    'score' => $score->score_register,
                 ]);
                 Auth::login($user);
             } else {

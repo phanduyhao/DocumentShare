@@ -23,9 +23,9 @@
                         <tr data-id="{{$comment->id}}">
                             <td>{{$comment->id}}</td>
                             <td>{{$comment->User->name}}</td>
-                            <td>{{$comment->User->name}}</td>
+                            <td>{{$comment->User->email}}</td>
                             <td>{{$comment->parent_comment_id}}</td>
-                            <td>{{$comment->Document->title}}</td>
+{{--                            <td>{{$comment->Document->title}}</td>--}}
                             <td>{{$comment->comment}}</td>
                             <td>
                                 <button type="button" data-url="/admin/comments/{{$comment->id}}" data-id="{{$comment->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>

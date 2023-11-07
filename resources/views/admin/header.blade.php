@@ -1,4 +1,4 @@
-<link rel="icon" type="image/x-icon" href="/temp/images/logo-only.png" />
+<link rel="icon" type="image/x-icon" href="/temp/images/icon/logo-only.png" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,6 +22,7 @@
 
 <link rel="stylesheet" href="/temp/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
 <link rel="stylesheet" href="/temp/viewer/dist/viewer.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <!-- Page CSS -->
 
@@ -69,4 +70,15 @@
     .admin th, .admin h5{
         color: black !important;
     }
+
+    .btn-favourite i{
+        transition: .2s all;
+    }
+
+    .btn-favourite:hover i{
+        color: red;
+        transition: .2s all;
+    }
+
+
 </style>
