@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('contents')
-    <div>
+    <div class="container-fluid">
         <div class="mt-4">
             <a href="{{route('documents.index')}}" class="">
                 <i class='bx bx-arrow-back fw-bold fs-1' ></i>

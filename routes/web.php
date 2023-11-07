@@ -51,7 +51,7 @@ Route::get('/reset-password/{token}', [AuthController::class,'showResetForm'])->
 Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 
 //    Get User Name Comment
-Route::get('/getUserName/{user_id}', [CommentController::class],'getUserName');
+//Route::get('/getUserName/{user_id}', [CommentController::class],'getUserName');
 
 // Comment
 Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
