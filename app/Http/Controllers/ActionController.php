@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Download;
 use App\Models\Favourite;
+use App\Models\Rate;
 use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\RateCreated;
 
 class ActionController extends Controller
 {
@@ -55,5 +57,18 @@ class ActionController extends Controller
             $favourite->save();
             return response()->json(['success' => true, 'message' => 'Yêu thích thành công!']);
         }
+    }
+
+//    Rating
+
+    public function rate(Request $request){
+        $rate = new Rate;
+        $rate->document_id = $request->input('document_id');
+        $rate->user_id = $request->input('user_id');
+        $rate->rates = $request->input('rate');
+        $rate->save();
+        event(new RateCreated($rate));
+
+        return response()->json(['success' => true, 'message' => 'Đánh giá thành công!']);
     }
 }

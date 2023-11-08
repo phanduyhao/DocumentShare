@@ -14,6 +14,7 @@
                         <th>User</th>
                         <th>Rating Document</th>
                         <th>Rate</th>
+                        <th>Time</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0 text-center">
@@ -22,7 +23,8 @@
                             <td>{{$rate->id}}</td>
                             <td>{{$rate->User->name}}</td>
                             <td>{{$rate->Document->title}}</td>
-                            <td>{{$rate->rate}}/10</td>
+                            <td>{{$rate->rates}} / 100%</td>
+                            <td>{{$rate->updated_at}}</td>
                             <td>
                                 <button type="button" data-url="/admin/rates/{{$rate->id}}" data-id="{{$rate->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>

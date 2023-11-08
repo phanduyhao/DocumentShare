@@ -23,7 +23,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('documents')
                 ->onDelete('cascade');
-            $table->float('rates')->nullable();
+            $table->integer('rates')->nullable();
             $table->timestamps();
         });
     }

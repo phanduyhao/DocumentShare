@@ -129,34 +129,6 @@ $(document).ready(function() {
         }
     });
 
-
-
-//      DOWNLOAD NORMAL
-
-    // $('.download-file').click(function() {
-    //     let documentId = $(this).data('id');
-    //     let userId = $(this).data('user-id'); // Lấy ID của người dùng
-    //     let score_user = $(this).data('score-user');
-    //     let score_doc = $(this).data('score-doc');
-    //     let user_score = score_user - score_doc;
-    //     // Gửi yêu cầu AJAX
-    //         $.ajax({
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             },
-    //             type: "POST",
-    //             url: "/download", // Đổi thành đường dẫn thích hợp của bạn
-    //             data: {
-    //                 document_id: documentId,
-    //                 user_id: userId,
-    //                 user_score: user_score,
-    //             },
-    //             error: function() {
-    //                 alert("Lỗi tải xuống!");
-    //             }
-    //         });
-    // });
-
 //    Views
     $('.btn-show__details-file').click(function() {
         let documentId = $(this).data('id');
@@ -213,10 +185,45 @@ $(document).ready(function() {
 
 
 //    ĐÁNH GIÁ
-        $('.star').click(function() {
-            const index = $(this).index();
-            const rating = (index + 1) * 20; // Tính điểm đánh giá (từ 20 đến 100)
-            $('.filled-stars').css('width', rating + '%');
-        });
 
+    let rated = false; // Biến để theo dõi xem đã đánh giá chưa
+    $('.star').click(function() {
+        const index = $(this).index();
+        const rating = (index + 1) * 20; // Tính điểm đánh giá (từ 20 đến 100)
+        $('.filled-stars').css('width', rating + '%');
+        rated = true; // Đánh giá đã được thực hiện
+    });
+
+    $('.btn-rate').click(function () {
+        if (rated) {
+            let documentId = $(this).data('doc-id');
+            let userId = $(this).data('user-id'); // Lấy ID của người dùng
+            let styleString = $('.filled-stars').attr('style');
+            let widthValue = styleString.split(':')[1];
+            let trimmedWidthValue = widthValue.trim();
+            var widthNumber = parseInt(trimmedWidthValue, 10);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                url: "/rate", // Đổi thành đường dẫn thích hợp của bạn
+                data: {
+                    document_id: documentId,
+                    user_id: userId,
+                    rate: widthNumber
+                },
+                success: function(response) {
+                    if(response.success) {
+                        toastr.success(response.message, 'Thông báo');
+                    }
+                },
+                error: function() {
+                    toastr.error('Lỗi đánh giá!', 'Thông báo');
+                }
+            });
+        } else {
+            toastr.error('Chưa đánh giá tài liệu!', 'Thông báo');
+        }
+    });
 });

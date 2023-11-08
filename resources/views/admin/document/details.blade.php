@@ -63,6 +63,51 @@
                     </div>
                 </div>
                 <div class="info-item border-bottom mb-3">
+                    <h4 class="info-title text-black-main">Đánh giá :</h4>
+                    @foreach($rate_tb as $rate)
+                        <h4>{{$rate->rates}}</h4>
+                    @endforeach
+                    <div class="d-flex align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
+                        <div class="rating position-relative">
+                            <div class="empty-stars">
+                                <span class="star">
+                                    <i class='bx bx-star fs-3 p-3' ></i>
+                                </span>
+                                <span class="star">
+                                    <i class='bx bx-star fs-3 p-3' ></i>
+                                </span>
+                                <span class="star">
+                                     <i class='bx bx-star fs-3 p-3' ></i>
+                                 </span>
+                                <span class="star">
+                                    <i class='bx bx-star fs-3 p-3' ></i>
+                                </span>
+                                <span class="star">
+                                    <i class='bx bx-star fs-3 p-3' ></i>
+                                </span>
+                            </div>
+                            <div class="filled-stars" style="width: 40%">
+                                <span class="star">
+                                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                                </span>
+                                <span class="star">
+                                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                                </span>
+                                <span class="star">
+                                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                                </span>
+                                <span class="star">
+                                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                                </span>
+                                <span class="star">
+                                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="info-item border-bottom mb-3">
                     <h4 class="info-title text-black-main">Created Time :</h4>
                     <h5 class="info-details ms-4">{{$document->created_at}}</h5>
                 </div>
@@ -77,6 +122,7 @@
 
 
 {{--  ĐÁNH GIÁ  --}}
+    <h1>ĐÁNH GIÁ</h1>
     <div class="d-flex align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
         <div class="rating position-relative">
             <div class="empty-stars">
@@ -114,6 +160,7 @@
                 </span>
             </div>
         </div>
+        <button data-user-id="{{ Auth::id() }}" data-doc-id="{{$document->id}}" class="btn-rate">Gửi đánh giá</button>
     </div>
 {{--  COMMENT  --}}
 

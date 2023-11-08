@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Document;
+use App\Models\Rate;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\status;
@@ -227,6 +228,8 @@ class DocumentController extends Controller
     public function show($slug)
     {
         $document = Document::where('slug', $slug)->first();
+        $document_id = $document->id;
+        $rate_tb = Rate::where('document_id',$document_id)->get();
         if($document){
            $comments = Comment::all();
            // Tìm tài liệu dựa trên trường 'slug'
@@ -248,7 +251,7 @@ class DocumentController extends Controller
            }
            $filename = $document->file;
 
-           return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments'),[
+           return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments','rate_tb'),[
                'title' => $filename
            ]);
        }

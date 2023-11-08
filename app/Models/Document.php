@@ -30,5 +30,9 @@ class Document extends Model
     {
         return $this->belongsTo( Tag::class, 'tag_id','id');
     }
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
 
 }

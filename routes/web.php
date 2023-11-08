@@ -63,6 +63,9 @@ Route::post('/view', [ActionController::class,'view']);
 //    Favourite
 Route::post('/favourite', [ActionController::class,'favourite']);
 
+//    Rating
+Route::post('/rate', [ActionController::class,'rate']);
+
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/', function () {
