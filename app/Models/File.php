@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+    protected $table = 'files';
+
     public function Document()
     {
         return $this->belongsTo( Document::class, 'document_id','id');

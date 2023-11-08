@@ -1,6 +1,7 @@
 <script src="/temp/admin/libs/jquery/dist/jquery.min.js"></script>
 <script src="/temp/admin/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/temp/build/js/admin.min.js"></script>
+<script src="/temp/build/js/main.min.js"></script>
 <script src="/temp/build/js/validate.min.js"></script>
 <script src="/temp/admin/assets/js/owl.carousel.min.js"></script>
 <script src="/temp/admin/assets/vendor/libs/jquery/jquery.js"></script>
@@ -22,3 +23,4 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

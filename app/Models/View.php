@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Favourite extends Model
+class View extends Model
 {
     use HasFactory;
-    protected $table = 'favourites';
+    protected $table = 'views';
 
     public function Document()
     {

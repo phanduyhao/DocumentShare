@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+    protected $table = 'tags';
+
     public function Category()
     {
         return $this->belongsTo( Category::class, 'cate_id','id');

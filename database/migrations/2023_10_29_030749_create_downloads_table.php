@@ -23,8 +23,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('documents')
                 ->onDelete('cascade');
-            $table->integer('download_time');
-            $table->integer('views');
             $table->timestamps();
         });
     }

@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\RateCreated;
 
 class Rate extends Model
 {
     use HasFactory;
-    public function Document()
+    protected $table = 'rates';
+
+    public function document()
     {
         return $this->belongsTo( Document::class, 'document_id','id');
     }
@@ -16,4 +19,7 @@ class Rate extends Model
     {
         return $this->belongsTo( User::class, 'user_id','id');
     }
+    protected $dispatchesEvents = [
+        'created' => RateCreated::class,
+    ];
 }

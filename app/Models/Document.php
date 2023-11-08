@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     use HasFactory;
+    protected $table = 'documents';
+
     protected $fillable = [
         'user_id',
     ];
@@ -29,6 +31,10 @@ class Document extends Model
     public function Tag()
     {
         return $this->belongsTo( Tag::class, 'tag_id','id');
+    }
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
     }
 
 }

@@ -19,4 +19,5 @@ class CommentMainController extends Controller
         $comment->save();
         return response()->json($comment); // Return the new comment as JSON
     }
+
 }
