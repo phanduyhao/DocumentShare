@@ -50,14 +50,12 @@ Route::get('/reset-password/{token}', [AuthController::class,'showResetForm'])->
 // Route xử lý việc đặt lại mật khẩu
 Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 
-//    Get User Name Comment
-//Route::get('/getUserName/{user_id}', [CommentController::class],'getUserName');
-
 // Comment
 Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
 
 //    Download
 Route::post('/download', [ActionController::class,'download']);
+Route::post('/update-score', [ActionController::class,'updateScore']);
 
 //    View
 Route::post('/view', [ActionController::class,'view']);

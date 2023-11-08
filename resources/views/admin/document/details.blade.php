@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('contents')
-    <div class="container-fluid">
+    <div>
         <div class="mt-4">
             <a href="{{route('documents.index')}}" class="">
                 <i class='bx bx-arrow-back fw-bold fs-1' ></i>
@@ -76,7 +76,45 @@
 
 
 
-
+{{--  ĐÁNH GIÁ  --}}
+    <div class="d-flex align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
+        <div class="rating position-relative">
+            <div class="empty-stars">
+                <span class="star">
+                    <i class='bx bx-star fs-3 p-3' ></i>
+                </span>
+                <span class="star">
+                    <i class='bx bx-star fs-3 p-3' ></i>
+                </span>
+                <span class="star">
+                     <i class='bx bx-star fs-3 p-3' ></i>
+                 </span>
+                <span class="star">
+                    <i class='bx bx-star fs-3 p-3' ></i>
+                </span>
+                <span class="star">
+                    <i class='bx bx-star fs-3 p-3' ></i>
+                </span>
+            </div>
+            <div class="filled-stars" style="width: 0%">
+                <span class="star">
+                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                </span>
+                <span class="star">
+                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                </span>
+                <span class="star">
+                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                </span>
+                <span class="star">
+                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                </span>
+                <span class="star">
+                    <i class='bx bxs-star text-warning fs-3 p-3'></i>
+                </span>
+            </div>
+        </div>
+    </div>
 {{--  COMMENT  --}}
 
     <div class="comment container-width" id="comment_area">
@@ -145,3 +183,4 @@
     </div>
 
 @endsection
+                        

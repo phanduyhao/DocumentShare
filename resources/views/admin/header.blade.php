@@ -79,6 +79,15 @@
         color: red;
         transition: .2s all;
     }
-
+    .rating:hover{
+        cursor: pointer;
+    }
+    .rating .filled-stars {
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 
 </style>

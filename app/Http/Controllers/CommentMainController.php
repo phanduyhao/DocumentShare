@@ -20,10 +20,4 @@ class CommentMainController extends Controller
         return response()->json($comment); // Return the new comment as JSON
     }
 
-//    Get Name User Commnent
-//    public function getUserName($user_id) {
-//        $user = User::find($user_id);
-//        return response()->json(['name' => $user->name]);
-//    }
-
 }

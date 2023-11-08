@@ -80,26 +80,82 @@
 
 $(document).ready(function() {
 
-    // Download
-    $('.download-file').click(function() {
+// DOWNLOAD - SCORE
+    $('.download-file').click(function(e) {
+        // e.preventDefault();
         let documentId = $(this).data('id');
         let userId = $(this).data('user-id'); // Lấy ID của người dùng
+        let score_user = $(this).data('score-user');
+        let score_doc = $(this).data('score-doc');
         // Gửi yêu cầu AJAX
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: "POST",
-            url: "/download", // Đổi thành đường dẫn thích hợp của bạn
-            data: {
-                document_id: documentId,
-                user_id: userId,
-            },
-            error: function() {
-                alert("Lỗi tải xuống!");
-            }
-        });
+        if(score_user > score_doc || score_user == score_doc){
+            let user_score = score_user - score_doc;
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                url: "/download",
+                data: {
+                    document_id: documentId,
+                    user_id: userId,
+                },
+                success: function(response) {
+                    // AJAX thành công, cập nhật điểm của người dùng
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "/update-score", // Thay đổi thành đường dẫn thích hợp
+                        data: {
+                            user_score: user_score,
+                        },
+                        success: function() {
+                            toastr.success('Tải xuống thành công!', 'Thông báo');
+                        },
+                        error: function() {
+                            alert("Lỗi cập nhật điểm!");
+                        }
+                    });
+                },
+                error: function() {
+                    alert("Lỗi tải xuống!");
+                }
+            });
+        } else {
+            e.preventDefault();
+            toastr.error('Không đủ điểm!', 'Thông báo');
+        }
     });
+
+
+
+//      DOWNLOAD NORMAL
+
+    // $('.download-file').click(function() {
+    //     let documentId = $(this).data('id');
+    //     let userId = $(this).data('user-id'); // Lấy ID của người dùng
+    //     let score_user = $(this).data('score-user');
+    //     let score_doc = $(this).data('score-doc');
+    //     let user_score = score_user - score_doc;
+    //     // Gửi yêu cầu AJAX
+    //         $.ajax({
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             },
+    //             type: "POST",
+    //             url: "/download", // Đổi thành đường dẫn thích hợp của bạn
+    //             data: {
+    //                 document_id: documentId,
+    //                 user_id: userId,
+    //                 user_score: user_score,
+    //             },
+    //             error: function() {
+    //                 alert("Lỗi tải xuống!");
+    //             }
+    //         });
+    // });
 
 //    Views
     $('.btn-show__details-file').click(function() {
@@ -154,4 +210,13 @@ $(document).ready(function() {
             }
         });
     });
+
+
+//    ĐÁNH GIÁ
+        $('.star').click(function() {
+            const index = $(this).index();
+            const rating = (index + 1) * 20; // Tính điểm đánh giá (từ 20 đến 100)
+            $('.filled-stars').css('width', rating + '%');
+        });
+
 });

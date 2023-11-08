@@ -91,7 +91,7 @@ function validateForm(formID) {
             '<div class="d-flex" style="align-items: flex-start;">'+
             '<img src="temp/images/Accountcircle.png" class="comment-user__img" alt="">'+
             '<div class="comment-user__infor">'+
-            '<p class="name">' + commentData.user_id + '</p>'+
+            '<p class="name">' + commentData.user_name + '</p>'+
             '<p class="type">' + commentData.comment + '</p>'+
             '</div>'+
             '</div>'+

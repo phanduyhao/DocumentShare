@@ -25,11 +25,26 @@ class DocumentController extends Controller
         $tags = Tag::all();
         $statuses = status::all();
         $cates = Category::all();
-        $documents = Document::where('status','1')->paginate(10);
-        return view('admin.document.index',compact('documents','cates','tags','statuses'),[
+
+//        Lấy các tài liệu Có Score = Null hoặc Score = 0;
+        $documents = Document::where('status', '1')
+            ->where(function ($query) {
+                $query->whereNull('score')
+                    ->orWhere('score', 0);
+            })
+            ->paginate(10);
+
+//        Lấy các tài liệu Có Score # Null hoặc Score > 0;
+        $document_vips = Document::where('status', '1')
+            ->whereNotNull('score')
+            ->where('score', '>', 0)
+            ->paginate(10);
+
+        return view('admin.document.index',compact('documents','document_vips','cates','tags','statuses'),[
             'title' => 'Tài liệu đã duyệt'
         ]);
     }
+
 
 //    Tài liệu chờ duyệt
     public function loading()

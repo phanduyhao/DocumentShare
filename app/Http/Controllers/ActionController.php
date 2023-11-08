@@ -6,6 +6,7 @@ use App\Models\Download;
 use App\Models\Favourite;
 use App\Models\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActionController extends Controller
 {
@@ -17,6 +18,15 @@ class ActionController extends Controller
         $download->user_id = $request->input('user_id');
         $download->save();
         return response()->json(['message' => 'Tải xuống đã được ghi nhận.']);
+    }
+
+//    Update Score
+    public function updateScore(Request $request){
+        $user = Auth::user();
+        $user->score = $request->input('user_score');
+        $user->save();
+        return response()->json(['message' => 'Cập nhật điểm thành công !.']);
+
     }
 
 //    View
