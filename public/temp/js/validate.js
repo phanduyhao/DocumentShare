@@ -101,34 +101,6 @@ function validateForm(formID) {
         $(`.${targetList}`).prepend(newComment);
     }
 
-// function appendNewComment(commentData, targetList) {
-//     var newComment = $('<div class="comment-user">' +
-//         '<p class="id_user d-none" >commentData.id</p>'+
-//         '<div class="d-flex" style="align-items: flex-start;">'+
-//         '<img src="temp/images/Accountcircle.png" class="comment-user__img" alt="">'+
-//         '<div class="comment-user__infor">'+
-//         '<p class="name">' + commentData.user_id + '</p>'+
-//         '<p class="type">' + commentData.comment + '</p>'+
-//         '</div>'+
-//         '</div>'+
-//         '<div class="reply">'+
-//         '</div>');
-//     // Thêm bình luận vào thể có class " comment-list "
-//     $(`.${targetList}`).prepend(newComment);
-//
-//     // Gửi yêu cầu AJAX để lấy tên người dùng
-//     // $.ajax({
-//     //     type: "GET",
-//     //     url: "/getUserName/" + commentData.user_id, // Đổi thành đường dẫn thích hợp của bạn
-//     //     success: function(response) {
-//     //         newComment.find('.name').text(response.name);
-//     //     },
-//     //     error: function() {
-//     //         console.log("Lỗi xảy ra khi gửi yêu cầu AJAX.");
-//     //     }
-//     // });
-// }
-
 
 // Chức năng Bấm vào " Trả lời " thì hiển form bình luận
     $('.reply-text__link').on('click', function(event) {

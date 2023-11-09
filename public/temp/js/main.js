@@ -188,10 +188,10 @@ $(document).ready(function() {
 //    ĐÁNH GIÁ
 
     let rated = false; // Biến để theo dõi xem đã đánh giá chưa
-    $('.star').click(function() {
+    $('.action-rate .star').click(function() {
         const index = $(this).index();
         const rating = (index + 1) * 20; // Tính điểm đánh giá (từ 20 đến 100)
-        $('.filled-stars').css('width', rating + '%');
+        $('.action-rate .filled-stars').css('width', rating + '%');
         rated = true; // Đánh giá đã được thực hiện
     });
 

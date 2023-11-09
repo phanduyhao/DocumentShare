@@ -63,10 +63,7 @@
                     </div>
                 </div>
                 <div class="info-item border-bottom mb-3">
-                    <h4 class="info-title text-black-main">Đánh giá :</h4>
-                    @foreach($rate_tb as $rate)
-                        <h4>{{$rate->rates}}</h4>
-                    @endforeach
+                    <h4 class="info-title text-black-main">Đánh giá ( {{intval($document->rate/10)}}/10 ) :</h4>
                     <div class="d-flex align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
                         <div class="rating position-relative">
                             <div class="empty-stars">
@@ -86,7 +83,7 @@
                                     <i class='bx bx-star fs-3 p-3' ></i>
                                 </span>
                             </div>
-                            <div class="filled-stars" style="width: 40%">
+                            <div class="filled-stars" style="width: {{intval($document->rate)}}%">
                                 <span class="star">
                                     <i class='bx bxs-star text-warning fs-3 p-3'></i>
                                 </span>
@@ -123,7 +120,7 @@
 
 {{--  ĐÁNH GIÁ  --}}
     <h1>ĐÁNH GIÁ</h1>
-    <div class="d-flex align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
+    <div class="d-flex action-rate align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
         <div class="rating position-relative">
             <div class="empty-stars">
                 <span class="star">
