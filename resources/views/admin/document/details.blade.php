@@ -9,7 +9,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-sm-7">
-                <iframe src="{{ asset('storage/files/'. $document->file) }}" width="100%" height="100%"></iframe>
+                <iframe src="/temp/files/{{$document->file }}" width="100%" height="100%"></iframe>
             </div>
             <div class="col-sm-5 ">
                 <h2 class="text-black-main fw-semibold text-center border-bottom">Thông tin chi tiết:</h2>

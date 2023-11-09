@@ -16,8 +16,9 @@ class CommentMainController extends Controller
         $comment->parent_comment_id = $request->input('parent_comment_id');
         $comment->document_id = $request->input('document');
         // Set other fields if needed
+        $user_name = $comment->user->name;
         $comment->save();
-        return response()->json($comment); // Return the new comment as JSON
+        return response()->json(['comment' => $comment->comment, 'user_name' => $user_name]); // Return the new comment and user_name as JSON
     }
 
 }

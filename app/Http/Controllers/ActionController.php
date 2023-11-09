@@ -67,7 +67,7 @@ class ActionController extends Controller
         $rate->user_id = $request->input('user_id');
         $rate->rates = $request->input('rate');
         $rate->save();
-        event(new RateCreated($rate));
+//        event(new RateCreated($rate));
 
         return response()->json(['success' => true, 'message' => 'Đánh giá thành công!']);
     }

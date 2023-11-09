@@ -51,7 +51,9 @@ class UsersController extends Controller
             $avatar = $request->file('avatar'); // Lấy file ảnh từ file Upload
             if ($avatar) {
                 $fileName = Str::slug($name) . '.jpg'; // Tên ảnh theo Slug Title
-                $avatar->storeAs('public/images/avatars', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
+//                $avatar->storeAs('public/images/avatars', $fileName); // Lưu ảnh đã thêm vào đường dẫn này
+                $avatar->move(public_path('temp/images/avatars'), $fileName); // Di chuyển ảnh vào thư mục này
+
                 $user->avatar = $fileName; // Lưu tên file ảnh theo slug Title
             }
             $user->email = $request->email;

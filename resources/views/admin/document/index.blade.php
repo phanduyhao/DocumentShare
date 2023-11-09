@@ -187,7 +187,7 @@
                                     <td>{{$document->title}}</td>
                                     <td style="width: 250px">
                                         <p class="position-relative mb-0" style="width: max-content">
-                                            <iframe src="{{ asset('storage/files/'. $document->file) }}" width="220px"></iframe>
+                                            <iframe src="/temp/files/{{$document->file }}" width="220px"></iframe>
                                             <a data-id="{{$document->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document->slug]) }}">
                                                 <a href="" data-id="{{$document->id}}" class="position-absolute end-0 z-3 me-3 btn-favourite">
                                                     <i class='bx bxs-heart fs-3 icon-favourite' ></i>
@@ -222,7 +222,7 @@
                                     <td class="">
                                         <button type="button" data-url="/admin/documents/{{$document->id}}" data-id="{{$document->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                         <button type="button" data-id="{{$document->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document->id}}">Sửa</button>
-                                        <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="{{ asset('storage/filesOrigin/'. $document->file .'.'. $document->type) }}" download class="download-file">
+                                        <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document->file }}.{{$document->type}}" download class="download-file">
                                             <i class='bx bxs-downvote fs-3' ></i>
                                         </a>
                                     </td>
@@ -393,7 +393,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 {{--                Tài liệu Vip                --}}
                 <div class="tab-pane fade" id="pills-doc-vip" role="tabpanel" aria-labelledby="pills-doc-vip-tab" tabindex="0">
                     <div class="table-responsive text-nowrap">
@@ -419,8 +419,8 @@
                                     <td>{{$document_vip->title}}</td>
                                     <td style="width: 250px">
                                         <p class="position-relative mb-0" style="width: max-content">
-                                            <iframe src="{{ asset('storage/files/'. $document_vip->file) }}" width="220px"></iframe>
-                                            <a data-id="{{$document_vip->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document_vip->slug]) }}">
+                                            <iframe src="/temp/files/{{$document_vip->file }}" width="220px"></iframe>
+                                            <a data-id="{{$document_vip->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="/temp/filesOrigin/{{$document_vip->file }}.{{$document_vip->type}}">
                                                 <a href="" data-id="{{$document_vip->id}}" class="position-absolute end-0 z-3 me-3 btn-favourite">
                                                     <i class='bx bxs-heart fs-3 icon-favourite' ></i>
                                                 </a>
@@ -454,7 +454,7 @@
                                     <td class="">
                                         <button type="button" data-url="/admin/documents/{{$document_vip->id}}" data-id="{{$document_vip->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                         <button type="button" data-id="{{$document_vip->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document_vip->id}}">Sửa</button>
-                                        <a data-id="{{$document_vip->id}}" data-score-doc="{{$document_vip->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="{{ asset('storage/filesOrigin/'. $document_vip->file .'.'. $document_vip->type) }}" download class="download-file">
+                                        <a data-id="{{$document_vip->id}}" data-score-doc="{{$document_vip->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document_vip->file }}.{{$document_vip->type}}" download class="download-file">
                                             <i class='bx bxs-downvote fs-3' ></i>
                                         </a>
                                     </td>

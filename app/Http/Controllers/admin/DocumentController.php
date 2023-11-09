@@ -117,28 +117,25 @@ class DocumentController extends Controller
              $document->size = round($fileSizeKB, 2) . ' KB';
              $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
              $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
-             $file->storeAs('public/filesOrigin', $fileName);
 
              // Lưu tệp tin tạm thời
-             $file->storeAs('public/files', $fileName);
-
-             // Đường dẫn tệp tin tạm thời
-             $tempFilePath = storage_path('app/public/files/' . $fileName);
+             $tempFilePath = public_path('temp/files/' . $fileName);
+             $file->move(public_path('temp/files'), $fileName);
 
              // Chuyển đổi tệp thành PDF
-             ConvertApi::setApiSecret('6QSfRhA7Nr905F3u'); // Thay 'your-api-secret' bằng API Secret của bạn
+             ConvertApi::setApiSecret('6QSfRhA7Nr905F3u');
              $result = ConvertApi::convert('pdf', ['File' => $tempFilePath]);
 
              // Lưu tệp PDF
              $pdfFileName = pathinfo($fileName, PATHINFO_FILENAME);
-             $pdfFilePath = storage_path('app/public/files/' . $pdfFileName);
+             $pdfFilePath = public_path('temp/files/' . $pdfFileName);
              $result->getFile()->save($pdfFilePath);
-
-             // Gán tên tệp PDF vào thuộc tính 'file'
              $document->file = $pdfFileName;
-
+             $destinationPath = public_path('temp/filesOrigin');
+             copy($tempFilePath, $destinationPath . '/' . $fileName);
              // Xóa tệp tin tạm thời
              unlink($tempFilePath);
+
          }
          $document->description = $request->desc;
          $document->slug = $request->slug;
@@ -176,31 +173,28 @@ class DocumentController extends Controller
             $document->size = round($fileSizeKB, 2) . ' KB';
             $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
             $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
-            $file->storeAs('public/filesOrigin', $fileName);
 
             // Lưu tệp tin tạm thời
-            $file->storeAs('public/files', $fileName);
-
-            // Đường dẫn tệp tin tạm thời
-            $tempFilePath = storage_path('app/public/files/' . $fileName);
+            $tempFilePath = public_path('temp/files/' . $fileName);
+            $file->move(public_path('temp/files'), $fileName);
 
             // Chuyển đổi tệp thành PDF
-            ConvertApi::setApiSecret('6QSfRhA7Nr905F3u'); // Thay 'your-api-secret' bằng API Secret của bạn
+            ConvertApi::setApiSecret('6QSfRhA7Nr905F3u');
             $result = ConvertApi::convert('pdf', ['File' => $tempFilePath]);
 
             // Lưu tệp PDF
             $pdfFileName = pathinfo($fileName, PATHINFO_FILENAME);
-            $pdfFilePath = storage_path('app/public/files/' . $pdfFileName);
+            $pdfFilePath = public_path('temp/files/' . $pdfFileName);
             $result->getFile()->save($pdfFilePath);
-
-            // Gán tên tệp PDF vào thuộc tính 'file'
             $document->file = $pdfFileName;
-
+            $destinationPath = public_path('temp/filesOrigin');
+            copy($tempFilePath, $destinationPath . '/' . $fileName);
             // Xóa tệp tin tạm thời
             unlink($tempFilePath);
         }
         $document->description = $request->desc;
         $document->slug = $request->slug;
+        $document->type = $fileExtension;
         $document->score = $request->score;
         $document->source = $request->source;
         $document->user_id = Auth::id();

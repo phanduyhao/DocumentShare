@@ -85,8 +85,8 @@
                             <td>{{$file->id}}</td>
                             <td style="width: 250px">
                                 <p class="position-relative mb-0" style="width: max-content">
-                                    <iframe src="{{ asset('storage/files/'. $file->file) }}" width="220px"></iframe>
-                                    <a class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ asset('storage/files/'. $file->file) }}"></a>
+                                    <iframe width="220px" src="/temp/files/{{$file->file }}" frameborder="0"></iframe>
+                                    <a class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="/temp/files/{{$file->file }}"></a>
                                 </p>
                             </td>
                             <td>
