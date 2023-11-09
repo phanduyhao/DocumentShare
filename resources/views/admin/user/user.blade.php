@@ -25,7 +25,7 @@
                     <tr data-id="{{$user->id}}">
                         <td>{{$user->id}}</td>
                         <td>
-                            <img width="100" src="{{ asset('storage/images/avatars/'. $user->avatar) }}" alt="Avatar">
+                            <img width="100" src="/temp/images/avatars/{{$user->avatar}}" alt="Avatar">
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>

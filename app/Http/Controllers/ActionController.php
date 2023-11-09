@@ -8,7 +8,8 @@ use App\Models\Rate;
 use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Events\RateCreated;
+use Illuminate\Support\Facades\DB;
+//use App\Events\RateCreated;
 
 class ActionController extends Controller
 {
@@ -67,11 +68,12 @@ class ActionController extends Controller
         $rate->user_id = $request->input('user_id');
         $rate->rates = $request->input('rate');
         $rate->save();
-<<<<<<< HEAD
 //        event(new RateCreated($rate));
-=======
-        event(new RateCreated($rate));
->>>>>>> f2c7389ac3cb13c8ba21f3c2ee2c19c43e10fea7
+
+        $averageRates = DB::table('rates')
+            ->select('document_id', DB::raw('AVG(rates) as average_rate'))
+            ->groupBy('document_id')
+            ->get();
 
         return response()->json(['success' => true, 'message' => 'Đánh giá thành công!']);
     }

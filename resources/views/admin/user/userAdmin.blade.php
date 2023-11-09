@@ -127,8 +127,7 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$user->id}}</td>
                             <td>
-{{--                                <img width="100" src="{{ asset('storage/images/avatars/'. $user->avatar) }}" alt="Avatar">--}}
-                                <img src="/temp/images/avatars/{{$user->avatar}}" alt="{{ $user->name }}'s Avatar">
+                                <img width="100" src="/temp/images/avatars/{{$user->avatar}}" alt="{{ $user->name }}'s Avatar">
 
                             </td>
                             <td>{{$user->name}}</td>

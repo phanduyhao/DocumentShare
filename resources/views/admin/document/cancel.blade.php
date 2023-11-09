@@ -45,11 +45,7 @@
                             <td>{{$document->title}}</td>
                             <td style="width: 250px">
                                 <p class="position-relative mb-0" style="width: max-content">
-<<<<<<< HEAD
                                     <iframe src="/temp/files/{{$document->file }}" width="220px"></iframe>
-=======
-                                    <iframe src="{{ asset('storage/files/'. $document->file) }}" width="220px"></iframe>
->>>>>>> f2c7389ac3cb13c8ba21f3c2ee2c19c43e10fea7
                                     <a class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' => $document->slug]) }}"></a>
                                 </p>
                             </td>

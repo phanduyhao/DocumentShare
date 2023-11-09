@@ -87,6 +87,7 @@ $(document).ready(function() {
         let userId = $(this).data('user-id'); // Lấy ID của người dùng
         let score_user = $(this).data('score-user');
         let score_doc = $(this).data('score-doc');
+
         // Gửi yêu cầu AJAX
         if(score_user > score_doc || score_user == score_doc){
             let user_score = score_user - score_doc;

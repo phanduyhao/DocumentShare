@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Download extends Model
 {
     use HasFactory;
-    protected $table = 'downloads';
 
     public function Document()
     {

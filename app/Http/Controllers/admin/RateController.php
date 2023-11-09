@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Rate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RateController extends Controller
 {
@@ -14,56 +15,15 @@ class RateController extends Controller
     public function index()
     {
         $rates = Rate::paginate(20);
-        return view('admin.rate.index',compact('rates'),[
+//        Tính trung bình điểm đánh giá theo mỗi Document
+        $averageRates = DB::table('rates')
+            ->select('document_id', DB::raw('AVG(rates) as average_rate'))
+            ->groupBy('document_id')
+            ->get();
+
+        return view('admin.rate.index',compact('rates','averageRates'),[
             'title' => 'Quản lý đánh giá'
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rate $rate)
-    {
-        //
-    }
 }

@@ -59,6 +59,7 @@ class UsersController extends Controller
             $user->email = $request->email;
             $user->role = $request->role;
             $user->level = $request->level;
+            $user->score = 0;
             $user->password = bcrypt($request->password);
             $user->save();
             return redirect()->back();
@@ -95,7 +96,7 @@ class UsersController extends Controller
              }
             $user->email = $request->email;
             $user->role = $request->role;
-            $user->level = $request->level;
+             $user->level = $request->level;
              if ($request->has('password') && !empty($request->password)) {
                  $user->password = bcrypt($request->password);
              }

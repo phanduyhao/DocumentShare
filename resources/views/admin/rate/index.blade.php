@@ -2,6 +2,10 @@
 @section('contents')
     <div class="container-fluid flex-grow-1 container-p-y">
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
+        <h1>TEST</h1>
+        @foreach($averageRates as $averageRate)
+            <p>Document ID: {{ $averageRate->document_id }} - Average Rate: {{ intval($averageRate->average_rate) }}</p>
+        @endforeach
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
                 <h5 class=" fw-bold">Danh sách đánh giá</h5>
