@@ -18,6 +18,8 @@ use App\Http\Controllers\admin\DownloadController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\admin\ViewController;
+use App\Http\Controllers\admin\SearchController;
+use App\Http\Controllers\DocumentMainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,22 +52,11 @@ Route::get('/reset-password/{token}', [AuthController::class,'showResetForm'])->
 // Route xử lý việc đặt lại mật khẩu
 Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 
-// Comment
-Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
+// Danh sách tài liệu theo danh mục
+Route::get('/tailieu/{categorySlug}', [DocumentMainController::class, 'index'])->name('categories.index');
 
-//    Download
-Route::post('/download', [ActionController::class,'download']);
-Route::post('/update-score', [ActionController::class,'updateScore']);
-
-//    View
-Route::post('/view', [ActionController::class,'view']);
-
-//    Favourite
-Route::post('/favourite', [ActionController::class,'favourite']);
-
-//    Rating
-Route::post('/rate', [ActionController::class,'rate']);
-
+// Chi tiết tài liệu
+Route::get('/{slug}', [DocumentMainController::class, 'details'])->name('documentMain.details');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/', function () {
@@ -73,6 +64,28 @@ Route::middleware(['auth'])->group(function() {
             'title' => 'Trang chủ'
         ]);
     });
+
+    // Comment
+    Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
+
+//    Download
+    Route::post('/download', [ActionController::class,'download']);
+    Route::post('/update-score', [ActionController::class,'updateScore']);
+
+//    View
+    Route::post('/view', [ActionController::class,'view']);
+
+//    Favourite
+    Route::post('/favourite', [ActionController::class,'favourite']);
+
+    //    UnFavourite
+    Route::post('/unfavourite', [ActionController::class,'unfavourite']);
+
+//    Rating
+    Route::post('/rate', [ActionController::class,'rate']);
+
+
+//    Vào Admin
     Route::middleware(['auth', 'checkLevel'])->group(function() {
         Route::prefix('admin')->group(function () {
             Route::get('/',[HomeController::class,'home'])->name('admin');
@@ -88,7 +101,6 @@ Route::middleware(['auth'])->group(function() {
             Route::delete('/cates/{id}', [CategoryController::class,'destroy'])->name('cates.destroy');
             Route::post('cates/delete-all', [CategoryController::class,'deleteAllCates'])->name('deleteAllCate');
 
-
 //            Documents
             Route::resource('documents', DocumentController::class);
             Route::get('/documents-loading', [DocumentController::class, 'loading'])->name('documents.loading');
@@ -99,7 +111,6 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/documents/delete-all-ok', [DocumentController::class,'deleteAllDocOk'])->name('deleteAllOk');
             Route::post('/documents/delete-all-load', [DocumentController::class,'deleteAllDocLoading'])->name('deleteAllLoad');
             Route::post('/documents/delete-all-cancel', [DocumentController::class,'deleteAllDocCancel'])->name('deleteAllCancel');
-
 
 //            Status
             Route::resource('statuses', StatusController::class);
@@ -133,6 +144,10 @@ Route::middleware(['auth'])->group(function() {
 
 //            Settings Admin
             Route::resource('settings',SettingController::class);
+
+//            Search
+            Route::get('/search',[SearchController::class,'search'])->name('search');
+
         });
     });
 });

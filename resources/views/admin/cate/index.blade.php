@@ -14,7 +14,7 @@
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa tất cả bản ghi không ?</h1>
                                 </div>
-                                <form action="{{route('deleteAllMenu')}}" method="post" class="modal-footer">
+                                <form action="{{route('deleteAllCate')}}" method="post" class="modal-footer">
                                     @csrf
                                     <button class="delete-forever btn btn-danger fw-bolder">Xóa</button>
                                     <button type="button" class="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Đóng</button>
@@ -42,6 +42,7 @@
                                         for='basic-default-fullname'
                                     >Title</label>
                                     <input
+                                        data-count="{{$count_cates}}"
                                         type='text'
                                         class='form-control title input-field '
                                         id='title-store'
@@ -184,6 +185,7 @@
                                             for='basic-default-fullname'
                                         >Title</label>
                                         <input
+                                            data-count="{{$count_cates}}"
                                             type='text'
                                             class='form-control title input-field'
                                             id='title-edit-{{$cate->id}}'

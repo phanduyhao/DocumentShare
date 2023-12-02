@@ -1,4 +1,5 @@
 // Gán sự kiện click cho checkbox
+
 // Dropdown
 $(document).ready(function(){
     $('.nav-item.dropdown-user').hover(function(){
@@ -76,17 +77,19 @@ $(document).ready(function () {
 // tạo Alias tự động
 $(document).ready(function () {
     $('#title-store').on('input', function () {
+        var count = $(this).data('count');
         var title = $(this).val();
         var slug = slugify(title);
-        $('#slug-store').val(slug);
+        $('#slug-store').val(count + '-' + slug);
     });
     $('.form-edit').each(function () {
+        var count = $(this).data('count');
         var title = $(this).find('.form-control.title')
         var slug = $(this).find('.form-control.slug')
         title.on('input',function () {
             var title_val = $(this).val();
             var slug_val = slugify(title_val);
-            slug.val(slug_val); // Sửa chỗ này
+            slug.val(count + '-' + slug_val); // Sửa chỗ này
         });
     });
 

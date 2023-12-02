@@ -3,12 +3,28 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Document;
+use App\Models\Download;
+use App\Models\File;
+use App\Models\Rate;
+use App\Models\User;
+use App\Models\View;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function home(){
-        return view ('admin.home',[
+        $users_count = User::count();
+        $docs_count = Document::count();
+        $cates_count = Category::count();
+        $files_count = File::count();
+        $comments = Comment::count();
+        $views = View::count();
+        $downloads = Download::count();
+        $rates = Rate::count();
+        return view ('admin.home',compact('users_count','docs_count', 'cates_count','files_count','comments','views','downloads','rates'),[
             'title' => 'Trang quản trị'
         ]);
     }

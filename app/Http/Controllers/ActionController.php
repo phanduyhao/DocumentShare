@@ -60,6 +60,19 @@ class ActionController extends Controller
         }
     }
 
+//    Bỏ thích
+    public function unfavourite(Request $request) {
+        $documentId = $request->input('document_id');
+        $userId = $request->input('user_id');
+
+        // Xóa bản ghi khỏi bảng favourites
+        Favourite::where('document_id', $documentId)
+            ->where('user_id', $userId)
+            ->delete();
+
+        return response()->json(['success' => true, 'message' => 'Đã bỏ yêu thích!']);
+    }
+
 //    Rating
 
     public function rate(Request $request){

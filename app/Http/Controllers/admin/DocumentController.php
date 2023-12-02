@@ -14,6 +14,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use ConvertApi\ConvertApi;
+use function Termwind\ValueObjects\p;
 
 class DocumentController extends Controller
 {
@@ -26,22 +27,22 @@ class DocumentController extends Controller
         $tags = Tag::all();
         $statuses = status::all();
         $cates = Category::all();
-
+        $count_docs = Document::count();
 //        Lấy các tài liệu Có Score = Null hoặc Score = 0;
         $documents = Document::where('status', '1')
             ->where(function ($query) {
                 $query->whereNull('score')
                     ->orWhere('score', 0);
             })
-            ->paginate(10);
+            ->paginate(7);
 
 //        Lấy các tài liệu Có Score # Null hoặc Score > 0;
         $document_vips = Document::where('status', '1')
             ->whereNotNull('score')
             ->where('score', '>', 0)
-            ->paginate(10);
+            ->paginate(7);
 
-        return view('admin.document.index',compact('documents','document_vips','cates','tags','statuses'),[
+        return view('admin.document.index',compact('documents','document_vips','cates','tags','statuses','count_docs'),[
             'title' => 'Tài liệu đã duyệt'
         ]);
     }
@@ -139,7 +140,11 @@ class DocumentController extends Controller
          }
          $document->description = $request->desc;
          $document->slug = $request->slug;
-         $document->score = $request->score;
+         if($request->score == null){
+             $document->score = 0;
+         }else{
+             $document->score = $request->score;
+         }
          $document->source = $request->source;
          $document->type = $fileExtension;
          $document->user_id = Auth::id();
@@ -159,10 +164,13 @@ class DocumentController extends Controller
     {
         $this->validate($request,[
             'title' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:documents',
+            'file' => 'required',
         ],[
             'title.required' => 'Vui lòng nhập tiêu đề !',
             'slug.required' => 'Vui lòng nhập slug',
+            'slug.unique' => 'Slug này đã có',
+            'file.required' => 'Vui lòng upload file',
         ]);
 
         $document->title = $request->title;
@@ -191,11 +199,15 @@ class DocumentController extends Controller
             copy($tempFilePath, $destinationPath . '/' . $fileName);
             // Xóa tệp tin tạm thời
             unlink($tempFilePath);
-        }
+        }  -
         $document->description = $request->desc;
         $document->slug = $request->slug;
         $document->type = $fileExtension;
-        $document->score = $request->score;
+        if($request->score == null){
+            $document->score = 0;
+        }else{
+            $document->score = $request->score;
+        }
         $document->source = $request->source;
         $document->user_id = Auth::id();
         $document->cate_id = $request->cate_id;

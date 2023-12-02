@@ -20,6 +20,10 @@ class Document extends Model
     {
         return date('d/m/Y', strtotime($value)); // Định dạng theo 'Ngày/Tháng/Năm'
     }
+    public function User()
+    {
+        return $this->belongsTo( User::class, 'user_id','id');
+    }
     public function Category()
     {
         return $this->belongsTo( Category::class, 'cate_id','id');
@@ -36,5 +40,16 @@ class Document extends Model
     {
         return $this->hasMany(Rate::class);
     }
-
+    public function views()
+    {
+        return $this->hasMany(View::class, 'document_id', 'id');
+    }
+    public function downloads()
+    {
+        return $this->hasMany(Download::class, 'document_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'document_id', 'id');
+    }
 }

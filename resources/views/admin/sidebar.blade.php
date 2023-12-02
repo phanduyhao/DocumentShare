@@ -29,39 +29,8 @@
                 <div data-i18n='Analytics'>Dashboard</div>
             </a>
         </li>
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Settings</span>
-        </li>
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-cog'></i>
-                <div data-i18n='Layouts'>Thiết lập</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('settings.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Cài đặt điểm</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Components</span>
-        </li>
-        <!-- Layouts -->
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-food-menu'></i>
-                <div data-i18n='Layouts'>Quản lý Menu</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('menus.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách Menu</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Users</span>
         </li>
@@ -120,21 +89,14 @@
                         <div data-i18n='Without menu'>Tài liệu đã hủy</div>
                     </a>
                 </li>
-            </ul>
-        </li>
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-radio-circle-marked'></i>
-                <div data-i18n='Layouts'>Quản lý trạng thái</div>
-            </a>
-            <ul class='menu-sub'>
                 <li class='menu-item'>
-                    <a href='{{route('statuses.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách trạng thái</div>
+                    <a href='{{route('cates.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh mục tài liệu</div>
                     </a>
                 </li>
             </ul>
         </li>
+
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-purchase-tag'></i>
@@ -229,6 +191,51 @@
                 </li>
             </ul>
         </li>
-
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Components</span>
+        </li>
+        <!-- Layouts -->
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-food-menu'></i>
+                <div data-i18n='Layouts'>Quản lý Menu</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('menus.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách Menu</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Settings</span>
+        </li>
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-radio-circle-marked'></i>
+                <div data-i18n='Layouts'>Quản lý trạng thái</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('statuses.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách trạng thái</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='menu-icon tf-icons bx bx-cog'></i>
+                <div data-i18n='Layouts'>Thiết lập</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('settings.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Cài đặt điểm</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </aside>

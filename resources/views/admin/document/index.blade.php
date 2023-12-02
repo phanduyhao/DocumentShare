@@ -3,10 +3,6 @@
     <div class="container-fluid flex-grow-1 container-p-y">
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
 
-
-
-
-
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
                 <h5 class=" fw-bold">Danh sách tài liệu</h5>
@@ -59,6 +55,7 @@
                                         for='basic-default-fullname'
                                     >Title</label>
                                     <input
+                                        data-count="{{$count_docs}}"
                                         type='text'
                                         class='form-control title input-field '
                                         id='title-store'
@@ -101,11 +98,11 @@
                                     >Source</label>
                                     <div class='input-group input-group-merge'>
                                         <input
-                                            type='number'
+                                            type='text'
                                             id='Source'
                                             class='form-control'
                                             placeholder='Input Source'
-                                            name='Source'
+                                            name='source'
                                         />
                                     </div>
                                 </div>
@@ -140,7 +137,7 @@
                                     <select name="tag" class="form-control" id="tag">
                                         <option value="">Chọn thẻ tag</option>
                                         @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->title }}</option>
+                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->tag_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -164,7 +161,7 @@
             <div class="tab-content" id="pills-tabContent">
 {{--                Tài liệu thường             --}}
                 <div class="tab-pane fade show active" id="pills-doc-normal" role="tabpanel" aria-labelledby="pills-doc-normal-tab" tabindex="0">
-                    <div class="table-responsive text-nowrap">
+                    <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
@@ -185,13 +182,10 @@
                                 <tr data-id="{{$document->id}}">
                                     <td> {{ $loop->iteration }}</td>
                                     <td>{{$document->title}}</td>
-                                    <td style="width: 250px">
+                                    <td>
                                         <p class="position-relative mb-0" style="width: max-content">
                                             <iframe src="/temp/files/{{$document->file }}" width="220px"></iframe>
-                                            <a data-id="{{$document->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document->slug]) }}">
-                                                <a href="" data-id="{{$document->id}}" class="position-absolute end-0 z-3 me-3 btn-favourite">
-                                                    <i class='bx bxs-heart fs-3 icon-favourite' ></i>
-                                                </a>
+                                            <a data-id="{{$document->id}}" class="position-absolute start-0 top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document->slug]) }}">
                                             </a>
 
                                         </p>
@@ -219,12 +213,10 @@
                                             <h5 class="info-details ms-4 mb-0 text-success">{{$document->Status->status}}</h5>
                                         </div>
                                     </td>
-                                    <td class="">
+                                    <td class="text-nowrap">
                                         <button type="button" data-url="/admin/documents/{{$document->id}}" data-id="{{$document->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                         <button type="button" data-id="{{$document->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document->id}}">Sửa</button>
-                                        <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document->file}}.{{$document->type}}" download class="download-file">
-                                            <i class='bx bxs-downvote fs-3' ></i>
-                                        </a>
+
                                     </td>
 
                                     <!-- Modal Delete -->
@@ -280,6 +272,7 @@
                                                         for='basic-default-fullname'
                                                     >Title</label>
                                                     <input
+                                                        data-count="{{$count_docs}}"
                                                         type='text'
                                                         class='form-control title input-field '
                                                         id='title-store-{{$document->id}}'
@@ -325,11 +318,11 @@
                                                     >Source</label>
                                                     <div class='input-group input-group-merge'>
                                                         <input
-                                                            type='number'
+                                                            type='text'
                                                             id='Source-{{$document->id}}'
                                                             class='form-control'
                                                             placeholder='Input Source'
-                                                            name='Source'
+                                                            name='source'
                                                             value="{{$document->source}}"
                                                         />
                                                     </div>
@@ -374,7 +367,7 @@
                                                             <option value="">Chọn thẻ tag</option>
                                                         @endif
                                                         @foreach($tags as $tag)
-                                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->tag_name }}</option>
+                                                            <option value="{{ $tag }}">{{ $tag }}-{{ $tag->tag_name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -555,11 +548,11 @@
                                                     >Source</label>
                                                     <div class='input-group input-group-merge'>
                                                         <input
-                                                            type='number'
+                                                            type='text'
                                                             id='Source-{{$document_vip->id}}'
                                                             class='form-control'
                                                             placeholder='Input Source'
-                                                            name='Source'
+                                                            name='source'
                                                             value="{{$document_vip->source}}"
                                                         />
                                                     </div>
@@ -604,7 +597,7 @@
                                                             <option value="">Chọn thẻ tag</option>
                                                         @endif
                                                         @foreach($tags as $tag)
-                                                            <option value="{{ $tag->id }}">{{ $tag->id }}-{{ $tag->tag_name }}</option>
+                                                            <option value="{{ $tag }}">{{ $tag }}-{{ $tag->tag_name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

@@ -13,8 +13,9 @@ class CategoryController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        $count_cates = Category::count();
         $cates = Category::paginate(10);
-        return view('admin.cate.index',compact('cates','tags'),[
+        return view('admin.cate.index',compact('cates','tags','count_cates'),[
             'title' => 'Quản lý danh mục'
         ]);
     }
@@ -29,7 +30,6 @@ class CategoryController extends Controller
             'slug.required' => 'Vui lòng nhập slug',
             'slug.unique' => 'Slug này đã tồn tại',
         ]);
-        // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
         $cate = new Category;
         $cate->title = $request->title;
         $cate->desc = $request->desc;
