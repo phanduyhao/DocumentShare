@@ -26,7 +26,7 @@ function previewImages(event, formID) {
         reader.onload = function (e) {
             var imgContainer = $('<div>').addClass('image-container');
             var imgElement = $('<img>').attr('src', e.target.result).css('max-width', '200px');
-            var deleteButton = $('<button>').html('X').addClass('delete-button').attr('type', 'button');
+            var deleteButton = $('<button>').html('X').addClass('delete-button d-flex justify-content-center').attr('type', 'button');
 
             deleteButton.on('click', function () {
                 var container = $(this).parent();

@@ -27,7 +27,7 @@ $('body form').on('click', function(e) {
                 url: formAction, // Sử dụng route action tương ứng của form
                 data: formData,
                 success: function(response) {
-                    alert('Đã gửi thành công !');
+                    toastr.success('Đã gửi bình luận!', 'Thông báo');
                     // Xóa Các Dữ liệu cũ trong các ô Input
                     $(`#${formID} input[type=text], #${formID} input[type=email], #${formID} textarea`).val('');
                     // Gọi hàm hiển thị Comment ra HTML
@@ -39,7 +39,7 @@ $('body form').on('click', function(e) {
                     }
                 },
                 error: function() {
-                    console.log("An error occurred.");
+                    toastr.error('Lỗi bình luận!', 'Thông báo');
                 }
             });
         }
@@ -86,17 +86,51 @@ function validateForm(formID) {
 
 //    HIỂN THỊ COMMENT
     function appendNewComment(commentData, targetList) {
-        var newComment = $('<div class="comment-user">' +
-            '<p class="id_user d-none" >commentData.id</p>'+
-            '<div class="d-flex" style="align-items: flex-start;">'+
-            '<img src="temp/images/Accountcircle.png" class="comment-user__img" alt="">'+
-            '<div class="comment-user__infor">'+
-            '<p class="name">' + commentData.user_name + '</p>'+
-            '<p class="type">' + commentData.comment + '</p>'+
-            '</div>'+
-            '</div>'+
-            '<div class="reply">'+
+        var avatar = $('.my-avatar').attr('src');
+        var currentDate = new Date();
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+        var seconds = currentDate.getSeconds();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+        var year = currentDate.getFullYear();
+        var newComment = $('<div class="comments-users d-flex mb-4">' +
+            '<div class="comment-avata d-flex align-items-center justify-content-center me-3">' +
+            '<img width="50" class="rounded-circle" src="' + avatar + '" alt="Avatar">' +
+            '</div>' +
+            '<div class="comment-user-info ">' +
+            '<div class="comment-user-info-item">' +
+            '<a href="">' + commentData.user_name + '</a>' +
+            '</div>' +
+            '<div class="comment-user-info-item">' +
+            '<i class="fa-solid fa-calendar-days me-1"></i>' +
+            '<span>' + year + '-' + month + '-' + day +' ' + hours + ':' + minutes +':' + seconds + '</span>' +
+            '</div>' +
+            '<div class="comment-user-info-item">' +
+            '<p class="comment-user-desc m-0 mt-3">' +
+            commentData.comment +
+            '</p>' +
+            '</div>' +
+            '<div class="reply">' +
+            '<form id="boxCommentFormReply_' + commentData.id + '" class="comment-box child d-none bg-white p-3" data-action="http://documentmanage.test/sendComment">' +
+            '<p id="' + commentData.id + '" class="boxCommentFormReplyID d-none"></p>' +
+            '<input type="hidden" name="_token" value="jmbwntWbDWzOKRBaCsvOPJtXzjTKp4tLhDcCXkq1" autocomplete="off">' +
+            '<input type="hidden" name="document" value="59">' +
+            '<input type="hidden" name="parent_comment_id" value="' + commentData.id + '">' +
+            '<div class="d-flex">' +
+            '<div class="comment-avata d-flex align-items-center justify-content-center me-2">' +
+            '<img width="50" class="rounded-circle" src="' + avatar + '" alt="Avatar">' +
+            '</div>' +
+            '<div class="form-comment w-100">' +
+            '<textarea name="comment" class="input-field textarea-note w-100 p-3" rows="3" placeholder="Nhập bình luận *" data-require="Vui lòng nhập nội dung!"></textarea>' +
+            '</div>' +
+            '</div>' +
+            '<button type="submit" class="send-comment float-end btn btn-primary">Gửi bình luận</button>' +
+            '</form>' +
+            '</div>' +
+            '</div>' +
             '</div>');
+
         // Thêm bình luận vào thể có class " comment-list "
         $(`.${targetList}`).prepend(newComment);
     }

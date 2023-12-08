@@ -164,6 +164,7 @@ $(document).ready(function() {
                     rate: widthNumber
                 },
                 success: function(response) {
+                    $('.filled-stars').css('width', '0%');
                     if(response.success) {
                         toastr.success(response.message, 'Thông báo');
                     }
@@ -176,4 +177,103 @@ $(document).ready(function() {
             toastr.error('Chưa đánh giá tài liệu!', 'Thông báo');
         }
     });
+
+//     Load THêm Comment
+    var dataCmt = $('#list-comment__data');
+    var initialCommentsCount = dataCmt.data('comment-limit');
+    var loadMoreCommentsCount = dataCmt.data('load-more');
+    var totalComments = dataCmt.data('total-cmt');
+
+    var commentList = $('.comment-list');
+    var loadMoreButton = $('#loadMoreComments');
+
+    // Ẩn các bình luận sau chỉ số ban đầu
+    for (var i = initialCommentsCount; i < totalComments; i++) {
+        var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
+        if (comment.length) {
+            comment.hide();
+        }
+    }
+
+    // Hiển thị thêm bình luận khi nhấp vào nút "Hiển thị thêm"
+    loadMoreButton.on('click', function () {
+        var nextIndex = initialCommentsCount + loadMoreCommentsCount;
+        for (var i = initialCommentsCount; i < nextIndex && i < totalComments; i++) {
+            var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
+            if (comment.length) {
+                comment.show();
+            }
+        }
+
+        initialCommentsCount = nextIndex;
+
+        // Ẩn nút "Hiển thị thêm" nếu đã hiển thị hết tất cả bình luận
+        if (initialCommentsCount >= totalComments) {
+            loadMoreButton.hide();
+        }
+    });
+
+
+// Đổi mật khẩu
+
+    $('#btn-reset_pass').on('click', function () {
+        // Clear old error messages
+        $('#old_pass_error, #new_pass_error, #confirm_pass_error').text('');
+
+        var oldPass = $('#old_pass').val();
+        var newPass = $('#new_pass').val();
+        var confirmPass = $('#confirm_pass').val();
+        var hasError = false;
+
+        if (oldPass === '') {
+            $('#old_pass_error').text('Vui lòng nhập mật khẩu hiện tại!');
+            hasError = true;
+        }
+        if (newPass === '') {
+            $('#new_pass_error').text('Vui lòng nhập mật khẩu mới!');
+            hasError = true;
+        }
+        if (confirmPass === '') {
+            $('#confirm_pass_error').text('Vui lòng nhập lại mật khẩu mới!');
+            hasError = true;
+        }
+        if (hasError) {
+            return;
+        }
+        // Send AJAX request
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: '/change-password',
+            data: {
+                _token: $('input[name="_token"]').val(),
+                old_pass: oldPass,
+                new_pass: newPass,
+                confirm_pass: confirmPass
+            },
+            success: function (response) {
+                if (response.success) {
+                    toastr.success('Đổi mật khẩu thành công!', 'Thông báo');
+                    $('#old_pass, #new_pass, #confirm_pass').val('');
+                } else {
+                    if (response.errors.old_pass) {
+                        $('#old_pass_error').text(response.errors.old_pass);
+                    }
+                    if (response.errors.new_pass) {
+                        $('#new_pass_error').text(response.errors.new_pass);
+                    }
+                    if (response.errors.confirm_pass) {
+                        $('#confirm_pass_error').text(response.errors.confirm_pass);
+                    }
+                }
+            },
+            error: function () {
+                // Handle AJAX error if needed
+                alert('Something went wrong with the AJAX request');
+            }
+        });
+    });
+
 });

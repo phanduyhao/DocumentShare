@@ -94,6 +94,15 @@ label {
   color: #767474;
   padding: 10px 0; }
 
+.rating:hover {
+  cursor: pointer; }
+.rating .filled-stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden; }
+
 .parameter-docunment {
   padding: 10px 0 10px 0; }
 
@@ -613,5 +622,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .footer-adress-info {
   color: #666564;
   font-size: 11px; }
+
+.lib-sidebar-subitem {
+  height: 29px !important; }
 
 /*# sourceMappingURL=main.min.css.map */

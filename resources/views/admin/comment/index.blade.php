@@ -5,7 +5,23 @@
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
                 <h5 class=" fw-bold">Danh sách bình luận</h5>
+                <button type="button"class="btn btn-danger me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModalAll">Xóa tất cả</button>
+                <div class="modal fade" id="deleteModalAll" tabindex="-1" aria-labelledby="deleteModalAllLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa tất cả bản ghi không ?</h1>
+                            </div>
+                            <form action="{{route('deleteAllComment')}}" method="post" class="modal-footer">
+                                @csrf
+                                <button class="delete-forever btn btn-danger fw-bolder">Xóa</button>
+                                <button type="button" class="btn btn-secondary fw-bolder" data-bs-dismiss="modal">Đóng</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>

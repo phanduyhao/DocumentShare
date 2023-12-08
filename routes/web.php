@@ -20,6 +20,8 @@ use App\Http\Controllers\ActionController;
 use App\Http\Controllers\admin\ViewController;
 use App\Http\Controllers\admin\SearchController;
 use App\Http\Controllers\DocumentMainController;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +58,7 @@ Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 Route::get('/tailieu/{categorySlug}', [DocumentMainController::class, 'index'])->name('categories.index');
 
 // Chi tiết tài liệu
-Route::get('/{slug}', [DocumentMainController::class, 'details'])->name('documentMain.details');
+Route::get('/chitiet/{slug}', [DocumentMainController::class, 'details'])->name('documentMain.details');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/', function () {
@@ -83,6 +85,11 @@ Route::middleware(['auth'])->group(function() {
 
 //    Rating
     Route::post('/rate', [ActionController::class,'rate']);
+
+//    Profile
+    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
+    Route::post('/profile-update/{user}', [ProfileController::class,'update'])->name('profile.update');
+    Route::post('/change-password', [ProfileController::class,'resetPassword'])->name('profile.resetPass');
 
 
 //    Vào Admin
@@ -129,6 +136,7 @@ Route::middleware(['auth'])->group(function() {
 
 //            Comments Admin
             Route::resource('comments', CommentController::class);
+            Route::post('comments/delete-all', [CommentController::class,'deleteAllComment'])->name('deleteAllComment');
 
 //            Favourites Admin
             Route::resource('favourites',FavouriteController::class);

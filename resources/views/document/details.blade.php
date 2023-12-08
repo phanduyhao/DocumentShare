@@ -314,7 +314,7 @@
                     <div class="col col-9">
                         <div class="list-document mb-3">
                             <div class="content-titel  mx-2">
-                                <h4 class="m-0">{{$document->title}}</h4>
+                                <h4 class="m-0 text-black fw-bold">{{$document->title}}</h4>
                                 <div class="parameter-docunment d-flex justify-content-between align-items-center">
                                     <div class="parameter-docunment-item ">
                                         <div class="parameter d-flex align-items-center">
@@ -364,17 +364,58 @@
                             <iframe src="/temp/files/{{$document->file }}" width="700" height="720" allow="autoplay"></iframe>
                         </div>
 
-                        <div class="list-document mt-5">
-                            <div class="content-titel d-flex justify-content-between mx-2">
-                                <h4>Bình luận</h4>
+                        {{--            ĐÁNH GIÁ            --}}
+                        <h4 class="fw-bold my-4">ĐÁNH GIÁ</h4>
+                        <div class="d-flex action-rate align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
+                            <div class="rating position-relative">
+                                <div class="empty-stars">
+                                    <span class="star">
+                                        <i class="fa-regular fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-regular fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-regular fa-star fs-2 me-2"></i>
+                                     </span>
+                                    <span class="star">
+                                        <i class="fa-regular fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-regular fa-star fs-2 me-2"></i>
+                                    </span>
+                                </div>
+                                <div class="filled-stars text-warning" style="width: 0%">
+                                    <span class="star">
+                                        <i class="fa-solid fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-solid fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-solid fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-solid fa-star fs-2 me-2"></i>
+                                    </span>
+                                    <span class="star">
+                                        <i class="fa-solid fa-star fs-2 me-2"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <button data-user-id="{{ Auth::id() }}" data-doc-id="{{$document->id}}" class="btn fw-bold ms-3 btn-rate btn-info ">Gửi đánh giá</button>
+                        </div>
+                        <div class="avg-rate mt-4">
+                            <h4 class="fw-bold ">Tổng đánh giá trung bình: ( {{round($document->rate/10,1)}}/10 )</h4>
+                        </div>
+                        {{--    COMMENTS    --}}
+                        <div id="list-comment__data" class="list-document mt-5" data-comment-limit="{{$initialCommentsCount}}" data-load-more="{{ $loadMoreCommentsCount }}" data-total-cmt="{{ $comments->count() }}">
+                            <div class="content-titel d-flex justify-content-between">
+                                <h4 class="fw-bold text-black mb-3">Bình luận</h4>
                                 <span>
                                 {{$document->comments_count}} <span>bình luận</span>
                               </span>
                             </div>
-
-
-
-
 
                             <div class="comment container-width" id="comment_area">
                                 <!-- TEST -->
@@ -386,7 +427,7 @@
                                             @if($document->User->avatar == null)
                                                 <i class="fa-solid fa-user"></i>
                                             @else
-                                                <img width="50" class="rounded-circle" src="/temp/images/avatars/{{$document->User->avatar}}" alt="Avatar">
+                                                <img width="50" class="rounded-circle my-avatar" src="/temp/images/avatars/{{$document->User->avatar}}" alt="Avatar">
                                             @endif
                                         </div>
                                         <div class="form-comment w-100">
@@ -396,10 +437,11 @@
                                     <button type="submit" class="send-comment float-end btn btn-primary">Gửi bình luận</button>
                                 </form>
 
+{{--    Comments Parent    --}}
                                 <div class="comment-list mt-5">
                                     @foreach($comments->sortByDesc('created_at') as $comment)
                                         @if($comment->parent_comment_id == null)
-                                            <div class="comment-user ">
+                                            <div class="comment-user " data-comment-index="{{ $loop->index + 1 }}">
                                                 <p class="id_user d-none" >{{ $comment->id }}</p>
 
                                                 <div class="comments-users d-flex mb-4">
@@ -424,9 +466,7 @@
                                                             </p>
                                                         </div>
 
-
-
-
+{{-- Reply comments --}}
                                                         <div class="reply">
                                                             <p class="reply-text  mt-2">
                                                                 <a class="reply-text__link fw-bold text-info" href="">
@@ -454,8 +494,6 @@
                                                                 </div>
                                                                 <button type="submit" class="send-comment float-end btn btn-primary">Gửi bình luận</button>
                                                             </form>
-                                                            <!-- TEST -->
-                                                        @if($comment->hasChildren()) <!-- Kiểm tra nếu có comment con -->
                                                             <div class="reply-box bg-white p-3">
                                                                 @php
                                                                     $comment_childs = $comments;
@@ -473,7 +511,9 @@
                                                                                 </div>
                                                                                 <div class="comment-user-info ">
                                                                                     <div class="comment-user-info-item">
-                                                                                        <a href="">{{$comment_child->User->name}}</a>
+                                                                                        <div class="comment-list mt-5" id="commentList">
+                                                                                            <a href="">{{$comment_child->User->name}}</a>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="comment-user-info-item">
                                                                                         <i class="fa-solid fa-calendar-days "></i>
@@ -490,7 +530,6 @@
                                                                     @endforeach
                                                                 </div>
                                                             </div>
-                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -498,6 +537,9 @@
                                         @endif
                                     @endforeach
                                 </div>
+                                @if($initialCommentsCount < $comments->count())
+                                    <button id="loadMoreComments" class="btn btn-link">Hiển thị thêm bình luận</button>
+                                @endif
                             </div>
                         </div>
                     </div>

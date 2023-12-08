@@ -39,6 +39,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/temp/build/js/main.min.js"></script>
+<script src="/temp/build/js/admin.min.js"></script>
 <script type="text/javascript" src="/temp/build/js/slide.min.js"></script>
 <script type="text/javascript" src="/temp/build/js/validate.min.js"></script>
 <script src="/temp/admin/assets/vendor/libs/jquery/jquery.js"></script>

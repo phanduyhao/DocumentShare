@@ -19,335 +19,260 @@
                     <div class="col col-3">
                         <div class="lib-sidebar">
                             <h4 class="lib-header mb-0">Danh mục tài liệu</h4>
-                            <ul class="lib-sidebar-list">
-                                <li class="lib-sidebar-item-main">
-                                    <a href="#">Đại học - Cao đẳng</a>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Toán cao cấp</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Đại số tuyến tính</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Giải tích 1</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Giải tích 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="lib-sidebar-item">
-                                    <a href="#">Pháp luật đại cương</a>
-                                </li>
-                                <li class="lib-sidebar-item-main">
-                                    <a href="#">Trung học phổ thông</a>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 12</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 11</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 10</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="lib-sidebar-item-main">
-                                    <a href="#">Trung học cơ sở</a>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 9</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 8</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 7</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 6</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Ngữ Văn</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="lib-sidebar-item-main">
-                                    <a href="#">Tiểu học</a>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 5</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Việt</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 4</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Việt</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 3</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Việt</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 2</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Việt</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li
-                                    class="lib-sidebar-item d-flex align-items-center position-relative"
-                                >
-                                    <a href="#">Lớp 1</a>
-                                    <i
-                                        class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"
-                                    ></i>
-                                    <ul
-                                        class="lib-sidebar-sublist position-absolute top-0 start-100"
-                                    >
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Toán</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Việt</a>
-                                        </li>
-                                        <li class="lib-sidebar-subitem">
-                                            <i class="fa-solid fa-calculator me-2"></i>
-                                            <a href="" class="">Tiếng Anh</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                @include('layout.list_cates')
+{{--                            <ul class="lib-sidebar-list">--}}
+{{--                                <li class="lib-sidebar-item-main">--}}
+{{--                                    <a href="#">Đại học - Cao đẳng</a>--}}
+{{--                                </li>--}}
+{{--                                --}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Toán cao cấp</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Đại số tuyến tính</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Giải tích 1</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Giải tích 2</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item">--}}
+{{--                                    <a href="#">Pháp luật đại cương</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item-main">--}}
+{{--                                    <a href="#">Trung học phổ thông</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 12</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 11</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 10</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item-main">--}}
+{{--                                    <a href="#">Trung học cơ sở</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 9</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 8</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 7</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 6</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Ngữ Văn</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item-main">--}}
+{{--                                    <a href="#">Tiểu học</a>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 5</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Việt</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 4</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Việt</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 3</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Việt</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 2</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Việt</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                                <li class="lib-sidebar-item d-flex align-items-center position-relative">--}}
+{{--                                    <a href="#">Lớp 1</a>--}}
+{{--                                    <i class="ti-angle-right position-absolute top-50 end-0 translate-middle-y pe-3"></i>--}}
+{{--                                    <ul class="lib-sidebar-sublist position-absolute top-0 start-100">--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Toán</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Việt</a>--}}
+{{--                                        </li>--}}
+{{--                                        <li class="lib-sidebar-subitem">--}}
+{{--                                            <i class="fa-solid fa-calculator me-2"></i>--}}
+{{--                                            <a href="" class="">Tiếng Anh</a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+
                         </div>
                     </div>
                     <div class="col col-9">

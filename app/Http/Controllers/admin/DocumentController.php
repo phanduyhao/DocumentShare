@@ -199,7 +199,7 @@ class DocumentController extends Controller
             copy($tempFilePath, $destinationPath . '/' . $fileName);
             // Xóa tệp tin tạm thời
             unlink($tempFilePath);
-        }  -
+        }
         $document->description = $request->desc;
         $document->slug = $request->slug;
         $document->type = $fileExtension;

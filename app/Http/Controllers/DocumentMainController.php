@@ -35,7 +35,10 @@ class DocumentMainController extends Controller
         $document_id = $document->id;
         $rate_tb = Rate::where('document_id',$document_id)->get();
         if($document){
-            $comments = Comment::where('document_id',$document_id)->get();
+            $initialCommentsCount = 10; // Số lượng ban đầu hiển thị
+            $loadMoreCommentsCount = 5;
+            $comments = Comment::where('document_id', $document_id)->take($initialCommentsCount)->get();
+
             // Tìm tài liệu dựa trên trường 'slug'
             $cate = Category::find($document->cate_id);
             if($document->cate_id) {
@@ -53,7 +56,7 @@ class DocumentMainController extends Controller
             }
             $filename = $document->file;
 
-            return view('document.details', compact('filename','document','username','cate_title','tag_name','comments','rate_tb'),[
+            return view('document.details', compact('filename','document','username','cate_title','tag_name','comments','rate_tb','initialCommentsCount','loadMoreCommentsCount'),[
                 'title' => $filename
             ]);
         }

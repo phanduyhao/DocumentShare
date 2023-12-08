@@ -1,3 +1,15 @@
+.rating{
+    &:hover{
+        cursor: pointer;
+    }
+    .filled-stars {
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}
 .parameter-docunment{
     padding: 10px 0 10px 0;
 }

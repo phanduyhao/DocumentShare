@@ -29,4 +29,9 @@ class CommentController extends Controller
         // Chuyển hướng về trang danh sách cate hoặc trang khác (tuỳ ý)
         return response()->json(['message' => 'Bình luận đã được xóa thành công']);
     }
+
+    public function deleteAllComment() {
+        Comment::truncate(); // Xóa tất cả bản ghi
+        return redirect()->back();
+    }
 }

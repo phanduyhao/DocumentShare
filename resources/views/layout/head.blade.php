@@ -11,5 +11,25 @@
 <link rel="stylesheet" href="/temp/build/css/font/fontawesome-free-6.4.0-web/css/all.min.css" />
 <link rel="stylesheet" href="/temp/build/css/font/themify-icons/themify-icons.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<style>
+    .image-container {
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+    }
 
+    .delete-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: red;
+        color: white;
+        border: none;
+        width: 20px;
+        display: flex;
+        height: 20px;
+        border-radius: 50%;
+        align-items: center;
+    }
+</style>
 <script src="https://www.youtube.com/iframe_api"></script>
