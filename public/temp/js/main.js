@@ -215,7 +215,6 @@ $(document).ready(function() {
 
 
 // Đổi mật khẩu
-
     $('#btn-reset_pass').on('click', function () {
         // Clear old error messages
         $('#old_pass_error, #new_pass_error, #confirm_pass_error').text('');

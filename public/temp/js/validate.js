@@ -96,7 +96,7 @@ function validateForm(formID) {
         var year = currentDate.getFullYear();
         var newComment = $('<div class="comments-users d-flex mb-4">' +
             '<div class="comment-avata d-flex align-items-center justify-content-center me-3">' +
-            '<img width="50" class="rounded-circle" src="' + avatar + '" alt="Avatar">' +
+            '<img width="50" height="50" class="rounded-circle" src="' + avatar + '" alt="Avatar">' +
             '</div>' +
             '<div class="comment-user-info ">' +
             '<div class="comment-user-info-item">' +
@@ -119,7 +119,7 @@ function validateForm(formID) {
             '<input type="hidden" name="parent_comment_id" value="' + commentData.id + '">' +
             '<div class="d-flex">' +
             '<div class="comment-avata d-flex align-items-center justify-content-center me-2">' +
-            '<img width="50" class="rounded-circle" src="' + avatar + '" alt="Avatar">' +
+            '<img width="50" height="50" class="rounded-circle" src="' + avatar + '" alt="Avatar">' +
             '</div>' +
             '<div class="form-comment w-100">' +
             '<textarea name="comment" class="input-field textarea-note w-100 p-3" rows="3" placeholder="Nhập bình luận *" data-require="Vui lòng nhập nội dung!"></textarea>' +
