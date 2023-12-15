@@ -33,6 +33,33 @@
         $("#update-info-user").hide()
         $("#edit-password").show()
     }
+
+    $('.main-slide-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.main-slide-nav'
+    });
+    $('.main-slide-nav').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        asNavFor: '.main-slide-for',
+        autoplay:true,
+        autoplaySpeed: 2000,
+        dots: true,
+        fade: true,
+        focusOnSelect: true
+    });
+
+    $('.hot-docs__slide').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
+
+
 </script>
 <script src="/temp/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/temp/bootstrap/js/bootstrap.js"></script>

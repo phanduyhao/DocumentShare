@@ -1,9 +1,9 @@
 @extends('layout.layout')
 @section('content')
-    <section class="vh-100 pt-5">
+    <section class=" pt-5">
         <h1 class="text-center mt-5 fw-bold">Đăng nhập</h1>
         <div class="container-fluid h-custom">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-md-9 col-lg-6 col-xl-5">
                     <img src="/temp/images/login.png"
                          class="img-fluid" alt="Sample image">

@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\MenuController;
 use App\Http\Controllers\admin\FileController;
 use App\Http\Controllers\admin\CommentController;
+use App\Http\Controllers\admin\SlideController;
 use App\Http\Controllers\CommentMainController;
 use App\Http\Controllers\admin\FavouriteController;
 use App\Http\Controllers\admin\RateController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\admin\ViewController;
 use App\Http\Controllers\admin\SearchController;
 use App\Http\Controllers\DocumentMainController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeMainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,8 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/',[HomeMainController::class,'welcome']);
+
 
 // Đăng ký
 Route::get('/register',[AuthController::class,'showRegistrationForm'])->name('register');
@@ -54,6 +58,9 @@ Route::get('/reset-password/{token}', [AuthController::class,'showResetForm'])->
 // Route xử lý việc đặt lại mật khẩu
 Route::post('/reset-password', [AuthController::class,'reset'])->name('reset');
 
+// Tất cả tài liệu
+Route::get('/tai-lieu', [DocumentMainController::class, 'allDocs'])->name('categories.allDocs');
+
 // Danh sách tài liệu theo danh mục
 Route::get('/tailieu/{categorySlug}', [DocumentMainController::class, 'index'])->name('categories.index');
 
@@ -61,11 +68,10 @@ Route::get('/tailieu/{categorySlug}', [DocumentMainController::class, 'index'])-
 Route::get('/chitiet/{slug}', [DocumentMainController::class, 'details'])->name('documentMain.details');
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('/', function () {
-        return view('welcome',[
-            'title' => 'Trang chủ'
-        ]);
-    });
+
+//    Upload Tài liệu
+    Route::get('/upload',[DocumentMainController::class,'uploadPage'])->name('uploadPage');
+
 
     // Comment
     Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
@@ -103,6 +109,12 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/userAdmin',[UsersController::class,'store'])->name('user.store');
             Route::patch('/userAdmin/{user}',[UsersController::class,'update'])->name('user.update');
             Route::delete('/users/{id}', [UsersController::class,'destroy'])->name('users.destroy');
+
+//            Slide
+            Route::resource('slides', SlideController::class);
+            Route::delete('/slides/{id}', [SlideController::class,'destroy'])->name('slides.destroy');
+            Route::post('slides/delete-all', [SlideController::class,'deleteAllSlides'])->name('deleteAllSlide');
+
 //            Categories
             Route::resource('cates', CategoryController::class);
             Route::delete('/cates/{id}', [CategoryController::class,'destroy'])->name('cates.destroy');

@@ -49,7 +49,7 @@
                             </div>
                             <span
                                 class='fw-semibold d-block mb-1'
-                            >Người dùng</span>
+                            >Tài khoản</span>
                             <h3 class='card-title mb-2'>{{$users_count}}</h3>
                         </div>
                     </div>

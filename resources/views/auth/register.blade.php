@@ -1,9 +1,9 @@
 @extends('layout.layout')
 @section('content')
-    <section class="vh-100 pt-5" >
+    <section class="pt-5" >
         <h1 class="text-center mt-5 fw-bold">Đăng ký tài khoản</h1>
         <div class="container-fluid h-custom">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="row d-flex justify-content-center align-items-center ">
                 <div class="col-md-9 col-lg-6 col-xl-5">
                     <img src="/temp/images/login.png"
                          class="img-fluid" alt="Sample image">
@@ -48,8 +48,8 @@
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-primary btn-lg"
                                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng ký</button>
-                            <p class="small fw-bold mt-2 pt-1 mb-0"><a href="{{route('login')}}"
-                                                                       class="link-danger">Đăng nhập</a></p>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Bạn đã có tài khoản? <a href="{{route('login')}}" class="link-danger">Đăng nhập</a></p>
+
                         </div>
                     </form>
                 </div>

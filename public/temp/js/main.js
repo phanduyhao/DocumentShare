@@ -2,6 +2,10 @@
 
 $(document).ready(function() {
 
+//    Change Background Main-slide
+    let img = $('.main-slide .slick-current.slick-active img').attr('src');
+    $('.main-bg img').attr('src',img);
+
 // DOWNLOAD - SCORE
     $('.download-file').click(function(e) {
         // e.preventDefault();

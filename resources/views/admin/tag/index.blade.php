@@ -99,11 +99,11 @@
                             <td>{{$tag->tag_name}}</td>
                             <td>{{$tag->Category->title}}</td>
                             <td>
-                                @if($tag->Document->title == null)
-                                    null
-                                @else
-                                    {{$tag->Document->title}}
-                                @endif
+{{--                                @if($tag->document_id == null)--}}
+{{--                                    null--}}
+{{--                                @else--}}
+                                    {{$tag->document_id}}
+{{--                                @endif--}}
                             </td>
                             <td >
                                 <button type="button" data-url="/admin/tags/{{$tag->id}}" data-id="{{$tag->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
@@ -163,11 +163,11 @@
                                         <label class='form-label'
                                                for='basic-default-email'>Tài liệu</label>
                                         <select name="document_id" class="form-control" id="tag">
-                                            @if($tag->document_id != null)
-                                                <option value="{{ $tag->Document->id }}">{{ $tag->Document->id }}-{{ $tag->Document->title }}</option>
-                                            @else
-                                                <option value="">Chọn tài liệu</option>
-                                            @endif
+{{--                                            @if($tag->document_id != null)--}}
+{{--                                                <option value="{{ $tag->Document->id }}">{{ $tag->Document->id }}-{{ $tag->Document->title }}</option>--}}
+{{--                                            @else--}}
+{{--                                                <option value="">Chọn tài liệu</option>--}}
+{{--                                            @endif--}}
                                             @foreach($documents as $document)
                                                 <option value="{{ $document->id }}">{{ $document->id }}-{{ $document->title }}</option>
                                             @endforeach
@@ -180,7 +180,7 @@
                                             @if($tag->cate_id != null)
                                                 <option value="{{ $tag->Category->id }}">{{ $tag->Category->id }}-{{ $tag->Category->title }}</option>
                                             @else
-                                                <option value="">Chọn tài liệu</option>
+                                                <option value="">Chọn danh mục</option>
                                             @endif
                                             @foreach($cates as $cate)
                                                 <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>

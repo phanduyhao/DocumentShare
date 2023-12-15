@@ -89,11 +89,11 @@
                         <div data-i18n='Without menu'>Tài liệu đã hủy</div>
                     </a>
                 </li>
-                <li class='menu-item'>
-                    <a href='{{route('cates.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh mục tài liệu</div>
-                    </a>
-                </li>
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('cates.index')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Danh mục tài liệu</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
         </li>
 
@@ -210,6 +210,19 @@
         </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Settings</span>
+        </li>
+        <li class='menu-item'>
+            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+                <i class='bx bx-images menu-icon' ></i>
+                <div data-i18n='Layouts'>Quản lý Slides</div>
+            </a>
+            <ul class='menu-sub'>
+                <li class='menu-item'>
+                    <a href='{{route('slides.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh sách Slides</div>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>

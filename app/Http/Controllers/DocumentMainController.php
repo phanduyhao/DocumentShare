@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Document;
 use App\Models\Favourite;
+use App\Models\File;
 use App\Models\Rate;
 use App\Models\status;
 use App\Models\Tag;
@@ -27,6 +28,14 @@ class DocumentMainController extends Controller
 
     }
 
+//    Tất cả tài liệu
+    public function allDocs(){
+        $favourites = Favourite::where('user_id',Auth::id())->get();
+        $docs = Document::where('status',1)->paginate(12);
+        return view('document.list_docs',compact('docs','favourites'),[
+           'title' => 'Tất cả tài liệu'
+        ]);
+    }
 
 //    Chi tiết tài liệu
     public function details($slug)
@@ -60,5 +69,13 @@ class DocumentMainController extends Controller
                 'title' => $filename
             ]);
         }
+    }
+
+    public function uploadPage(){
+        $count_docs = Document::count();
+        $cates = Category::all();
+        return view('document.upload',compact('cates','count_docs'),[
+           'title' => 'Upload Tài liệu'
+        ]);
     }
 }

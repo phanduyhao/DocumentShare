@@ -1,0 +1,40 @@
+.header{
+    height: 110px;
+    &-auth{
+        &__btn{
+            width: 110px;
+            height: 40px;
+        }
+    }
+    &-main{
+        &__bottom{
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+.marquee-container {
+    background: linear-gradient(-135deg, #008ed9, #8b00db);
+    height: 45px; /* Điều chỉnh chiều cao của marquee container */
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee-content {
+    position: absolute;
+    animation: marqueeAnimation 8s linear infinite; /* Thời gian và kiểu chuyển động */
+}
+
+@keyframes marqueeAnimation {
+    0% {
+        transform: translateY(30%);
+    }
+    33.33% {
+        transform: translateY(-50%);
+    }
+    66.66% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(30%);
+    }
+}

@@ -67,12 +67,20 @@ function validateForm(formID) {
                 $(this).parent().append(emailAlert);
             }
         }
-        if(value == null || value == '' || value == undefined) {
+        if (value == null || value == '' || value == undefined) {
+            let $input = $(this);
             checkValid = false;
-            $(this).addClass('input-error');
-            let htmlAlert = `<span class="helper text-danger" style="z-index: 999;margin-top: 75px;">${$(this).data('require')}</span>`;
-            $(this).parent().append(htmlAlert);
+            // Kiểm tra xem có thẻ span báo lỗi chưa
+            if (!$input.next('.helper.text-danger').length) {
+                // Thêm thẻ span báo lỗi
+                let htmlAlert = `<span class="helper text-danger" style="z-index: 999;margin-top: 75px;">${$input.data('require')}</span>`;
+                $input.parent().append(htmlAlert);
+            }
+            if(!$input.hasClass('input-error')){
+                $input.addClass('input-error');
+            }
         }
+
     });
     return checkValid;
 }

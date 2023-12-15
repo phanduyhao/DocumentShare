@@ -40,6 +40,17 @@ class ActionController extends Controller
         $view->save();
         return response()->json(['message' => 'Xem tài liệu thành công!.']);
     }
+//    public function view($slug){
+//        // Tìm tài liệu dựa vào slug
+//        $document = Document::where('slug', $slug)->firstOrFail();
+//
+//        // Tăng lượt xem
+//        $document->views += 1;
+//        $document->save();
+//
+//        // Các logic hiển thị trang chi tiết tài liệu
+//        return view('documents.show', compact('document'));
+//    }
 
 //    Favourite
     public function favourite(Request $request) {
