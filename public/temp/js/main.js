@@ -279,4 +279,46 @@ $(document).ready(function() {
         });
     });
 
+//    Check validate ở phần upload chọn Danh mục
+    $(document).ready(function () {
+        var cateSelect = $('#form_document_upload #cate_select');
+        var cateMore = $('#form_document_upload #cate_add');
+
+
+        cateSelect.on('change', function () {
+            updateValidationClass();
+        });
+
+        cateMore.on('input', function () {
+            updateValidationClass();
+        });
+
+        function updateValidationClass() {
+            var cateSelect_helper = $('#form_document_upload .cate_select .helper');
+            var cateMore_helper = $('#form_document_upload .cate_more .helper');
+            if (cateSelect.val()) {
+                // Nếu người dùng đã chọn danh mục, loại bỏ class và vô hiệu hóa input của cateMore
+                cateMore.removeClass('input-field input-error').prop('disabled', true);
+                cateMore_helper.addClass('d-none');
+
+                // Loại bỏ class và vô hiệu hóa input của cateSelect
+                cateSelect.removeClass('input-field input-error');
+                cateSelect_helper.addClass('d-none');
+            } else if (cateMore.val()) {
+                // Nếu người dùng đã nhập dữ liệu, loại bỏ class và vô hiệu hóa select của cateSelect
+                cateSelect.removeClass('input-field input-error').prop('disabled', true);
+                cateSelect_helper.addClass('d-none');
+
+                // Loại bỏ class của cateMore
+                cateMore.removeClass('input-field input-error');
+                cateMore_helper.addClass('d-none');
+            } else {
+                // Nếu cả hai đều trống, thêm class và kích hoạt cả hai input
+                cateSelect.addClass('input-field input-error').prop('disabled', false);
+                cateMore.addClass('input-field').prop('disabled', false);
+                cateMore_helper.addClass('d-none');
+                cateSelect_helper.addClass('d-none');
+            }
+        }
+    });
 });

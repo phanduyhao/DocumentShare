@@ -82,6 +82,12 @@ $(document).ready(function () {
         var slug = slugify(title);
         $('#slug-store').val(count + '-' + slug);
     });
+    $('#cate_add').on('input', function () {
+        var count = $(this).data('count');
+        var title = $(this).val();
+        var slug = slugify(title);
+        $('#cate_add_slug').val(count + '-' + slug);
+    });
     $('.form-edit').each(function () {
         var count = $(this).data('count');
         var title = $(this).find('.form-control.title')

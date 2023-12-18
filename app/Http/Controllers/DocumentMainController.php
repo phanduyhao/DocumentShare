@@ -6,12 +6,10 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Document;
 use App\Models\Favourite;
-use App\Models\File;
 use App\Models\Rate;
-use App\Models\status;
 use App\Models\Tag;
-use App\Models\View;
 use App\Models\User;
+use ConvertApi\ConvertApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +24,93 @@ class DocumentMainController extends Controller
             'title' => 'Tài liệu ' . $category->title,
         ]);
 
+    }
+
+    public function uploadPage(){
+        $count_docs = Document::count();
+        $count_cates = Category::count();
+        $cates = Category::all();
+        return view('document.upload',compact('cates','count_docs','count_cates'),[
+            'title' => 'Upload Tài liệu'
+        ]);
+    }
+
+    public function upload(Request $request){
+
+        $this->validate($request,[
+            'title' => 'required',
+            'slug' => 'required|unique:documents',
+            'file' => 'required',
+        ],[
+            'title.required' => 'Vui lòng nhập tiêu đề !',
+            'slug.required' => 'Vui lòng nhập slug',
+            'slug.unique' => 'Slug này đã có',
+            'file.required' => 'Vui lòng upload file',
+        ]);
+        $cate_more = $request->cate_add;
+        $cate = new Category;
+        if (!empty($cate_more)) {
+            $cate->title = $cate_more;
+            $cate->slug = $request->cate_add_slug;
+            $cate->save();
+        }
+        $document = new Document;
+        $document->title = $request->title;
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileSize = $file->getSize();
+            $fileSizeKB = $fileSize / 1024;
+            $document->size = round($fileSizeKB, 2) . ' KB';
+            $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
+            $fileExtension = $file->getClientOriginalExtension(); // Lấy phần đuôi của file
+
+            // Lưu tệp tin tạm thời
+            $tempFilePath = public_path('temp/files/' . $fileName);
+            $file->move(public_path('temp/files'), $fileName);
+
+            // Chuyển đổi tệp thành PDF
+            ConvertApi::setApiSecret('6QSfRhA7Nr905F3u');
+            $result = ConvertApi::convert('pdf', ['File' => $tempFilePath]);
+
+            // Lưu tệp PDF
+            $pdfFileName = pathinfo($fileName, PATHINFO_FILENAME);
+            $pdfFilePath = public_path('temp/files/' . $pdfFileName);
+            $result->getFile()->save($pdfFilePath);
+            $document->file = $pdfFileName;
+            $destinationPath = public_path('temp/filesOrigin');
+            copy($tempFilePath, $destinationPath . '/' . $fileName);
+            // Xóa tệp tin tạm thời
+            unlink($tempFilePath);
+
+        }
+        $document->description = $request->desc;
+        $document->slug = $request->slug;
+        if($request->score == null){
+            $document->score = 0;
+        }else{
+            $document->score = $request->score;
+        }
+        $document->source = $request->source;
+        $document->type = $fileExtension;
+        $document->user_id = Auth::id();
+        if (!empty($cate_more)) {
+            $document->cate_id = $cate->id;
+        }else{
+            $document->cate_id = $request->cate_select;
+        }
+        $document->status = 1;
+        $document->save();
+        $tag = new Tag;
+        $tag->tag_name = $request->tag;
+        $tag->document_id = $document->id;
+        $tag->cate_id = $request->cate_id;
+        $tag->save();
+
+
+        // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
+        return view('document.up_success',[
+            'title' => 'Tải lên thành công!'
+        ]);
     }
 
 //    Tất cả tài liệu
@@ -71,11 +156,4 @@ class DocumentMainController extends Controller
         }
     }
 
-    public function uploadPage(){
-        $count_docs = Document::count();
-        $cates = Category::all();
-        return view('document.upload',compact('cates','count_docs'),[
-           'title' => 'Upload Tài liệu'
-        ]);
-    }
 }

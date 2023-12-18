@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row py-5">
                 <div class="col col-3">
-                    <div class="pr-sub d-flex justify-content-center align-items-center py-2">
+                    <div class="pr-sub d-flex justify-content-center align-items-center py-2 px-3">
                         <div class="avata-user">
                             <img src="/temp/images/avatars/{{$user->avatar}}" alt="">
                         </div>
@@ -45,10 +45,10 @@
                         </div>
                         <div class="info-pr-decs">
                             <div class="row info-pr-item d-flex justify-content-center align-items-center">
-                                <div class="col col-2">
+                                <div class="col col-3">
                                     <span>Họ và tên:</span>
                                 </div>
-                                <div class="col col-6">
+                                <div class="col col-5">
                                     {{$user->name}}
                                 </div>
                             </div>

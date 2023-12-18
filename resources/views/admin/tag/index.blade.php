@@ -97,14 +97,29 @@
                             <td> {{ $loop->iteration }}</td>
                             <td>{{$tag->id}}</td>
                             <td>{{$tag->tag_name}}</td>
-                            <td>{{$tag->Category->title}}</td>
                             <td>
-{{--                                @if($tag->document_id == null)--}}
-{{--                                    null--}}
-{{--                                @else--}}
-                                    {{$tag->document_id}}
-{{--                                @endif--}}
+                                @if($tag->cate_id == null)
+                                    Chưa có danh mục
+                                @else
+                                    @if($tag->Category)
+                                        {{$tag->Category->title}}
+                                    @else
+                                        Danh mục không tồn tại
+                                    @endif
+                                @endif
                             </td>
+                            <td>
+                                @if($tag->document_id == null)
+                                    null
+                                @else
+                                    @if($tag->Document)
+                                        {{$tag->Document->title}}
+                                    @else
+                                        Tài liệu không tồn tại
+                                    @endif
+                                @endif
+                            </td>
+
                             <td >
                                 <button type="button" data-url="/admin/tags/{{$tag->id}}" data-id="{{$tag->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 <button type="button" data-id="{{$tag->id}}" class="btn btn-edit btn-info btnEditTag text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editTag{{$tag->id}}">Sửa</button>

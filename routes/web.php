@@ -96,6 +96,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::post('/profile-update/{user}', [ProfileController::class,'update'])->name('profile.update');
     Route::post('/change-password', [ProfileController::class,'resetPassword'])->name('profile.resetPass');
+    Route::post('/upload-docs', [DocumentMainController::class,'upload'])->name('upload');
 
 
 //    Vào Admin

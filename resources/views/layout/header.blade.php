@@ -34,14 +34,9 @@
                               </a>
                           </div>
                           <div class="header-infor position-relative ms-4">
-                              <a href="" class="user">
+                              <a href="{{route('profile')}}" class="user">
                                   <i class="fa-solid fa-user fs-5"></i>
                               </a>
-                              <ul class="position-absolute">
-                                  <li class="">
-                                      <a href="" class=""></a>
-                                  </li>
-                              </ul>
                           </div>
                           <form action="{{route('logout')}}" method="post" class="logout ms-4">
                               @csrf
