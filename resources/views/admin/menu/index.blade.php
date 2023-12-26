@@ -261,6 +261,52 @@
                                                 />
                                             </div>
                                         </div>
+                                        <div class='mb-3 d-flex justify-content-between'>
+                                            <div class="">
+                                                <label
+                                                    class='form-label'
+                                                    for='basic-default-email'
+                                                >Active</label>
+                                                <div class='input-group input-group-merge'>
+                                                    @if($menu->active == true)
+                                                        <input class="form-check-input" checked name="active" type="checkbox">
+                                                    @else
+                                                        <input class="form-check-input" name="active" type="checkbox">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label
+                                                    class='form-label'
+                                                    for='basic-default-email'
+                                                >Level</label>
+                                                <div class='input-group input-group-merge'>
+                                                    <input
+                                                        type='number'
+                                                        id='level'
+                                                        class='form-control'
+                                                        name='level'
+                                                        value="{{$menu->level}}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label
+                                                    class='form-label'
+                                                    for='basic-default-email'
+                                                >Order</label>
+                                                <div class='input-group input-group-merge'>
+                                                    <input
+                                                        type='number'
+                                                        id='order'
+                                                        class='form-control'
+                                                        name='order'
+                                                        value="{{$menu->order}}"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group mb-3">
                                             <label class='form-label'
                                                    for='basic-default-email'>Parent Id</label>

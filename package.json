@@ -6,7 +6,7 @@
         "build": "vite build",
         "run": "php artisan serve",
         "Create Storage image": "php artisan storage:link",
-        "makeController": "php artisan make:controller HomeMainController ",
+        "makeController": "php artisan make:controller SearchMainController ",
         "makeController Full Class": "php artisan make:controller Document --resource",
         "makeModel-Controller-Migration": "php artisan make:model Slide -mcr",
         "RunPHPCommand": " php artisan tinker ",

@@ -8,8 +8,9 @@
                         <img width="105" class="" src="/temp/images/logo.png" alt="">
                     </a>
                    <div class="p-3" style="margin-left: 105px">
-                       <form action="" class="header-search position-relative">
-                           <input type="text" name="search" class="w-100 h-100 header-search__input bg-light p-3 pe-5 border-0 rounded-2" placeholder="Tìm kiếm ">
+                       <form action="{{route('searchMain')}}" class="header-search position-relative">
+                           @csrf
+                           <input type="text" name="keyword" class="w-100 h-100 header-search__input bg-light p-3 pe-5 border-0 rounded-2" placeholder="Tìm kiếm ">
                            <button type="submit" class="search-btn border-0 bg-transparent position-absolute top-0 end-0 bottom-0 me-3">
                                <i class="fa-solid fa-magnifying-glass"></i>
                            </button>

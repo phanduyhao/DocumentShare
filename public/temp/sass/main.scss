@@ -187,6 +187,11 @@ input[type="number"]::-webkit-outer-spin-button {
             height: 175px;
         }
     }
+    &-docs{
+        &__slide{
+            margin-bottom: 60px;
+        }
+    }
 }
 
 @keyframes marquee-slogan_bg {

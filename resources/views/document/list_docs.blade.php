@@ -13,8 +13,7 @@
                 <a href="#" class="ms-1">Tất cả tài liệu</a>
             </div>
         </div>
-        <div class="content">
-            <div class="container">
+        <div class="container">
                 <div class="row">
                     <div class="col col-3">
                         <div class="lib-sidebar">
@@ -88,7 +87,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         <div class="h-100"></div>
     </div>
 @endsection

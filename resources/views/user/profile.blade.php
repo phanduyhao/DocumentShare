@@ -45,10 +45,10 @@
                         </div>
                         <div class="info-pr-decs">
                             <div class="row info-pr-item d-flex justify-content-center align-items-center">
-                                <div class="col col-3">
+                                <div class="col col-2">
                                     <span>Họ và tên:</span>
                                 </div>
-                                <div class="col col-5">
+                                <div class="col col-6">
                                     {{$user->name}}
                                 </div>
                             </div>

@@ -8,9 +8,7 @@
     <!-- header -->
 @include('layout.header')
 <!-- main -->
-    <div class="content">
         @yield('content')
-    </div>
     <!-- footer -->
     @include('layout.footer')
 </div>

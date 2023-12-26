@@ -22,6 +22,7 @@ use App\Http\Controllers\admin\ViewController;
 use App\Http\Controllers\admin\SearchController;
 use App\Http\Controllers\DocumentMainController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchMainController;
 use App\Http\Controllers\HomeMainController;
 
 /*
@@ -98,6 +99,8 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/change-password', [ProfileController::class,'resetPassword'])->name('profile.resetPass');
     Route::post('/upload-docs', [DocumentMainController::class,'upload'])->name('upload');
 
+//            Search Trang chủ
+    Route::get('/search',[SearchMainController::class,'search'])->name('searchMain');
 
 //    Vào Admin
     Route::middleware(['auth', 'checkLevel'])->group(function() {

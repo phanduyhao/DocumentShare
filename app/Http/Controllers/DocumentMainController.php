@@ -98,7 +98,7 @@ class DocumentMainController extends Controller
         }else{
             $document->cate_id = $request->cate_select;
         }
-        $document->status = 1;
+        $document->status = 2;
         $document->save();
         $tag = new Tag;
         $tag->tag_name = $request->tag;
@@ -116,7 +116,7 @@ class DocumentMainController extends Controller
 //    Tất cả tài liệu
     public function allDocs(){
         $favourites = Favourite::where('user_id',Auth::id())->get();
-        $docs = Document::where('status',1)->paginate(12);
+        $docs = Document::where('status',1)->paginate(9);
         return view('document.list_docs',compact('docs','favourites'),[
            'title' => 'Tất cả tài liệu'
         ]);

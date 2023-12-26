@@ -52,13 +52,18 @@
         focusOnSelect: true
     });
 
-    $('.hot-docs__slide').slick({
+    $('.docs-slide__home-top').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
     });
-
+    $('.docs-slide__home-bottom').slick({
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
 
 </script>
 <script src="/temp/bootstrap/js/bootstrap.bundle.min.js"></script>
