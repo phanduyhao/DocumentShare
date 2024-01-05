@@ -25,39 +25,32 @@
                         <div class="lib-sidebar mt-4">
                             <h4 class="lib-header mb-0">Từ khoá liên quan</h4>
                             <div class="keywords-lists d-flex flex-fill flex-wrap p-2">
-                                <div class="keywords-item m-1">
-                                    <a href="">bài tập hoá</a>
-                                </div>
-                                <div class="keywords-item m-1">
-                                    <a href="">công thức hoá</a>
-                                </div>
-                                <div class="keywords-item m-1">
-                                    <a href="">bài tập hoá 10-có lời giải</a>
-                                </div>
-                                <div class="keywords-item m-1">
-                                    <a href="">đề thi</a>
-                                </div>
-                                <div class="keywords-item m-1">
-                                    <a href="">đề thi hsg hoá </a>
-                                </div>
+                               @foreach($tags as $tag)
+                                    <div class="keywords-item m-1">
+                                        <a href="">{{$tag->tag_name}}</a>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
 
                         <div class="lib-sidebar mt-4">
                             <h4 class="lib-header mb-0">Tài liệu liên quan</h4>
                             <div class="related-document">
-                                <div class="related-document-item d-flex align-items-center py-2 px-3">
-                                    <i class="fa-regular fa-file-pdf fs-3 me-2"></i>
-                                    <a href="" class="lh-1">Đề thi trung học phổ thông môn hoá 2022 </a>
-                                </div>
-                                <div class="related-document-item d-flex align-items-center py-2 px-3">
-                                    <i class="fa-regular fa-file-word fs-3 me-2"></i>
-                                    <a href="" class="lh-1">Đề thi trung học phổ thông môn hoá 2022 </a>
-                                </div>
-                                <div class="related-document-item d-flex align-items-center py-2 px-3">
-                                    <i class="fa-regular fa-file-video fs-3 me-2"></i>
-                                    <a href="" class="lh-1">Đề thi trung học phổ thông môn hoá 2022 </a>
-                                </div>
+                                @foreach($doc_news as $doc_new)
+                                    <div class="related-document-item d-flex align-items-center py-2 px-3">
+                                        @if($doc_new->type == 'pdf')
+                                            <i class="fa-regular fa-file-pdf fs-3 me-2"></i>
+                                        @elseif($doc_new->type == 'docx')
+                                            <i class="fa-regular fa-file-word fs-3 me-2"></i>
+                                        @elseif($doc_new->type == 'pptx')
+                                            <i class="fa-regular fa-file-powerpoint fs-3 me-2"></i>
+                                        @elseif($doc_hot->type == 'xlsx')
+                                            <i class="$doc_new-regular fa-file-excel fs-3 me-2"></i>
+                                        @endif
+                                        <a data-id="{{$doc_new->id}}" class="btn-show__details-file lh-1" target="_blank"
+                                           href="{{ route('documentMain.details', ['slug' => $doc_new->slug]) }}">{{$doc_new->title}}</a>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -92,16 +85,16 @@
                                     </div>
                                     <div class="parameter-docunment-item ">
                                         @if($document->type == 'pdf')
-                                            <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
+                                            <a data-id="{{$document->id}}" data-score-doc=" {{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
                                                 <i class="fa-solid fa-download pe-1"></i>
                                                 <span>Tải xuống</span>
                                             </a>
                                         @else
-                                            <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document->file}}.{{$document->type}}" download class="btn btn-success text-white download-file btn-download px-3">
+                                            <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document->file}}.{{$document->type}}" download class="btn btn-success text-white download-file btn-download px-3">
                                                 <i class="fa-solid fa-download pe-1"></i>
                                                 <span>Tải File gốc ({{$document->type}})</span>
                                             </a>
-                                            <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
+                                            <a data-id="{{$document->id}}" data-score-doc="{{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
                                                 <i class="fa-solid fa-download pe-1"></i>
                                                 <span>Tải File PDF</span>
                                             </a>
@@ -167,11 +160,16 @@
                               </span>
                             </div>
 
-                            <div class="comment container-width" id="comment_area">
+                            <div class="comment container-width mt-5" id="comment_area">
                                 <!-- TEST -->
+                                @guest
+                                @else
                                 <form id="boxCommentForm" class="comment-box" data-action="{{route('sendComment')}}">
                                     @csrf
-                                    <input type="hidden" name="document" value="{{ $document->id }}"> <!-- Đặt parent_comment_id -->
+                                    <input type="hidden" name="document" value="{{ $document->id }}">
+
+                                    <!-- Đặt parent_comment_id -->
+
                                     <div class="d-flex">
                                         <div class="comment-avata d-flex align-items-center justify-content-center me-2">
                                             @if($document->User->avatar == null)
@@ -186,6 +184,7 @@
                                     </div>
                                     <button type="submit" class="send-comment float-end btn btn-primary">Gửi bình luận</button>
                                 </form>
+                                @endguest
 
 {{--    Comments Parent    --}}
                                 <div class="comment-list mt-5">
@@ -225,25 +224,28 @@
                                                                 </a>
                                                             </p>
                                                             <!-- TEST -->
-                                                            <form id="boxCommentFormReply_{{ $comment->id }}" class="comment-box child d-none bg-white p-3" data-action="{{route('sendComment')}}" >
-                                                                <p id="{{ $comment->id }}" class="boxCommentFormReplyID d-none"></p>
-                                                                @csrf
-                                                                <input type="hidden" name="document" value="{{ $document->id }}"> <!-- Đặt parent_comment_id -->
-                                                                <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}"> <!-- Đặt parent_comment_id -->
-                                                                <div class="d-flex">
-                                                                    <div class="comment-avata d-flex align-items-center justify-content-center me-2">
-                                                                        @if($document->User->avatar == null)
-                                                                            <i class="fa-solid fa-user"></i>
-                                                                        @else
-                                                                            <img width="50" height="50" class="rounded-circle" src="/temp/images/avatars/{{Auth::user()->avatar}}" alt="Avatar">
-                                                                        @endif
+                                                            @guest
+                                                            @else
+                                                                <form id="boxCommentFormReply_{{ $comment->id }}" class="comment-box child d-none bg-white p-3" data-action="{{route('sendComment')}}" >
+                                                                    <p id="{{ $comment->id }}" class="boxCommentFormReplyID d-none"></p>
+                                                                    @csrf
+                                                                    <input type="hidden" name="document" value="{{ $document->id }}"> <!-- Đặt parent_comment_id -->
+                                                                    <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}"> <!-- Đặt parent_comment_id -->
+                                                                    <div class="d-flex">
+                                                                        <div class="comment-avata d-flex align-items-center justify-content-center me-2">
+                                                                            @if($document->User->avatar == null)
+                                                                                <i class="fa-solid fa-user"></i>
+                                                                            @else
+                                                                                <img width="50" height="50" class="rounded-circle" src="/temp/images/avatars/{{Auth::user()->avatar}}" alt="Avatar">
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="form-comment w-100">
+                                                                            <textarea name="comment" class="input-field textarea-note w-100 p-3" id="" rows="3" placeholder="Nhập bình luận *" data-require="Vui lòng nhập nội dung!"></textarea>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="form-comment w-100">
-                                                                        <textarea name="comment" class="input-field textarea-note w-100 p-3" id="" rows="3" placeholder="Nhập bình luận *" data-require="Vui lòng nhập nội dung!"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <button type="submit" class="send-comment float-end btn btn-primary">Gửi bình luận</button>
-                                                            </form>
+                                                                    <button type="submit" class="send-comment float-end btn btn-primary">Gửi bình luận</button>
+                                                                </form>
+                                                            @endguest
                                                             @if($comment->hasChildren())
                                                             <div class="reply-box bg-white p-3">
                                                                 @php

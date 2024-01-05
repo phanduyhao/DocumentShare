@@ -176,7 +176,7 @@
                                 <div class="error">
                                     @include('admin.error')
                                 </div>
-                                <form class="form_cate_update form-edit" id="form_cate_update-{{$cate->id}}" data-id="{{$cate->id}}" method='post' action='{{ route('cates.update',['cate' => $cate]) }}'>
+                                <form data-count="{{$count_cates}}" class="form_cate_update form-edit" id="form_cate_update-{{$cate->id}}" data-id="{{$cate->id}}" method='post' action='{{ route('cates.update',['cate' => $cate]) }}'>
                                     @method('Patch')
                                     @csrf
                                     <div class='mb-3'>
@@ -185,7 +185,6 @@
                                             for='basic-default-fullname'
                                         >Title</label>
                                         <input
-                                            data-count="{{$count_cates}}"
                                             type='text'
                                             class='form-control title input-field'
                                             id='title-edit-{{$cate->id}}'

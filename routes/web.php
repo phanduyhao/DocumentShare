@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\SearchController;
 use App\Http\Controllers\DocumentMainController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchMainController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeMainController;
 
 /*
@@ -68,11 +69,19 @@ Route::get('/tailieu/{categorySlug}', [DocumentMainController::class, 'index'])-
 // Chi tiết tài liệu
 Route::get('/chitiet/{slug}', [DocumentMainController::class, 'details'])->name('documentMain.details');
 
+// Trang Liên hệ
+Route::get('/lien-he', [PageController::class, 'contact']);
+
+// Trang giới thiệu
+Route::get('/gioi-thieu', [PageController::class, 'about']);
+
+
+// Các chức năng sau khi đăng nhập
+
 Route::middleware(['auth'])->group(function() {
 
 //    Upload Tài liệu
     Route::get('/upload',[DocumentMainController::class,'uploadPage'])->name('uploadPage');
-
 
     // Comment
     Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
@@ -98,6 +107,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/profile-update/{user}', [ProfileController::class,'update'])->name('profile.update');
     Route::post('/change-password', [ProfileController::class,'resetPassword'])->name('profile.resetPass');
     Route::post('/upload-docs', [DocumentMainController::class,'upload'])->name('upload');
+    Route::get('/favourite-docs', [ProfileController::class,'favourite'])->name('favourite');
 
 //            Search Trang chủ
     Route::get('/search',[SearchMainController::class,'search'])->name('searchMain');

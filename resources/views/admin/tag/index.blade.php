@@ -4,7 +4,7 @@
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
         <div class="card">
             <div class="d-flex p-4 justify-content-between">
-                <h5 class=" fw-bold">Danh sách danh mục</h5>
+                <h5 class=" fw-bold">Danh sách thẻ tag</h5>
                 <div>
                     <button type="button" data-id="" class="btn btn-success text-dark px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#createTag">Thêm mới</button>
                     <button type="button"class="btn btn-danger me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModalAll">Xóa tất cả</button>
@@ -28,7 +28,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="createTagLabel">Thêm mới danh mục.</h1>
+                            <h1 class="modal-title fs-5" id="createTagLabel">Thêm mới thẻ Tag.</h1>
                         </div>
                         <div class="card-body">
                             <div class="error">
@@ -42,11 +42,25 @@
                                         for='basic-default-fullname'
                                     >Title</label>
                                     <input
+                                        data-count="{{$count_tags}}"
                                         type='text'
                                         class='form-control title input-field '
-                                        id='tag_name-store'
+                                        id='title-store'
                                         placeholder='Input Tag Name'
                                         name='tag_name' data-require='Mời nhập tiêu đề'
+                                    />
+                                </div>
+                                <div class='mb-3'>
+                                    <label
+                                        class='form-label'
+                                        for='basic-default-fullname'
+                                    >Slug</label>
+                                    <input
+                                        type='text'
+                                        class='form-control title input-field '
+                                        id='slug-store'
+                                        placeholder='Input Tag Name'
+                                        name='slug' data-require='Mời nhập tiêu đề'
                                     />
                                 </div>
                                 <div class="form-group mb-3">
@@ -140,7 +154,6 @@
                                 </div>
                             </div>
                         </tr>
-
                         <!-- Modal Edit -->
 
                     @endforeach
@@ -157,7 +170,7 @@
                                 <div class="error">
                                     @include('admin.error')
                                 </div>
-                                <form class="form_tag_update form-edit" id="form_tag_update-{{$tag->id}}" data-id="{{$tag->id}}" method='post' action='{{ route('tags.update',['tag' => $tag]) }}'>
+                                <form class="form_tag_update form-edit" data-count="{{$count_tags}}" id="form_tag_update-{{$tag->id}}" data-id="{{$tag->id}}" method='post' action='{{ route('tags.update',['tag' => $tag]) }}'>
                                     @method('Patch')
                                     @csrf
                                     <div class='mb-3'>
@@ -168,10 +181,25 @@
                                         <input
                                             type='text'
                                             class='form-control title input-field '
-                                            id='tag_name-store-{{$tag->id}}'
+                                            id='title-edit-{{$tag->id}}'
                                             placeholder='Input Tag Name'
                                             value="{{$tag->tag_name}}"
                                             name='tag_name' data-require='Mời nhập tiêu đề'
+                                        />
+
+                                    </div>
+                                    <div class='mb-3'>
+                                        <label
+                                            class='form-label'
+                                            for='basic-default-company'
+                                        >Slug</label>
+                                        <input
+                                            type='text'
+                                            class='form-control slug input-field'
+                                            id='slug-edit-{{$tag->id}}'
+                                            placeholder='Input Slug'
+                                            name='slug' data-require='Mời nhập Slug'
+                                            value="{{$tag->slug}}"
                                         />
                                     </div>
                                     <div class="form-group mb-3">

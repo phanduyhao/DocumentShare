@@ -32,9 +32,9 @@ class Document extends Model
     {
         return $this->belongsTo( status::class, 'status','id');
     }
-    public function Tag()
+    public function TagChildren()
     {
-        return $this->belongsTo( Tag::class, 'tag_id','id');
+        return $this->hasMany( Tag::class, 'tag_id','id');
     }
     public function rates()
     {

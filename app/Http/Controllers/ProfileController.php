@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
+use App\Models\Favourite;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +22,14 @@ class ProfileController extends Controller
             'title' => 'Trang cá nhân'
         ]);
     }
+
+    public function favourite(){
+        $docs = Favourite::where('user_id',Auth::id())->paginate(8);
+        return view('user.favourite_docs',compact('docs'),[
+            'title' => 'Tài liệu yêu thích'
+        ]);
+    }
+
 
     public function update(Request $request, User $user)
     {

@@ -20,6 +20,17 @@
                             <h4 class="lib-header mb-0">Danh mục tài liệu</h4>
                                 @include('layout.list_cates')
                         </div>
+                        <div class="lib-sidebar mt-4">
+                            <h4 class="lib-header mb-0">Từ khoá liên quan</h4>
+                            <div class="keywords-lists d-flex flex-fill flex-wrap p-2">
+                                @foreach($tags as $tag)
+                                    <div class="keywords-item m-1">
+                                        <a href="">{{$tag->tag_name}}</a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col col-9">
                         <div class="list-document mb-5">

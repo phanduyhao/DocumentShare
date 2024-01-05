@@ -20,17 +20,19 @@ class DocumentMainController extends Controller
         $category = Category::where('slug', $categorySlug)->firstOrFail();
         $documents = Document::withCount(['views', 'downloads'])->where('cate_id', $category->id)->paginate(6);
         $favourites = Favourite::where('user_id',Auth::id())->get();
-        return view('document.index', compact('category', 'documents','favourites'), [
+        $tags = Tag::where('cate_id', $category->id)->take(6)->get();
+
+        return view('document.index', compact('category', 'documents','favourites','tags'), [
             'title' => 'Tài liệu ' . $category->title,
         ]);
-
     }
 
     public function uploadPage(){
         $count_docs = Document::count();
         $count_cates = Category::count();
+        $count_tags = Tag::count();
         $cates = Category::all();
-        return view('document.upload',compact('cates','count_docs','count_cates'),[
+        return view('document.upload',compact('cates','count_docs','count_cates','count_tags'),[
             'title' => 'Upload Tài liệu'
         ]);
     }
@@ -113,11 +115,14 @@ class DocumentMainController extends Controller
         ]);
     }
 
+
 //    Tất cả tài liệu
     public function allDocs(){
         $favourites = Favourite::where('user_id',Auth::id())->get();
         $docs = Document::where('status',1)->paginate(9);
-        return view('document.list_docs',compact('docs','favourites'),[
+        $tags = Tag::take(10)->get();
+        $doc_hots = Document::where('status',1)->where('score','>',0)->take(6)->get();
+        return view('document.list_docs',compact('docs','favourites','tags','doc_hots'),[
            'title' => 'Tất cả tài liệu'
         ]);
     }
@@ -125,6 +130,10 @@ class DocumentMainController extends Controller
 //    Chi tiết tài liệu
     public function details($slug)
     {
+        $doc_news = Document::where('status',1)
+            ->orderBy('id', 'desc')
+            ->take(6)
+            ->get();
         $document = Document::withCount(['comments','views', 'downloads'])->where('slug', $slug)->first();
         $document_id = $document->id;
         $rate_tb = Rate::where('document_id',$document_id)->get();
@@ -142,15 +151,11 @@ class DocumentMainController extends Controller
             }
             $user = User::find($document->user_id);
             $username = $user->name;
-            $tag = Tag::find($document->tag_id);
-            if($document->tag_id) {
-                $tag_name = $tag->tag_name;
-            } else {
-                $tag_name = "Chưa có thẻ tag !";
-            }
-            $filename = $document->file;
 
-            return view('document.details', compact('filename','document','username','cate_title','tag_name','comments','rate_tb','initialCommentsCount','loadMoreCommentsCount'),[
+            $filename = $document->file;
+            $tags = $document->tag_id;
+            $tags = Tag::where('document_id',$document_id)->get();
+            return view('document.details', compact('filename','document','username','cate_title','comments','rate_tb','initialCommentsCount','loadMoreCommentsCount','tags','doc_news'),[
                 'title' => $filename
             ]);
         }

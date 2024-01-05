@@ -15,7 +15,8 @@ class TagController extends Controller
         $cates = Category::all();
         $documents = Document::all();
         $tags = Tag::paginate(10);
-        return view('admin.tag.index',compact('tags','documents','cates'),[
+        $count_tags =Tag::count();
+        return view('admin.tag.index',compact('tags','documents','count_tags','cates'),[
             'title' => 'Quản lý tag'
         ]);
     }
@@ -30,6 +31,7 @@ class TagController extends Controller
         // Kiểm tra xem tag_id có tồn tại trong bảng Tag hay không
         $tag = new Tag;
         $tag->tag_name = $request->tag_name;
+        $tag->slug = $request->slug;
         $tag->cate_id = $request->cate_id;
         $tag->document_id = $request->document_id;
         $tag->save();
@@ -49,6 +51,7 @@ class TagController extends Controller
         ]);
         // Kiểm tra xem tag_id có tồn tại trong bảng Tag hay không
         $tag->tag_name = $request->tag_name;
+        $tag->slug = $request->slug;
         $tag->cate_id = $request->cate_id;
         $tag->document_id = $request->document_id;
         $tag->save();

@@ -10,7 +10,7 @@
                         </div>
                         <div class="pr-info-sub ms-2">
                             <div class="pr-sub-name">{{$user->name}}</div>
-                            <div class="pr-sub-point d-flex justify-content-center align-items-center">
+                            <div class="pr-sub-point d-flex align-items-center">
                                 <span>Điểm tích luỹ:</span>
                                 <div class="point ms-1">{{$user->score}}</div>
                             </div>
@@ -25,6 +25,9 @@
                         </div>
                         <div class="pr-sub-nav" onclick="openEditPassword()">
                             <a href="#" class="pr-sub-nav-item">Thay đổi mật khẩu</a>
+                        </div>
+                        <div class="pr-sub-nav">
+                            <a href="{{route('favourite')}}" class="pr-sub-nav-item">Tài liệu yêu thích</a>
                         </div>
                         <form action="{{route('logout')}}" method="post" class="logout pr-sub-nav">
                             @csrf

@@ -112,17 +112,26 @@
                     <div class="col-4">
                         <label
                             class='form-label text-black fw-bold'
-                            for='basic-default-email'
+                            for='basic-default-fullname'
                         >Từ khóa:</label>
                     </div>
-                    <div class='col-8'>
+                    <div class="col-8">
+                        <input
+                            data-count="{{$count_tags}}"
+                            type='text'
+                            class='form-control title input-field '
+                            id='tag-store'
+                            placeholder='Input Title'
+                            name='title' data-require='Mời nhập Tiêu đề'
+                        />
+                    </div>
+                </div>
+                <div class='mb-3 row d-none'>
+                    <div class="col-8">
                         <input
                             type='text'
-                            id='tag'
-                            class='form-control input-field'
-                            placeholder='Input Tag'
-                            name='tag'
-                            data-require="Nhập từ khóa"
+                            id='slug-tag'
+                            name='tag-slug'
                         />
                     </div>
                 </div>
