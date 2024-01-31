@@ -57,6 +57,7 @@
                     <!-- Search -->
                     <div class="navbar-nav align-items-center">
                         <form action="{{ route('search') }}" method="get" class="nav-item d-flex align-items-center">
+                            
                             <i class="bx bx-search fs-4 lh-0"></i>
                             <input type="text" name="keyword" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search...">
                         </form>

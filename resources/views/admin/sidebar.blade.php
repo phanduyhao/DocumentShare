@@ -10,7 +10,6 @@
                 class='app-brand-text demo menu-text text-white fw-bolder ms-2'
             >Dashboard</span>
         </a>
-
         <a
             href='javascript:void(0);'
             class='layout-menu-toggle menu-link text-large ms-auto d-xl-none'
@@ -18,9 +17,7 @@
             <i class='bx bx-chevron-left bx-sm align-middle'></i>
         </a>
     </div>
-
     <div class='menu-inner-shadow'></div>
-
     <ul class='menu-inner py-1 ps ps--active-y'>
         <!-- Dashboard -->
         <li class='menu-item active'>
@@ -29,8 +26,6 @@
                 <div data-i18n='Analytics'>Dashboard</div>
             </a>
         </li>
-
-
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Users</span>
         </li>
@@ -52,26 +47,78 @@
                 </li>
             </ul>
         </li>
+
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Documents</span>
         </li>
+{{--        <li class='menu-item'>--}}
+{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
+{{--                <i class='menu-icon tf-icons bx bx-category-alt'></i>--}}
+{{--                <div data-i18n='Layouts'>Quản lý danh mục</div>--}}
+{{--            </a>--}}
+{{--            <ul class='menu-sub'>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('cates.index')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Danh mục tài liệu</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
+{{--        <li class='menu-item'>--}}
+{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
+{{--                <i class='menu-icon tf-icons bx bx-book-open'></i>--}}
+{{--                <div data-i18n='Layouts'>Quản lý tài liệu</div>--}}
+{{--            </a>--}}
+{{--            <ul class='menu-sub'>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('documents.index')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Tài liệu đã duyệt</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('documents.loading')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Tài liệu chưa duyệt</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('documents.cancel')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Tài liệu đã hủy</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
+{{--        <li class='menu-item'>--}}
+{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
+{{--                <i class='menu-icon tf-icons bx bx-purchase-tag'></i>--}}
+{{--                <div data-i18n='Layouts'>Quản lý thẻ Tag</div>--}}
+{{--            </a>--}}
+{{--            <ul class='menu-sub'>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('tags.index')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Danh sách thẻ tag</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
+{{--        <li class='menu-item'>--}}
+{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
+{{--                <i class='menu-icon tf-icons bx bx-file'></i>--}}
+{{--                <div data-i18n='Layouts'>Quản lý Files</div>--}}
+{{--            </a>--}}
+{{--            <ul class='menu-sub'>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('files.index')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Danh sách Files</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
+
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-category-alt'></i>
-                <div data-i18n='Layouts'>Quản lý danh mục</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('cates.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh mục tài liệu</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-book-open'></i>
-                <div data-i18n='Layouts'>Quản lý tài liệu</div>
+                <div data-i18n='Layouts'>Tài liệu</div>
             </a>
             <ul class='menu-sub'>
                 <li class='menu-item'>
@@ -89,40 +136,29 @@
                         <div data-i18n='Without menu'>Tài liệu đã hủy</div>
                     </a>
                 </li>
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('cates.index')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Danh mục tài liệu</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                <li class='menu-item'>
+                    <a href='{{route('cates.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Danh mục</div>
+                    </a>
+                </li>
+                <li class='menu-item'>
+                    <a href='{{route('tags.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Từ khóa</div>
+                    </a>
+                </li>
+                <li class='menu-item'>
+                    <a href='{{route('rates.index')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Đánh giá</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-purchase-tag'></i>
-                <div data-i18n='Layouts'>Quản lý thẻ Tag</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('tags.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách thẻ tag</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-file'></i>
-                <div data-i18n='Layouts'>Quản lý Files</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('files.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách Files</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
+
+
+
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Actions</span>
         </li>
@@ -152,19 +188,19 @@
                 </li>
             </ul>
         </li>
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-star'></i>
-                <div data-i18n='Layouts'>Quản lý đánh giá</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('rates.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách đánh giá</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+{{--        <li class='menu-item'>--}}
+{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
+{{--                <i class='menu-icon tf-icons bx bx-star'></i>--}}
+{{--                <div data-i18n='Layouts'>Quản lý đánh giá</div>--}}
+{{--            </a>--}}
+{{--            <ul class='menu-sub'>--}}
+{{--                <li class='menu-item'>--}}
+{{--                    <a href='{{route('rates.index')}}' class='menu-link'>--}}
+{{--                        <div data-i18n='Without menu'>Danh sách đánh giá</div>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-downvote'></i>

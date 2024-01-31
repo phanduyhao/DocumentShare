@@ -30,6 +30,26 @@
                                 @endforeach
                             </div>
                         </div>
+                        <div class="lib-sidebar mt-4">
+                            <h4 class="lib-header mb-0">Tài liệu nổi bật</h4>
+                            <div class="related-document">
+                                @foreach($doc_hots as $doc_hot)
+                                    <div class="related-document-item d-flex align-items-center py-2 px-3">
+                                        @if($doc_hot->type == 'pdf')
+                                            <i class="fa-regular fa-file-pdf fs-3 me-2"></i>
+                                        @elseif($doc_hot->type == 'docx')
+                                            <i class="fa-regular fa-file-word fs-3 me-2"></i>
+                                        @elseif($doc_hot->type == 'pptx')
+                                            <i class="fa-regular fa-file-powerpoint"></i>
+                                        @elseif($doc_hot->type == 'xlsx')
+                                            <i class="fa-regular fa-file-excel"></i>
+                                        @endif
+                                        <a data-id="{{$doc_hot->id}}" class="btn-show__details-file lh-1" target="_blank"
+                                           href="{{ route('documentMain.details', ['slug' => $doc_hot->slug]) }}">{{$doc_hot->title}}</a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
 
                     </div>
                     <div class="col col-9">

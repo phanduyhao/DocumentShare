@@ -39,7 +39,7 @@ class SearchMainController extends Controller
             'path' => Paginator::resolveCurrentPath(),
         ]);
 
-        return view('layout.search', compact('searchResults', 'cates', 'tags', 'count_docs', 'favourites'), [
+        return view('layout.search', compact('searchResults', 'cates', 'tags', 'count_docs', 'favourites','keyword'), [
             'title' => 'Kết quả tìm kiếm cho từ khóa " ' . $keyword . ' "'
         ]);
     }

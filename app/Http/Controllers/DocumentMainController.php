@@ -21,8 +21,9 @@ class DocumentMainController extends Controller
         $documents = Document::withCount(['views', 'downloads'])->where('cate_id', $category->id)->paginate(6);
         $favourites = Favourite::where('user_id',Auth::id())->get();
         $tags = Tag::where('cate_id', $category->id)->take(6)->get();
+        $doc_hots = Document::where('status',1)->where('score','>',0)->take(3)->get();
 
-        return view('document.index', compact('category', 'documents','favourites','tags'), [
+        return view('document.index', compact('category', 'documents','favourites','tags','doc_hots'), [
             'title' => 'Tài liệu ' . $category->title,
         ]);
     }

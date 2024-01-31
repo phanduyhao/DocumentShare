@@ -137,7 +137,6 @@ $(document).ready(function() {
     });
 
 
-
 //    ĐÁNH GIÁ
 
     let rated = false; // Biến để theo dõi xem đã đánh giá chưa
@@ -183,39 +182,39 @@ $(document).ready(function() {
     });
 
 //     Load THêm Comment
-    var dataCmt = $('#list-comment__data');
-    var initialCommentsCount = dataCmt.data('comment-limit');
-    var loadMoreCommentsCount = dataCmt.data('load-more');
-    var totalComments = dataCmt.data('total-cmt');
-
-    var commentList = $('.comment-list');
-    var loadMoreButton = $('#loadMoreComments');
-
-    // Ẩn các bình luận sau chỉ số ban đầu
-    for (var i = initialCommentsCount; i < totalComments; i++) {
-        var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
-        if (comment.length) {
-            comment.hide();
-        }
-    }
-
-    // Hiển thị thêm bình luận khi nhấp vào nút "Hiển thị thêm"
-    loadMoreButton.on('click', function () {
-        var nextIndex = initialCommentsCount + loadMoreCommentsCount;
-        for (var i = initialCommentsCount; i < nextIndex && i < totalComments; i++) {
-            var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
-            if (comment.length) {
-                comment.show();
-            }
-        }
-
-        initialCommentsCount = nextIndex;
-
-        // Ẩn nút "Hiển thị thêm" nếu đã hiển thị hết tất cả bình luận
-        if (initialCommentsCount >= totalComments) {
-            loadMoreButton.hide();
-        }
-    });
+//     var dataCmt = $('#list-comment__data');
+//     var initialCommentsCount = dataCmt.data('comment-limit');
+//     var loadMoreCommentsCount = dataCmt.data('load-more');
+//     var totalComments = dataCmt.data('total-cmt');
+//
+//     var commentList = $('.comment-list');
+//     var loadMoreButton = $('#loadMoreComments');
+//
+//     // Ẩn các bình luận sau chỉ số ban đầu
+//     for (var i = initialCommentsCount; i < totalComments; i++) {
+//         var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
+//         if (comment.length) {
+//             comment.hide();
+//         }
+//     }
+//
+//     // Hiển thị thêm bình luận khi nhấp vào nút "Hiển thị thêm"
+//     loadMoreButton.on('click', function () {
+//         var nextIndex = initialCommentsCount + loadMoreCommentsCount;
+//         for (var i = initialCommentsCount; i < nextIndex && i < totalComments; i++) {
+//             var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
+//             if (comment.length) {
+//                 comment.show();
+//             }
+//         }
+//
+//         initialCommentsCount = nextIndex;
+//
+//         // Ẩn nút "Hiển thị thêm" nếu đã hiển thị hết tất cả bình luận
+//         if (initialCommentsCount >= totalComments) {
+//             loadMoreButton.hide();
+//         }
+//     });
 
 
 // Đổi mật khẩu
@@ -321,4 +320,23 @@ $(document).ready(function() {
             }
         }
     });
+
+//    Gửi phản hồi về Email
+    $('.btn-send-feedback').click(function () {
+        var formData = $('#feedbackForm').serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: '/send-feedback',
+            data: formData,
+            success: function (response) {
+                console.log(response);  // Xử lý phản hồi từ server (nếu cần)
+                alert('Phản hồi đã được gửi thành công!');
+            },
+            error: function (error) {
+                console.log(error);  // Xử lý lỗi (nếu cần)
+                alert('Có lỗi xảy ra khi gửi phản hồi!');
+            }
+        });
+    })
 });

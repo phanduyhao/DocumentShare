@@ -75,6 +75,11 @@ Route::get('/lien-he', [PageController::class, 'contact']);
 // Trang giới thiệu
 Route::get('/gioi-thieu', [PageController::class, 'about']);
 
+//            Search Trang chủ
+Route::get('/search',[SearchMainController::class,'search'])->name('searchMain');
+
+//            Phản hồi
+Route::post('/send-feedback',[PageController::class,'sendFeedback'])->name('sendFeedBack');
 
 // Các chức năng sau khi đăng nhập
 
@@ -108,9 +113,6 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/change-password', [ProfileController::class,'resetPassword'])->name('profile.resetPass');
     Route::post('/upload-docs', [DocumentMainController::class,'upload'])->name('upload');
     Route::get('/favourite-docs', [ProfileController::class,'favourite'])->name('favourite');
-
-//            Search Trang chủ
-    Route::get('/search',[SearchMainController::class,'search'])->name('searchMain');
 
 //    Vào Admin
     Route::middleware(['auth', 'checkLevel'])->group(function() {
