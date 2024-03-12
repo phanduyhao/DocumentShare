@@ -44,7 +44,7 @@
                                         @elseif($doc_hot->type == 'xlsx')
                                             <i class="fa-regular fa-file-excel"></i>
                                         @endif
-                                        <a data-id="{{$doc_hot->id}}" class="btn-show__details-file lh-1" target="_blank"
+                                        <a class="btn-show__details-file lh-1" target="_blank"
                                            href="{{ route('documentMain.details', ['slug' => $doc_hot->slug]) }}">{{$doc_hot->title}}</a>
                                     </div>
                                 @endforeach
@@ -96,7 +96,7 @@
                                                         <div class="action-click">
                                                             <div class="action-read-download">
                                                                 <div class="action-read-download-btn me-2">
-                                                                    <a data-id="{{$document->id}}" class="btn-show__details-file" target="_blank"
+                                                                    <a class="btn-show__details-file" target="_blank"
                                                                        href="{{ route('documentMain.details', ['slug' => $document->slug]) }}">Đọc online</a>
                                                                 </div>
                                                                 <div class="action-read-download-btn">

@@ -6,11 +6,9 @@ use App\Models\Document;
 use App\Models\Download;
 use App\Models\Favourite;
 use App\Models\Rate;
-use App\Models\View;
 use ConvertApi\ConvertApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Events\RateCreated;
 
 class ActionController extends Controller
@@ -35,24 +33,19 @@ class ActionController extends Controller
     }
 
 //    View
-    public function view(Request $request) {
-        $view = new View;
-        $view->document_id = $request->input('document_id');
-        $view->user_id = $request->input('user_id');
-        $view->save();
-        return response()->json(['message' => 'Xem tài liệu thành công!.']);
+
+    public function increaseView(Request $request){
+        $doc_slug = $request->input("doc_slug");
+        $document = Document::where('slug', $doc_slug)->first();
+
+        if ($document) {
+            $document->views += 1 ;
+            $document->save();
+            return response()->json($doc_slug);
+        } else {
+            return response()->json(['error' => 'Document not found'], 404);
+        }
     }
-//    public function view($slug){
-//        // Tìm tài liệu dựa vào slug
-//        $document = Document::where('slug', $slug)->firstOrFail();
-//
-//        // Tăng lượt xem
-//        $document->views += 1;
-//        $document->save();
-//
-//        // Các logic hiển thị trang chi tiết tài liệu
-//        return view('documents.show', compact('document'));
-//    }
 
 //    Favourite
     public function favourite(Request $request) {

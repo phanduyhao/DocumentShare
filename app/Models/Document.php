@@ -40,10 +40,6 @@ class Document extends Model
     {
         return $this->hasMany(Rate::class);
     }
-    public function views()
-    {
-        return $this->hasMany(View::class, 'document_id', 'id');
-    }
     public function downloads()
     {
         return $this->hasMany(Download::class, 'document_id', 'id');

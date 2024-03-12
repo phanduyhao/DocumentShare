@@ -18,7 +18,7 @@ class DocumentMainController extends Controller
     public function Index($categorySlug)
     {
         $category = Category::where('slug', $categorySlug)->firstOrFail();
-        $documents = Document::withCount(['views', 'downloads'])->where('cate_id', $category->id)->paginate(6);
+        $documents = Document::withCount('downloads')->where('cate_id', $category->id)->paginate(6);
         $favourites = Favourite::where('user_id',Auth::id())->get();
         $tags = Tag::where('cate_id', $category->id)->take(6)->get();
         $doc_hots = Document::where('status',1)->where('score','>',0)->take(3)->get();
@@ -120,7 +120,7 @@ class DocumentMainController extends Controller
 //    Tất cả tài liệu
     public function allDocs(){
         $favourites = Favourite::where('user_id',Auth::id())->get();
-        $docs = Document::where('status',1)->paginate(9);
+        $docs = Document::withCount('downloads')->where('status',1)->paginate(9);
         $tags = Tag::take(10)->get();
         $doc_hots = Document::where('status',1)->where('score','>',0)->take(6)->get();
         return view('document.list_docs',compact('docs','favourites','tags','doc_hots'),[
@@ -135,7 +135,7 @@ class DocumentMainController extends Controller
             ->orderBy('id', 'desc')
             ->take(6)
             ->get();
-        $document = Document::withCount(['comments','views', 'downloads'])->where('slug', $slug)->first();
+        $document = Document::withCount(['comments', 'downloads'])->where('slug', $slug)->first();
         $document_id = $document->id;
         $rate_tb = Rate::where('document_id',$document_id)->get();
         if($document){

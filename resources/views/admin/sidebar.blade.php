@@ -52,69 +52,6 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Documents</span>
         </li>
-{{--        <li class='menu-item'>--}}
-{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
-{{--                <i class='menu-icon tf-icons bx bx-category-alt'></i>--}}
-{{--                <div data-i18n='Layouts'>Quản lý danh mục</div>--}}
-{{--            </a>--}}
-{{--            <ul class='menu-sub'>--}}
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('cates.index')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Danh mục tài liệu</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-{{--        <li class='menu-item'>--}}
-{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
-{{--                <i class='menu-icon tf-icons bx bx-book-open'></i>--}}
-{{--                <div data-i18n='Layouts'>Quản lý tài liệu</div>--}}
-{{--            </a>--}}
-{{--            <ul class='menu-sub'>--}}
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('documents.index')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Tài liệu đã duyệt</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('documents.loading')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Tài liệu chưa duyệt</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('documents.cancel')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Tài liệu đã hủy</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-{{--        <li class='menu-item'>--}}
-{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
-{{--                <i class='menu-icon tf-icons bx bx-purchase-tag'></i>--}}
-{{--                <div data-i18n='Layouts'>Quản lý thẻ Tag</div>--}}
-{{--            </a>--}}
-{{--            <ul class='menu-sub'>--}}
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('tags.index')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Danh sách thẻ tag</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-{{--        <li class='menu-item'>--}}
-{{--            <a href='javascript:void(0);' class='menu-link menu-toggle'>--}}
-{{--                <i class='menu-icon tf-icons bx bx-file'></i>--}}
-{{--                <div data-i18n='Layouts'>Quản lý Files</div>--}}
-{{--            </a>--}}
-{{--            <ul class='menu-sub'>--}}
-{{--                <li class='menu-item'>--}}
-{{--                    <a href='{{route('files.index')}}' class='menu-link'>--}}
-{{--                        <div data-i18n='Without menu'>Danh sách Files</div>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-category-alt'></i>
@@ -210,19 +147,6 @@
                 <li class='menu-item'>
                     <a href='{{route('downloads.index')}}' class='menu-link'>
                         <div data-i18n='Without menu'>Thống kê lượt tải tài liệu</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-street-view'></i>
-                <div data-i18n='Layouts'>Quản lý lượt xem</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('views.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Thống kê lượt xem tài liệu</div>
                     </a>
                 </li>
             </ul>

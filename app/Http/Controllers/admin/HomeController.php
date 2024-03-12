@@ -10,8 +10,6 @@ use App\Models\Download;
 use App\Models\File;
 use App\Models\Rate;
 use App\Models\User;
-use App\Models\View;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -21,10 +19,9 @@ class HomeController extends Controller
         $cates_count = Category::count();
         $files_count = File::count();
         $comments = Comment::count();
-        $views = View::count();
         $downloads = Download::count();
         $rates = Rate::count();
-        return view ('admin.home',compact('users_count','docs_count', 'cates_count','files_count','comments','views','downloads','rates'),[
+        return view ('admin.home',compact('users_count','docs_count', 'cates_count','files_count','comments','downloads','rates'),[
             'title' => 'Trang quản trị'
         ]);
     }

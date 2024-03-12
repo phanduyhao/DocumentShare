@@ -2,6 +2,28 @@
 
 $(document).ready(function() {
 
+    // increase-view
+    let currentURL = window.location.href;
+    let urlObject = new URL(currentURL);
+    let docSlug = urlObject.pathname.split('/').pop();
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: "/increase-view",
+        data: {
+            doc_slug: docSlug,
+        },
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+
 //    Change Background Main-slide
     let img = $('.main-slide .slick-current.slick-active img').attr('src');
     $('.main-bg img').attr('src',img);
@@ -57,25 +79,25 @@ $(document).ready(function() {
     });
 
 //    Views
-    $('.btn-show__details-file').click(function() {
-        let documentId = $(this).data('id');
-        let userId = $(this).data('user-id'); // Lấy ID của người dùng
-        // Gửi yêu cầu AJAX
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: "POST",
-            url: "/view", // Đổi thành đường dẫn thích hợp của bạn
-            data: {
-                document_id: documentId,
-                user_id: userId,
-            },
-            error: function() {
-                alert("Lỗi!")
-            }
-        });
-    });
+//     $('.btn-show__details-file').click(function() {
+//         let documentId = $(this).data('id');
+//         let userId = $(this).data('user-id'); // Lấy ID của người dùng
+//         // Gửi yêu cầu AJAX
+//         $.ajax({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             },
+//             type: "POST",
+//             url: "/view", // Đổi thành đường dẫn thích hợp của bạn
+//             data: {
+//                 document_id: documentId,
+//                 user_id: userId,
+//             },
+//             error: function() {
+//                 alert("Lỗi!")
+//             }
+//         });
+//     });
 
 //    Favourite
     $('.btn-favourite').click(function(e) {
@@ -340,3 +362,32 @@ $(document).ready(function() {
         });
     })
 });
+
+// $(document).ready(function () {
+//     $('#detail-document').on('scroll', function() {        // Lấy URL hiện tại
+//         let currentURL = window.location.href;
+//
+//         // Tạo một đối tượng URL từ URL hiện tại
+//         let urlObject = new URL(currentURL);
+//
+//         // Lấy phần cuối của đường dẫn (pathname)
+//         let docSlug = urlObject.pathname.split('/').pop();
+//         console.log(docSlug)
+//         $.ajax({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             },
+//             type: "POST",
+//             url: "/increase-view", // Đổi thành đường dẫn thích hợp của bạn
+//             data: {
+//                 doc_slug: docSlug,
+//             },
+//             success: function(response) {
+//                 console.log(response); // In ra console để kiểm tra kết quả
+//             },
+//             error: function() {
+//                 alert("Lỗi khi tăng cột view!");
+//             }
+//         });
+//     });
+// })

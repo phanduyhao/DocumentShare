@@ -81,6 +81,9 @@ Route::get('/search',[SearchMainController::class,'search'])->name('searchMain')
 //            Phản hồi
 Route::post('/send-feedback',[PageController::class,'sendFeedback'])->name('sendFeedBack');
 
+//    View
+Route::post('/increase-view', [ActionController::class,'increaseView']);
+
 // Các chức năng sau khi đăng nhập
 
 Route::middleware(['auth'])->group(function() {
@@ -95,8 +98,6 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/download', [ActionController::class,'download']);
     Route::post('/update-score', [ActionController::class,'updateScore']);
 
-//    View
-    Route::post('/view', [ActionController::class,'view']);
 
 //    Favourite
     Route::post('/favourite', [ActionController::class,'favourite']);

@@ -17,24 +17,17 @@ class HomeMainController extends Controller
 
         $settings = Setting::where('id',1)->first();
         $number_docs = $settings->docs_home;
-        $doc_hots = Document::where('score', '>', 0)
-            ->where('status',1)
-            ->orderBy('score', 'desc')  // Sắp xếp theo điểm giảm dần, ví dụ
-            ->take($number_docs)
-            ->get();
-        $doc_hot2s = Document::where('score', '>', 0)
-            ->where('status',1)
-            ->orderBy('id', 'desc')  // Sắp xếp theo điểm giảm dần, ví dụ
-            ->take($number_docs)
-            ->get();
-        $doc_news = Document::where('status',1)
-            ->orderBy('id', 'desc')
-            ->take($number_docs)
-            ->get();
-        $doc_new2s = Document::where('status',1)
-            ->orderBy('rate', 'desc')
-            ->take($number_docs)
-            ->get();
+        function getDocuments($status, $orderBy, $numberDocs) {
+            return Document::where('status', $status)
+                ->orderBy($orderBy, 'desc')
+                ->take($numberDocs)
+                ->get();
+        }
+
+        $doc_hots = getDocuments(1, 'score', $number_docs);
+        $doc_hot2s = getDocuments(1, 'id', $number_docs);
+        $doc_news = getDocuments(1, 'id', $number_docs);
+        $doc_new2s = getDocuments(1, 'rate', $number_docs);
         return view('welcome',compact('slides','slide1','slide2','slide3','doc_hots','doc_hot2s','doc_news','doc_new2s','number_docs'),[
             'title' => 'Trang chủ'
         ]);
