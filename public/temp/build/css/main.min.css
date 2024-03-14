@@ -188,11 +188,11 @@ label {
 .comment-user-desc {
   font-size: 15px; }
 
-.btn-favourite i {
+.btn-action i {
   transition: .2s all;
   font-size: 25px; }
 
-.btn-favourite:hover i {
+.btn-action:hover i {
   color: rgba(42, 112, 184, 0.95);
   transition: .2s all; }
 
@@ -219,6 +219,37 @@ label {
         transition: all 0.3s; }
 .pagination svg {
   width: 20px; }
+
+#pdfContainer {
+  height: 900px; }
+  #pdfContainer canvas {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px; }
+
+.docs-item .action-contain .fa-heart {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: 0.3s all; }
+.docs-item .action-contain .fa-download {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: 0.5s all; }
+.docs-item .action-contain .fa-eye {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: 0.7s all; }
+.docs-item:hover .action-contain .fa-heart {
+  opacity: 1;
+  transform: translateX(-10px);
+  transition: 0.3s all; }
+.docs-item:hover .action-contain .fa-download {
+  opacity: 1;
+  transform: translateX(-10px);
+  transition: 0.5s all; }
+.docs-item:hover .action-contain .fa-eye {
+  opacity: 1;
+  transform: translateX(-10px);
+  transition: 0.7s all; }
 
 * {
   margin: 0;
@@ -402,10 +433,13 @@ input[type="number"]::-webkit-outer-spin-button {
     .main-slogan_bg h1 {
       white-space: nowrap;
       animation: marquee-slogan_bg 10s linear infinite; }
-  .main .hot-docs__item {
+  .main .docs-item {
     height: 325px; }
-    .main .hot-docs__item__bottom {
+    .main .docs-item__bottom {
       height: 175px; }
+    .main .docs-item canvas {
+      width: 100% !important;
+      height: 170px !important; }
   .main-docs__slide {
     margin-bottom: 60px; }
 
@@ -684,5 +718,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .lib-sidebar-subitem {
   height: 29px !important; }
+
+.z-index-5 {
+  z-index: 5; }
 
 /*# sourceMappingURL=main.min.css.map */

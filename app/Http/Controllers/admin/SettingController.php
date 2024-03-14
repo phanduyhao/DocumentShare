@@ -25,7 +25,7 @@ class SettingController extends Controller
     public function update(Request $request, Setting $setting)
     {
         $setting->score_register = $request->score_register;
-        $setting->score_docs_ok = $request->score_admin_accept;
+        $setting->score_doc_ok = $request->score_admin_accept;
         $setting->docs_home = $request->docs_home;
         $setting->save();
         return redirect()->back();

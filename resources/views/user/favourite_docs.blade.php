@@ -67,7 +67,7 @@
                                                     class="statistical d-flex align-items-center justify-content-between">
                                                     <div class="view">
                                                         <i class="ti-eye"></i>
-                                                        <span>{{ $doc->views_count }}</span>
+                                                        <span>{{ $doc->views }}</span>
                                                     </div>
                                                     <div class="download d-flex align-items-center">
                                                         <i class="fa-solid fa-download pe-1"></i>

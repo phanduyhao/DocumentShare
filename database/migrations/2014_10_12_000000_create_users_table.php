@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('score')->nullable();
             $table->string('phone',10)->nullable();
             $table->date('date')->nullable();
+            $table->string('payment_money')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

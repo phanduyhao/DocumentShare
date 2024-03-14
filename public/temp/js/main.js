@@ -1,4 +1,75 @@
+$(document).ready(function () {
+    // Lấy ra trang 1 của file pdf ở list
+    $('.docs-item__pdf').each(function(){
+        const urlPdf = $(this).data('src');
+        const container = $(this); // Lưu trữ giá trị của 'this'
+        pdfjsLib.getDocument(urlPdf).promise.then(function(pdf) {
+            pdf.getPage(1).then(function(page) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const viewport = page.getViewport({ scale: 1 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+                container.append(canvas);
+            });
+        });
+    });
 
+    $('.docs-title').each(function() {
+        var maxHeight = 58;
+        var $title = $(this);
+        var originalText = $title.text();
+        $title.css({'max-height': maxHeight + 'px', 'overflow': 'hidden', 'text-overflow': 'ellipsis'});
+        if ($title[0].scrollHeight > maxHeight || $title[0].scrollHeight == maxHeight) {
+            var index = originalText.lastIndexOf(' ', originalText.length = 70); // Giảm độ dài thêm 4 ký tự để tránh trường hợp chưa kịp xuống hàng thì đã vượt quá chiều cao
+            var shortenedText = originalText.substring(0, index) + '...';
+            $title.text(shortenedText);
+        }
+    });
+
+    // Hiển thị 1 nửa số trang Pdf và bắt người dùng tải xuống
+    const pdfUrl = $('#pdfContainer').data('src');
+    let totalPageCount = 0;
+    let reachedHalfway = false; // Cờ để đánh dấu đã đến nửa trang hay chưa
+    // Sử dụng PDF.js để hiển thị tệp PDF trên trang web
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        // Lưu trữ tổng số trang
+        totalPageCount = pdf.numPages;
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+            pdf.getPage(pageNumber).then(function(page) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const viewport = page.getViewport({ scale: 1.5 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+                $('#pdfContainer').append(canvas);
+            });
+        }
+        // Kiểm tra khi cuộn đến nửa số trang
+        $('#pdfContainer').scroll(function() {
+            const scrollTop = $(this).scrollTop();
+            const containerHeight = $(this).height();
+            const scrollHeight = $(this)[0].scrollHeight;
+            const scrolledPercentage = (scrollTop + containerHeight) / scrollHeight;
+            if (scrolledPercentage >= 0.5 && !reachedHalfway) {
+                toastr.error('Tải xuống để xem toàn bộ', 'Thông báo');
+                reachedHalfway = true;
+                $(this).addClass('overflow-hidden');
+                $(this).removeClass('overflow-auto');
+            }
+        });
+    });
+})
 
 $(document).ready(function() {
 
@@ -31,130 +102,119 @@ $(document).ready(function() {
 // DOWNLOAD - SCORE
     $('.download-file').click(function(e) {
         // e.preventDefault();
-        let documentId = $(this).data('id');
         let userId = $(this).data('user-id'); // Lấy ID của người dùng
-        let score_user = $(this).data('score-user');
-        let score_doc = $(this).data('score-doc');
+        if(userId){
+            let documentId = $(this).data('id');
+            let score_user = $(this).data('score-user');
+            let score_doc = $(this).data('score-doc');
 
-        // Gửi yêu cầu AJAX
-        if(score_user > score_doc || score_user == score_doc){
-            let user_score = score_user - score_doc;
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                url: "/download",
-                data: {
-                    document_id: documentId,
-                    user_id: userId,
-                },
-                success: function(response) {
-                    // AJAX thành công, cập nhật điểm của người dùng
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: "POST",
-                        url: "/update-score", // Thay đổi thành đường dẫn thích hợp
-                        data: {
-                            user_score: user_score,
-                        },
-                        success: function() {
-                            toastr.success('Tải xuống thành công!', 'Thông báo');
-                        },
-                        error: function() {
-                            alert("Lỗi cập nhật điểm!");
-                        }
-                    });
-                },
-                error: function() {
-                    alert("Lỗi tải xuống!");
-                }
-            });
-        } else {
+            // Gửi yêu cầu AJAX
+            if(score_user > score_doc || score_user == score_doc){
+                let user_score = score_user - score_doc;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "/download",
+                    data: {
+                        document_id: documentId,
+                        user_id: userId,
+                    },
+                    success: function(response) {
+                        // AJAX thành công, cập nhật điểm của người dùng
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "POST",
+                            url: "/update-score", // Thay đổi thành đường dẫn thích hợp
+                            data: {
+                                user_score: user_score,
+                            },
+                            success: function() {
+                                toastr.success('Tải xuống thành công!', 'Thông báo');
+                            },
+                            error: function() {
+                                alert("Lỗi cập nhật điểm!");
+                            }
+                        });
+                    },
+                    error: function() {
+                        alert("Lỗi tải xuống!");
+                    }
+                });
+            } else {
+                e.preventDefault();
+                toastr.error('Không đủ điểm!', 'Thông báo');
+            }
+        }else{
             e.preventDefault();
-            toastr.error('Không đủ điểm!', 'Thông báo');
+            toastr.error('Bạn chưa đăng nhập!', 'Thông báo');
         }
     });
-
-//    Views
-//     $('.btn-show__details-file').click(function() {
-//         let documentId = $(this).data('id');
-//         let userId = $(this).data('user-id'); // Lấy ID của người dùng
-//         // Gửi yêu cầu AJAX
-//         $.ajax({
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             },
-//             type: "POST",
-//             url: "/view", // Đổi thành đường dẫn thích hợp của bạn
-//             data: {
-//                 document_id: documentId,
-//                 user_id: userId,
-//             },
-//             error: function() {
-//                 alert("Lỗi!")
-//             }
-//         });
-//     });
 
 //    Favourite
     $('.btn-favourite').click(function(e) {
         e.preventDefault();
-        let documentId = $(this).data('id');
         let userId = $(this).data('user-id');
-        var favouriteIcon = $(this).find('i.icon-favourite');
+        if(userId){
+            let documentId = $(this).data('id');
+            var favouriteIcon = $(this).find('i.icon-favourite');
 
-        // Kiểm tra xem nút đã được yêu thích hay chưa
-        if (favouriteIcon.hasClass('text-danger')) {
-            // Nếu đã yêu thích, thực hiện hành động bỏ yêu thích
-            favouriteIcon.removeClass('text-danger');
+            // Kiểm tra xem nút đã được yêu thích hay chưa
+            if (favouriteIcon.hasClass('text-danger')) {
+                // Nếu đã yêu thích, thực hiện hành động bỏ yêu thích
+                favouriteIcon.removeClass('text-danger');
 
-            // Gửi yêu cầu AJAX để xóa khỏi danh sách yêu thích
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                url: "/unfavourite", // Đặt đúng đường dẫn của bạn
-                data: {
-                    document_id: documentId,
-                    user_id: userId,
-                },
-                success: function(response) {
-                    if(response.success) {
-                        toastr.success(response.message, 'Thông báo');
+                // Gửi yêu cầu AJAX để xóa khỏi danh sách yêu thích
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "/unfavourite", // Đặt đúng đường dẫn của bạn
+                    data: {
+                        document_id: documentId,
+                        user_id: userId,
+                    },
+                    success: function(response) {
+                        if(response.success) {
+                            toastr.success(response.message, 'Thông báo');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Lỗi yêu thích!', 'Thông báo');
                     }
-                },
-                error: function() {
-                    alert("Lỗi!");
-                }
-            });
-        } else {
-            // Nếu chưa yêu thích, thực hiện hành động thêm vào danh sách yêu thích
-            favouriteIcon.addClass('text-danger');
+                });
+            } else {
+                // Nếu chưa yêu thích, thực hiện hành động thêm vào danh sách yêu thích
+                favouriteIcon.addClass('text-danger');
 
-            // Gửi yêu cầu AJAX để thêm vào danh sách yêu thích
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                url: "/favourite", // Đặt đúng đường dẫn của bạn
-                data: {
-                    document_id: documentId,
-                    user_id: userId,
-                },
-                success: function(response) {
-                    if(response.success) {
-                        toastr.success(response.message, 'Thông báo');
+                // Gửi yêu cầu AJAX để thêm vào danh sách yêu thích
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "/favourite", // Đặt đúng đường dẫn của bạn
+                    data: {
+                        document_id: documentId,
+                        user_id: userId,
+                    },
+                    success: function(response) {
+                        if(response.success) {
+                            toastr.success(response.message, 'Thông báo');
+                        }
+                    },
+                    error: function() {
+                        alert("Lỗi!");
                     }
-                },
-                error: function() {
-                    alert("Lỗi!");
-                }
-            });
+                });
+            }
+        }else{
+            e.preventDefault();
+            toastr.error('Bạn chưa đăng nhập!', 'Thông báo');
         }
     });
 
@@ -170,74 +230,42 @@ $(document).ready(function() {
     });
 
     $('.btn-rate').click(function () {
-        if (rated) {
-            let documentId = $(this).data('doc-id');
-            let userId = $(this).data('user-id'); // Lấy ID của người dùng
-            let styleString = $('.filled-stars').attr('style');
-            let widthValue = styleString.split(':')[1];
-            let trimmedWidthValue = widthValue.trim();
-            var widthNumber = parseInt(trimmedWidthValue, 10);
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                url: "/rate", // Đổi thành đường dẫn thích hợp của bạn
-                data: {
-                    document_id: documentId,
-                    user_id: userId,
-                    rate: widthNumber
-                },
-                success: function(response) {
-                    $('.filled-stars').css('width', '0%');
-                    if(response.success) {
-                        toastr.success(response.message, 'Thông báo');
+        let userId = $(this).data('user-id'); // Lấy ID của người dùng
+        if(userId){
+            if (rated) {
+                let documentId = $(this).data('doc-id');
+                let styleString = $('.filled-stars').attr('style');
+                let widthValue = styleString.split(':')[1];
+                let trimmedWidthValue = widthValue.trim();
+                var widthNumber = parseInt(trimmedWidthValue, 10);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "/rate", // Đổi thành đường dẫn thích hợp của bạn
+                    data: {
+                        document_id: documentId,
+                        user_id: userId,
+                        rate: widthNumber
+                    },
+                    success: function(response) {
+                        $('.filled-stars').css('width', '0%');
+                        if(response.success) {
+                            toastr.success(response.message, 'Thông báo');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Lỗi đánh giá!', 'Thông báo');
                     }
-                },
-                error: function() {
-                    toastr.error('Lỗi đánh giá!', 'Thông báo');
-                }
-            });
-        } else {
-            toastr.error('Chưa đánh giá tài liệu!', 'Thông báo');
+                });
+            } else {
+                toastr.error('Chưa đánh giá tài liệu!', 'Thông báo');
+            }
+        }else{
+            toastr.error('Bạn chưa đăng nhập!', 'Thông báo');
         }
     });
-
-//     Load THêm Comment
-//     var dataCmt = $('#list-comment__data');
-//     var initialCommentsCount = dataCmt.data('comment-limit');
-//     var loadMoreCommentsCount = dataCmt.data('load-more');
-//     var totalComments = dataCmt.data('total-cmt');
-//
-//     var commentList = $('.comment-list');
-//     var loadMoreButton = $('#loadMoreComments');
-//
-//     // Ẩn các bình luận sau chỉ số ban đầu
-//     for (var i = initialCommentsCount; i < totalComments; i++) {
-//         var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
-//         if (comment.length) {
-//             comment.hide();
-//         }
-//     }
-//
-//     // Hiển thị thêm bình luận khi nhấp vào nút "Hiển thị thêm"
-//     loadMoreButton.on('click', function () {
-//         var nextIndex = initialCommentsCount + loadMoreCommentsCount;
-//         for (var i = initialCommentsCount; i < nextIndex && i < totalComments; i++) {
-//             var comment = commentList.find('[data-comment-index="' + (i + 1) + '"]');
-//             if (comment.length) {
-//                 comment.show();
-//             }
-//         }
-//
-//         initialCommentsCount = nextIndex;
-//
-//         // Ẩn nút "Hiển thị thêm" nếu đã hiển thị hết tất cả bình luận
-//         if (initialCommentsCount >= totalComments) {
-//             loadMoreButton.hide();
-//         }
-//     });
-
 
 // Đổi mật khẩu
     $('#btn-reset_pass').on('click', function () {
@@ -362,32 +390,3 @@ $(document).ready(function() {
         });
     })
 });
-
-// $(document).ready(function () {
-//     $('#detail-document').on('scroll', function() {        // Lấy URL hiện tại
-//         let currentURL = window.location.href;
-//
-//         // Tạo một đối tượng URL từ URL hiện tại
-//         let urlObject = new URL(currentURL);
-//
-//         // Lấy phần cuối của đường dẫn (pathname)
-//         let docSlug = urlObject.pathname.split('/').pop();
-//         console.log(docSlug)
-//         $.ajax({
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             },
-//             type: "POST",
-//             url: "/increase-view", // Đổi thành đường dẫn thích hợp của bạn
-//             data: {
-//                 doc_slug: docSlug,
-//             },
-//             success: function(response) {
-//                 console.log(response); // In ra console để kiểm tra kết quả
-//             },
-//             error: function() {
-//                 alert("Lỗi khi tăng cột view!");
-//             }
-//         });
-//     });
-// })

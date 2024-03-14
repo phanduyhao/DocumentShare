@@ -13,46 +13,10 @@
                 <a href="#" class="ms-1 me-1">Hoá học</a>
             </div>
         </div>
-        <div class="content">
-            <div class="container">
+        <div class="container">
                 <div class="row">
                     <div class="col col-3">
-                        <div class="lib-sidebar">
-                            <h4 class="lib-header mb-0">Danh mục tài liệu</h4>
-                            @include('layout.list_cates')
-
-                        </div>
-                        <div class="lib-sidebar mt-4">
-                            <h4 class="lib-header mb-0">Từ khoá liên quan</h4>
-                            <div class="keywords-lists d-flex flex-fill flex-wrap p-2">
-                               @foreach($tags as $tag)
-                                    <div class="keywords-item m-1">
-                                        <a href="">{{$tag->tag_name}}</a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="lib-sidebar mt-4">
-                            <h4 class="lib-header mb-0">Tài liệu liên quan</h4>
-                            <div class="related-document">
-                                @foreach($doc_news as $doc_new)
-                                    <div class="related-document-item d-flex align-items-center py-2 px-3">
-                                        @if($doc_new->type == 'pdf')
-                                            <i class="fa-regular fa-file-pdf fs-3 me-2"></i>
-                                        @elseif($doc_new->type == 'docx')
-                                            <i class="fa-regular fa-file-word fs-3 me-2"></i>
-                                        @elseif($doc_new->type == 'pptx')
-                                            <i class="fa-regular fa-file-powerpoint fs-3 me-2"></i>
-                                        @elseif($doc_hot->type == 'xlsx')
-                                            <i class="$doc_new-regular fa-file-excel fs-3 me-2"></i>
-                                        @endif
-                                        <a data-id="{{$doc_new->id}}" class="btn-show__details-file lh-1" target="_blank"
-                                           href="{{ route('documentMain.details', ['slug' => $doc_new->slug]) }}">{{$doc_new->title}}</a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_news, 'title' => 'liên quan'])
                     </div>
                     <div class="col col-9">
                         <div class="list-document mb-3">
@@ -63,7 +27,7 @@
                                         <div class="parameter d-flex align-items-center">
                                             <i class="ti-eye me-1"></i>
                                             <span class="me-1">Lượt xem:</span>
-                                            <span>{{ $document->views_count }}</span>
+                                            <span>{{ $document->views }}</span>
                                         </div>
                                         <div class="parameter d-flex align-items-center">
                                             <i class="fa-solid fa-user me-1"></i>
@@ -103,12 +67,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="content-document ps-3">
-                            <iframe src="/temp/files/{{$document->file }}" width="700" height="720" allow="autoplay"></iframe>
-                        </div>
+                        <div id="pdfContainer" data-src="/temp/files/{{$document->file }}" class="ps-3 overflow-auto"></div>
 
                         {{--            ĐÁNH GIÁ            --}}
-                        <h4 class="fw-bold my-4">ĐÁNH GIÁ</h4>
+                        <h4 class="fw-bold my-4">ĐÁNH GIÁ:</h4>
                         <div class="d-flex action-rate align-items-center fs-12px justify-content-center mb-0 px-6 rating-result">
                             <div class="rating position-relative">
                                 <div class="empty-stars">
@@ -299,6 +261,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
+
 @endsection

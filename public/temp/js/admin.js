@@ -131,7 +131,6 @@ $(document).ready(function () {
                 type: 'DELETE',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 success: function(data){
-                    console.log(data);
                     $('#deleteModal').modal('hide'); // Ẩn modal sau khi xóa thành công
                     $('.modal-backdrop.fade.show').addClass('d-none');
                     $(`tr[data-id="${id}"]`).remove(); // Xóa hàng trong bảng

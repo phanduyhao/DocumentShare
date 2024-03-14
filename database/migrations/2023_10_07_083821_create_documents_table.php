@@ -42,7 +42,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('tag')
                 ->onDelete('cascade');
-            $table->integer('views')->nullable();
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }

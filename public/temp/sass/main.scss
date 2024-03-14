@@ -4,6 +4,7 @@
 @import 'components/profile.scss';
 @import 'components/password.scss';
 @import 'components/detail-document.scss';
+@import 'components/document-item.scss';
 
 * {
     margin: 0;
@@ -181,10 +182,14 @@ input[type="number"]::-webkit-outer-spin-button {
         }
     }
 
-    .hot-docs__item{
+    .docs-item{
         height: 325px;
         &__bottom{
             height: 175px;
+        }
+        canvas{
+            width: 100% !important;
+            height: 170px !important;
         }
     }
     &-docs{
@@ -487,4 +492,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .lib-sidebar-subitem{
     height: 29px !important;
+}
+.z-index-5{
+    z-index: 5;
 }

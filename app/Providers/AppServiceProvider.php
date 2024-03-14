@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $menus = Menu::all();
             $view->with('menus', $menus);
         });
-        View::composer('layout.list_cates', function ($view) {
+        View::composer('component.list_cates', function ($view) {
             $cates = Category::all();
             $view->with('cates', $cates);
         });

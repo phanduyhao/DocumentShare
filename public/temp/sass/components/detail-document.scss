@@ -83,12 +83,12 @@
 .comment-user-desc{
     font-size: 15px;
 }
-.btn-favourite i{
+.btn-action i{
     transition: .2s all;
     font-size: 25px;
 }
 
-.btn-favourite:hover i{
+.btn-action:hover i{
     color: rgba(42, 112, 184, 0.95);
     transition: .2s all;
 }
@@ -132,5 +132,12 @@
 
     svg {
         width: 20px;
+    }
+}
+#pdfContainer{
+    height: 900px;
+    canvas{
+        border-bottom: 1px solid black;
+        margin-bottom: 20px;
     }
 }

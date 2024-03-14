@@ -16,100 +16,18 @@
         <div class="container">
                 <div class="row">
                     <div class="col col-3">
-                        <div class="lib-sidebar">
-                            <h4 class="lib-header mb-0">Tất cả tài liệu</h4>
-                            @include('layout.list_cates')
-                        </div>
-                        <div class="lib-sidebar mt-4">
-                            <h4 class="lib-header mb-0">Từ khoá liên quan</h4>
-                            <div class="keywords-lists d-flex flex-fill flex-wrap p-2">
-                                @foreach($tags as $tag)
-                                    <div class="keywords-item m-1">
-                                        <a href="">{{$tag->tag_name}}</a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="lib-sidebar mt-4">
-                            <h4 class="lib-header mb-0">Tài liệu nổi bật</h4>
-                            <div class="related-document">
-                                @foreach($doc_hots as $doc_hot)
-                                    <div class="related-document-item d-flex align-items-center py-2 px-3">
-                                        @if($doc_hot->type == 'pdf')
-                                        <i class="fa-regular fa-file-pdf fs-3 me-2"></i>
-                                        @elseif($doc_hot->type == 'docx')
-                                        <i class="fa-regular fa-file-word fs-3 me-2"></i>
-                                        @elseif($doc_hot->type == 'pptx')
-                                        <i class="fa-regular fa-file-powerpoint"></i>
-                                        @elseif($doc_hot->type == 'xlsx')
-                                        <i class="fa-regular fa-file-excel"></i>
-                                        @endif
-                                        <a class="btn-show__details-file lh-1" target="_blank"
-                                           href="{{ route('documentMain.details', ['slug' => $doc_hot->slug]) }}">{{$doc_hot->title}}</a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_hots, 'title' => 'nổi bật'])
                     </div>
                     <div class="col col-9">
                         <div class="list-document mb-5">
                             <div class="content-titel d-flex justify-content-between mx-2">
-                                <h4>Tất cả tài liệu</h4>
+                                <h4 class="fw-bold">Tất cả tài liệu</h4>
                             </div>
                             <div class="content-product pt-4">
                                 <div class="ps-3 pe-3">
                                     <div class="row gx-3 position-relative">
-                                        @foreach($docs as $doc)
-                                            <div class="col-lg-4 col-md-3 col-sm-6 col-12 mb-3">
-                                                <div class="content-product-item position-relative">
-                                                    <a href="" data-id="{{$doc->id}}" class="position-absolute end-0 z-3 me-2 mt-2 btn-favourite">
-                                                        <i class="fa-solid fa-heart icon-favourite {{ $favourites->contains('document_id', $doc->id) ? 'text-danger' : '' }}"></i>
-                                                    </a>
-                                                    <div class="content-product-item-titel">
-                                                        <h4 class="me-3">{{$doc->title}}</h4>
-                                                        <div class="subject d-flex align-items-center">
-                                                            <img
-                                                                src="https://hocmai.vn/kho-tai-lieu/images/folder.png"
-                                                                alt=""
-                                                                class="me-2"
-                                                            />
-                                                            <span>{{$doc->Category->title}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="position-relative">
-                                                        <div
-                                                            class="statistical d-flex align-items-center justify-content-between">
-                                                            <div class="view">
-                                                                <i class="ti-eye"></i>
-                                                                <span>{{ $doc->views_count }}</span>
-                                                            </div>
-                                                            <div class="download d-flex align-items-center">
-                                                                <i class="fa-solid fa-download pe-1"></i>
-                                                                <span>{{ $doc->downloads_count }}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="author">
-                                                            <i class="fa-solid fa-user"></i>
-                                                            <span>Tác giả: {{$doc->User->name}}</span>
-                                                        </div>
-                                                        <div class="action-click">
-                                                            <div class="action-read-download">
-                                                                <div class="action-read-download-btn me-2">
-                                                                    <a class="btn-show__details-file" target="_blank"
-                                                                       href="{{ route('documentMain.details', ['slug' => $doc->slug]) }}">Đọc online</a>
-                                                                </div>
-                                                                <div class="action-read-download-btn">
-                                                                    <a data-id="{{$doc->id}}" data-score-doc="{{$doc->score}}" @auth data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" @endauth href="/temp/filesOrigin/{{$doc->file}}.{{$doc->type}}" download class="download-file">Tải xuống</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        <div class="pagination mt-4 pb-4">
-                                            {{ $docs->links() }}
-                                        </div>
+                                        @include('component.list_docs2',['docs'=>$docs])
+                                        @include('component.paginate',['docs'=>$docs])
                                     </div>
                                 </div>
                             </div>

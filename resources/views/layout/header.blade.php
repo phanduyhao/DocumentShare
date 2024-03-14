@@ -16,6 +16,31 @@
                            </button>
                        </form>
                    </div>
+
+{{--                    NẠP TIỀN                    --}}
+                    <div class="ms-auto me-4">
+                        <button type="button" class="btn btn-info fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Nạp tiền
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Nạp tiền đổi điểm</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="header-phone text-orange d-flex align-items-center border-start border-end h-100 px-4">
                         <i class="fa-solid fa-phone fs-5"></i>
                         <h6 class="mb-0 fw-bold ms-2" >+84 855 840 100</h6>

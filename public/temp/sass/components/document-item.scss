@@ -1,0 +1,38 @@
+.docs-item{
+    .action-contain{
+        .fa-heart{
+            opacity: 0;
+            transform: translateX(30px);
+            transition: 0.3s all;
+        }
+        .fa-download{
+            opacity: 0;
+            transform: translateX(50px);
+            transition: 0.5s all;
+        }
+        .fa-eye{
+            opacity: 0;
+            transform: translateX(50px);
+            transition: 0.7s all;
+        }
+    }
+    &:hover{
+        .action-contain{
+            .fa-heart{
+                opacity: 1;
+                transform: translateX(-10px);
+                transition: 0.3s all;
+            }
+            .fa-download{
+                opacity: 1;
+                transform: translateX(-10px);
+                transition: 0.5s all;
+            }
+            .fa-eye{
+                opacity: 1;
+                transform: translateX(-10px);
+                transition: 0.7s all;
+            }
+        }
+    }
+}
