@@ -22,9 +22,9 @@
                 @elseif($doc->type == 'docx')
                     <i class="fa-regular fa-file-word fs-3 me-2"></i>
                 @elseif($doc->type == 'pptx')
-                    <i class="fa-regular fa-file-powerpoint"></i>
+                    <i class="fa-regular fa-file-powerpoint fs-3 me-2"></i>
                 @elseif($doc->type == 'xlsx')
-                    <i class="fa-regular fa-file-excel"></i>
+                    <i class="fa-regular fa-file-excel fs-3 me-2"></i>
                 @endif
                 <a class="btn-show__details-file lh-1" target="_blank"
                    href="{{ route('documentMain.details', ['slug' => $doc->slug]) }}">{{$doc->title}}</a>

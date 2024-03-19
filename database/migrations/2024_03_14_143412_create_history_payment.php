@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('order_code')->unique();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->string('amount_money')->default('0');
+            $table->string('amount_money')->nullable();
+            $table->string('card_number',30)->nullable();
+            $table->string('TransactionStatus')->default(1);
+            $table->string('BankCode')->nullable();
+            $table->string('TransactionNo')->nullable();
+            $table->string('payment_status')->nullable()->comment("0:chưa thanh toán, 1:đã thanh toán,  2:Hủy");
+            $table->string('vnp_BankTranNo')->nullable();
+            $table->string('vnp_ResponseCode')->nullable();
             $table->timestamps();
         });
     }

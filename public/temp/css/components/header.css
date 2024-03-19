@@ -28,5 +28,9 @@
     transform: translateY(-100%); }
   100% {
     transform: translateY(30%); } }
+.payment-contain .modal-dialog {
+  max-width: 768px !important; }
+.payment-contain .list-rules .list-rules__item li {
+  list-style-type: square !important; }
 
 /*# sourceMappingURL=header.css.map */

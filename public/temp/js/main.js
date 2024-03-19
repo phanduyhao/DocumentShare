@@ -107,7 +107,7 @@ $(document).ready(function() {
             let documentId = $(this).data('id');
             let score_user = $(this).data('score-user');
             let score_doc = $(this).data('score-doc');
-
+            let author_id = $(this).data('author');
             // Gửi yêu cầu AJAX
             if(score_user > score_doc || score_user == score_doc){
                 let user_score = score_user - score_doc;
@@ -139,6 +139,21 @@ $(document).ready(function() {
                                 alert("Lỗi cập nhật điểm!");
                             }
                         });
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "POST",
+                            url: "/plus-score", // Đường dẫn đến phương thức để lấy tên người dùng
+                            data: {
+                                author_id: author_id,
+                                score_doc: score_doc
+                            },
+                            success: function(response) {
+                            },
+                            error: function() {
+                            }
+                        });
                     },
                     error: function() {
                         alert("Lỗi tải xuống!");
@@ -158,6 +173,7 @@ $(document).ready(function() {
     $('.btn-favourite').click(function(e) {
         e.preventDefault();
         let userId = $(this).data('user-id');
+        console.log(userId);
         if(userId){
             let documentId = $(this).data('id');
             var favouriteIcon = $(this).find('i.icon-favourite');

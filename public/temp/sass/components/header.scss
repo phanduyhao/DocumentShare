@@ -38,3 +38,16 @@
         transform: translateY(30%);
     }
 }
+
+.payment-contain{
+    .modal-dialog{
+        max-width: 768px !important;
+    }
+    .list-rules{
+        .list-rules__item{
+            li{
+                list-style-type: square !important;
+            }
+        }
+    }
+}

@@ -2,10 +2,10 @@
     <div class="col-4 mb-3">
         <div class="docs-item border border-1 mx-2 position-relative">
             <div class="position-absolute end-0 z-index-5 d-flex flex-column h-50 justify-content-around action-contain">
-                <a href="" data-id="{{$doc->id}}" class="btn-favourite btn-action">
+                <a href="" @auth data-user-id="{{ Auth::id() }}" @endauth data-id="{{$doc->id}}" class="btn-favourite btn-action">
                     <i class="fa-solid fa-heart icon-favourite {{ $favourites->contains('document_id', $doc->id) ? 'text-danger' : '' }}"></i>
                 </a>
-                <a data-id="{{$doc->id}}" data-score-doc="{{$doc->score}}" @auth data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" @endauth href="/temp/filesOrigin/{{$doc->file}}.{{$doc->type}}" download class="download-file btn-action">
+                <a data-id="{{$doc->id}}" data-author="{{$doc->user_id}}" data-score-doc="{{$doc->score}}" @auth data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" @endauth href="/temp/filesOrigin/{{$doc->file}}.{{$doc->type}}" download class="download-file btn-action">
                     <i class="fa-solid fa-download"></i>
                 </a>
                 <a href="{{ route('documentMain.details', ['slug' => $doc->slug]) }}" data-id="{{$doc->id}}" class="btn-view btn-action">

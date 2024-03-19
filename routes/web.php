@@ -25,6 +25,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchMainController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeMainController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,10 @@ Route::post('/increase-view', [ActionController::class,'increaseView']);
 
 Route::middleware(['auth'])->group(function() {
 
+//    NẠP TIỀN VNPAY
+    Route::post("checkout/Payment", [PaymentController::class, "payment"])->name("checkout.payment.vnpay");
+    Route::get("checkout/complete/{code}", [PaymentController::class, "complete"])->name("checkout.complete");
+
 //    Upload Tài liệu
     Route::get('/upload',[DocumentMainController::class,'uploadPage'])->name('uploadPage');
 
@@ -98,6 +103,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/download', [ActionController::class,'download']);
     Route::post('/update-score', [ActionController::class,'updateScore']);
 
+    Route::post('/plus-score', [ProfileController::class,'plusScoreUserByDocDown']);
 
 //    Favourite
     Route::post('/favourite', [ActionController::class,'favourite']);

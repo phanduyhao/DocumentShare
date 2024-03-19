@@ -18,29 +18,80 @@
                    </div>
 
 {{--                    NẠP TIỀN                    --}}
-                    <div class="ms-auto me-4">
+                    <div class="ms-auto me-4 payment-contain">
+                        @auth
                         <button type="button" class="btn btn-info fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Nạp tiền
                         </button>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Nạp tiền đổi điểm</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <form method="post" action="{{route('checkout.payment.vnpay')}}" class="modal-content">
+                                    @csrf
+                                    <div class="modal-header text-center d-block" style="background: url('/temp/images/icon/slogan-bg.png')">
+                                        <h2 class="modal-title text-white fw-bold" id="exampleModalLabel">Nạp tiền đổi điểm</h2>
                                     </div>
-                                    <div class="modal-body">
-                                        ...
+                                    <div class="bg-light py-3 px-4 d-flex justify-content-between">
+                                        <div class="account d-flex align-items-center justify-content-center fs-5">
+                                            <i class=" me-2 fa-solid fa-user"></i>
+                                            <p class="name mb-0"> {{Auth::user()->name}}</p>
+                                        </div>
+                                        <div class="email d-flex align-items-center justify-content-center fs-5">
+                                            <i class=" me-2 fa-solid fa-envelope"></i>
+                                            <p class="name mb-0"> {{Auth::user()->email}}</p>
+                                        </div>
+                                        <div class="score d-flex align-items-center justify-content-center fs-5">
+                                            <i class=" me-2 fa-solid fa-coins"></i>
+                                            <p class="score mb-0 d-flex align-items-center"> Số điểm: {{Auth::user()->score}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body p-4 text-white" style="background: linear-gradient(-135deg, #33d1ae, #8d00df);">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h4 class="fw-bold text-decoration-underline">Quy ước đổi điểm:</h4>
+                                                <ul class="fs-5 list-rules fw-bold">
+                                                    <li>
+                                                        - Nạp ít nhất 10.000đ trở lên.
+                                                    </li>
+                                                    <li>
+                                                        - Số điểm = số tiền / 1000
+                                                    </li>
+                                                    <li>
+                                                        - Ví dụ:
+                                                        <ul class="list-rules__item">
+                                                            <li>10.000đ = 10 điểm</li>
+                                                            <li>20.000đ = 20 điểm</li>
+                                                            <li>...</li>
+                                                            <li>Nạp > 50.000đ = 50 điểm + 10% số điểm ( +5 )</li>
+                                                            <li>...</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-4">
+                                                <img class="img-fluid w-100 rounded-5" src="/temp/images/vnpay.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex align-items-center text-nowrap">
+                                            <label for="" class="me-3 mb-0 text-white fw-bold"> <i class="fa-solid fa-circle-right"></i> Nhập số tiền cần nạp ( VD: 10000 ):</label>
+                                            <div class="input-group text-black">
+                                                <input id="input-amount__money" type="float" name="amount_money" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                                                <span class="input-group-text">VNĐ</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-secondary fs-5 fw-semibold" data-bs-dismiss="modal">Đóng</button>
+                                        <button id="btn-submit__money" type="submit" class="btn btn-primary fs-5 fw-semibold">Nạp tiền</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info fw-bold">
+                                Nạp tiền
+                            </a>
+                        @endauth
                     </div>
-
                     <div class="header-phone text-orange d-flex align-items-center border-start border-end h-100 px-4">
                         <i class="fa-solid fa-phone fs-5"></i>
                         <h6 class="mb-0 fw-bold ms-2" >+84 855 840 100</h6>

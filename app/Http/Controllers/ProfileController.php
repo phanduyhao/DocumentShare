@@ -30,7 +30,6 @@ class ProfileController extends Controller
         ]);
     }
 
-
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
@@ -82,5 +81,18 @@ class ProfileController extends Controller
             return response()->json(['success' => false, 'errors' => ['old_pass' => 'Mật khẩu hiện tại không chính xác']]);
         }
     }
-
+    public function plusScoreUserByDocDown(Request $request)
+    {
+        $userId = $request->input('author_id');
+        $user = User::find($userId);
+        if ($user && $user->id != Auth::user()->id) {
+            $score_doc = $request->input('score_doc');
+            $score_doc = floatval($score_doc);
+            $score_plus = $score_doc / 100 * 20;
+            $user->score += $score_plus;
+            $user->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => true]);
+    }
 }
