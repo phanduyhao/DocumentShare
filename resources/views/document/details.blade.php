@@ -49,16 +49,16 @@
                                     </div>
                                     <div class="parameter-docunment-item ">
                                         @if($document->type == 'pdf')
-                                            <a data-id="{{$document->id}}" data-author="{{$doc->user_id}}" data-score-doc=" {{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
+                                            <a data-id="{{$document->id}}" data-author="{{$document->user_id}}" data-score-doc=" {{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
                                                 <i class="fa-solid fa-download pe-1"></i>
                                                 <span>Tải xuống</span>
                                             </a>
                                         @else
-                                            <a data-id="{{$document->id}}" data-author="{{$doc->user_id}}" data-score-doc="{{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document->file}}.{{$document->type}}" download class="btn btn-success text-white download-file btn-download px-3">
+                                            <a data-id="{{$document->id}}" data-author="{{$document->user_id}}" data-score-doc="{{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document->file}}.{{$document->type}}" download class="btn btn-success text-white download-file btn-download px-3">
                                                 <i class="fa-solid fa-download pe-1"></i>
                                                 <span>Tải File gốc ({{$document->type}})</span>
                                             </a>
-                                            <a data-id="{{$document->id}}" data-author="{{$doc->user_id}}" data-score-doc="{{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
+                                            <a data-id="{{$document->id}}" data-author="{{$document->user_id}}" data-score-doc="{{$document->score}}" data-score-user="@guest @else {{ Auth::user()->score }} @endguest" data-user-id="{{ Auth::id() }}" href="/temp/files/{{$document->file}}" download class="btn btn-success text-white download-file btn-download px-3">
                                                 <i class="fa-solid fa-download pe-1"></i>
                                                 <span>Tải File PDF</span>
                                             </a>

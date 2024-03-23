@@ -17,7 +17,8 @@ class PaymentController extends Controller
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('checkout.complete', ['code' => $checkout->order_code]);
+//        $vnp_Returnurl = route('checkout.complete', ['code' => $checkout->order_code]);
+        $vnp_Returnurl = route('checkout.complete', ['code' => $checkout->order_code, 'amount_money' => $request->amount_money]);
         $vnp_TmnCode = "TERQDSEC";
         $vnp_HashSecret = "XDVHXUYMZCAWUPORNPNVANCNAXBPOSSM";
         $code_cart = rand(00, 9999);
@@ -72,8 +73,7 @@ class PaymentController extends Controller
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        $checkout->card_number = $request->input('cardNumber');
-//        $checkout->save();
+        $checkout->save();
         header('Location: ' . $vnp_Url);
         die();
     }
@@ -81,19 +81,26 @@ class PaymentController extends Controller
     public function complete(Request $request, $code)
     {
         $maCode = $code;
+        $amount_money = $request->query('amount_money');
         if ($maCode) {
             $checkout = Payment_History::where("order_code", $maCode)->first();
-            $checkout->card_number = $request->input('cardNumber');
             if ($checkout) {
                 if ($request->isMethod('get') && $request->filled('vnp_ResponseCode')) {
-                    $checkout->card_number = $request->input('cardNumber');
                     $checkout->BankCode = $request->input('vnp_BankCode');
                     $checkout->TransactionNo = $request->input('vnp_TransactionNo');
                     $checkout->vnp_BankTranNo = $request->input('vnp_BankTranNo');
                     $checkout->vnp_ResponseCode = $request->input('vnp_ResponseCode');
                     $checkout->save();
                 }
-                return view('vnpay.complete', compact("checkout"),[
+                $user = Auth::user();
+                $score = $amount_money / 1000;
+                if(!($score < 50)){
+                    $score_more = $score / 100 * 10;
+                    $score += $score_more;
+                }
+                $user->score += $score;
+                $user->save();
+                return view('vnpay.complete', compact("checkout", "amount_money"),[
                     'title' => 'Thanh toán thành công!'
                 ]);
             }

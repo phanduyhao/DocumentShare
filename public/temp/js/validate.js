@@ -143,14 +143,13 @@ function validateForm(formID) {
         $(`.${targetList}`).prepend(newComment);
     }
 
-
 // Chức năng Bấm vào " Trả lời " thì hiển form bình luận
-    $('.reply-text__link').on('click', function(event) {
-        event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
-        // Ẩn tất cả các form trả lời hiện có
-        $('.comment-box.child').addClass('d-none');
+$('.reply-text__link').on('click', function(event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+    // Ẩn tất cả các form trả lời hiện có
+    $('.comment-box.child').addClass('d-none');
 
-        // Hiển thị form trả lời tương ứng với liên kết được click
-        var commentBox = $(this).closest('.comment-user').find('.comment-box.child');
-        commentBox.removeClass('d-none');
-    });
+    // Hiển thị form trả lời tương ứng với liên kết được click
+    var commentBox = $(this).closest('.comment-user').find('.comment-box.child');
+    commentBox.removeClass('d-none');
+});
