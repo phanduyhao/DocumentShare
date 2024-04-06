@@ -25,7 +25,6 @@ class DocumentController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        $statuses = status::all();
         $cates = Category::all();
         $count_docs = Document::count();
 //        Lấy các tài liệu Có Score = Null hoặc Score = 0;
@@ -42,7 +41,7 @@ class DocumentController extends Controller
             ->where('score', '>', 0)
             ->paginate(7);
 
-        return view('admin.document.index',compact('documents','document_vips','cates','tags','statuses','count_docs'),[
+        return view('admin.document.index',compact('documents','document_vips','cates','tags','count_docs'),[
             'title' => 'Tài liệu đã duyệt'
         ]);
     }
@@ -52,10 +51,9 @@ class DocumentController extends Controller
     public function loading()
     {
         $tags = Tag::all();
-        $statuses = status::all();
         $cates = Category::all();
         $documents = Document::where('status','2')->paginate(10);
-        return view('admin.document.loading',compact('documents','cates','tags','statuses'),[
+        return view('admin.document.loading',compact('documents','cates','tags'),[
             'title' => 'Tài liệu chờ duyệt'
         ]);
     }
@@ -64,10 +62,9 @@ class DocumentController extends Controller
     public function cancel()
     {
         $tags = Tag::all();
-        $statuses = status::all();
         $cates = Category::all();
         $documents = Document::where('status','3')->paginate(10);
-        return view('admin.document.cancel',compact('documents','cates','tags','statuses'),[
+        return view('admin.document.cancel',compact('documents','cates','tags'),[
             'title' => 'Tài liệu đã hủy'
         ]);
     }

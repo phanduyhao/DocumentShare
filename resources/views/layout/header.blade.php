@@ -25,7 +25,7 @@
                         </button>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <form method="post" action="{{route('checkout.payment.vnpay')}}" class="modal-content">
+                                <form id="form-pay__money" method="post" action="{{route('checkout.payment.vnpay')}}" class="modal-content">
                                     @csrf
                                     <div class="modal-header text-center d-block" style="background: url('/temp/images/icon/slogan-bg.png')">
                                         <h2 class="modal-title text-white fw-bold" id="exampleModalLabel">Nạp tiền đổi điểm</h2>

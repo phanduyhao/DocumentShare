@@ -105,10 +105,10 @@ class DocumentMainController extends Controller
         $document->save();
         $tag = new Tag;
         $tag->tag_name = $request->tag;
+        $tag->slug = $request->tag_slug;
         $tag->document_id = $document->id;
         $tag->cate_id = $request->cate_id;
         $tag->save();
-
 
         // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
         return view('document.up_success',[
@@ -139,7 +139,7 @@ class DocumentMainController extends Controller
         $document_id = $document->id;
         $rate_tb = Rate::where('document_id',$document_id)->get();
         if($document){
-            $initialCommentsCount = 10; // Số lượng ban đầu hiển thị
+            $initialCommentsCount = 2; // Số lượng ban đầu hiển thị
             $loadMoreCommentsCount = 5;
             $comments = Comment::where('document_id', $document_id)->take($initialCommentsCount)->get();
 
@@ -154,7 +154,6 @@ class DocumentMainController extends Controller
             $username = $user->name;
 
             $filename = $document->file;
-            $tags = $document->tag_id;
             $tags = Tag::where('document_id',$document_id)->get();
             return view('document.details', compact('filename','document','username','cate_title','comments','rate_tb','initialCommentsCount','loadMoreCommentsCount','tags','doc_news'),[
                 'title' => $filename
@@ -162,4 +161,23 @@ class DocumentMainController extends Controller
         }
     }
 
+    public function loadComments(Request $request)
+    {
+        $document_id = $request->input('document_id');
+        $offset = $request->input('offset'); // Số lượng bình luận hiện tại
+        $loadMoreCommentsCount = $request->input('loadMoreCommentsCount'); // Số lượng bình luận muốn load thêm
+
+        // Lấy thêm bình luận bằng cách sử dụng offset và số lượng muốn load
+        $comments = Comment::where('document_id', $document_id)
+            ->skip($offset)
+            ->take($loadMoreCommentsCount)
+            ->get();
+        foreach ($comments as $comment) {
+            $comment->load('user'); // Load dữ liệu người bình luận
+            $comment->avatar = $comment->user->avatar; // Lưu avatar vào thuộc tính mới
+            $comment->name = $comment->user->name;
+        }
+
+        return response()->json(['comments' => $comments]);
+    }
 }

@@ -85,6 +85,9 @@ Route::post('/send-feedback',[PageController::class,'sendFeedback'])->name('send
 //    View
 Route::post('/increase-view', [ActionController::class,'increaseView']);
 
+// Load thêm comment
+Route::get('/load-comments',[DocumentMainController::class,'loadComments'])->name('loadComment');
+
 // Các chức năng sau khi đăng nhập
 
 Route::middleware(['auth'])->group(function() {

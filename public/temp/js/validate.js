@@ -1,3 +1,17 @@
+$('#form-pay__money').submit(function (e) {
+    e.preventDefault();
+    $amount_money = $('#input-amount__money').val();
+    if (!$amount_money) {
+        alert('Bạn chưa nhập số tiền.');
+    }else{
+        if(parseInt($amount_money) < 10000){
+            alert('Số tiền không được nhỏ hơn 10.000đ.');
+        }else{
+            $(this).submit();
+        }
+    }
+});
+
 // Click để xóa các thông báo đỏ của check dữ liệu
 $('form .input-field').each(function () {
     $(this).click(function () {
@@ -13,43 +27,112 @@ $('body form').on('click', function(e) {
 
 // Kiểm tra dữ liệu đầu vào đã nhập hay chưa ?
 
-    // --------------------------- COMMENT ------------------------ //
-
-    $('#comment_area form button[type="submit"]').on('click', function(e){
-        e.preventDefault();
-        let form = $(this).closest('form');
-        let formID = form.attr('id');
-        let formAction = form.data('action'); // Lấy route action từ thuộc tính data-action
-        if(validateForm(`#${formID}`)) {
-            let formData = form.serialize(); // được sử dụng khi bạn muốn gửi dữ liệu của form dưới dạng chuỗi để thực hiện các yêu cầu HTTP như POST hoặc GET.
-            $.ajax({
-                type: "POST",
-                url: formAction, // Sử dụng route action tương ứng của form
-                data: formData,
-                success: function(response) {
-                    toastr.success('Đã gửi bình luận!', 'Thông báo');
-                    // Xóa Các Dữ liệu cũ trong các ô Input
-                    $(`#${formID} input[type=text], #${formID} input[type=email], #${formID} textarea`).val('');
-                    // Gọi hàm hiển thị Comment ra HTML
-                    var dataId = $('#'+formID+' .boxCommentFormReplyID ').attr('id');
-                    if (formID === 'boxCommentForm') {
-                        appendNewComment(response, 'comment-list');
-                    } else if (formID === 'boxCommentFormReply_'+dataId) {
-                        appendNewComment(response, 'comment-list__child-'+dataId);
-                    }
-                },
-                error: function() {
-                    toastr.error('Lỗi bình luận!', 'Thông báo');
+// --------------------------- COMMENT ------------------------ //
+$('#comment_area form button[type="submit"]').on('click', function(e){
+    e.preventDefault();
+    let form = $(this).closest('form');
+    let formID = form.attr('id');
+    let formAction = form.data('action'); // Lấy route action từ thuộc tính data-action
+    if(validateForm(`#${formID}`)) {
+        let formData = form.serialize(); // được sử dụng khi bạn muốn gửi dữ liệu của form dưới dạng chuỗi để thực hiện các yêu cầu HTTP như POST hoặc GET.
+        $.ajax({
+            type: "POST",
+            url: formAction, // Sử dụng route action tương ứng của form
+            data: formData,
+            success: function(response) {
+                toastr.success('Đã gửi bình luận!', 'Thông báo');
+                // Xóa Các Dữ liệu cũ trong các ô Input
+                $(`#${formID} input[type=text], #${formID} input[type=email], #${formID} textarea`).val('');
+                // Gọi hàm hiển thị Comment ra HTML
+                var dataId = $('#'+formID+' .boxCommentFormReplyID ').attr('id');
+                if (formID === 'boxCommentForm') {
+                    appendNewComment(response, 'comment-list');
+                } else if (formID === 'boxCommentFormReply_'+dataId) {
+                    appendNewComment(response, 'comment-list__child-'+dataId);
                 }
-            });
+            },
+            error: function() {
+                toastr.error('Lỗi bình luận!', 'Thông báo');
+            }
+        });
+    }
+});
+
+//    Load thêm Bình luận
+// Xử lý khi nhấn nút "Xem thêm bình luận"
+$('#load-more-comments-btn').on('click', function() {
+    var document_id = $(this).data('doc-id');
+    var offset = $('#list-comment__data').data('comment-limit');
+    var loadMoreCommentsCount = $('#list-comment__data').data('load-more');
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/load-comments',
+        type: 'GET',
+        data: {
+            document_id: document_id,
+            offset: offset,
+            loadMoreCommentsCount: loadMoreCommentsCount
+        },
+        success: function(response) {
+            var comments = response.comments;
+            if (comments.length > 0) {
+                comments.forEach(function(comment) {
+                    var formattedDateTime = new Date(comment.created_at).toLocaleString('en-US', { timeZone: 'UTC' });
+                    // Tạo HTML cho mỗi bình luận
+                    var newCommentHTML = `
+                        <div class="comment-user" data-comment-index="${comment.index}">
+                            <div class="comments-users d-flex mb-4">
+                                <div class="comment-avata d-flex align-items-center justify-content-center me-3">
+                                     <img width="50" height="50" class="rounded-circle" src="/temp/images/avatars/${comment.avatar}" alt="Avatar">
+                                 </div>
+                                <div class="comment-user-info">
+                                    <div class="comment-user-info-item">
+                                        <a href="">${comment.name}</a>
+                                    </div>
+                                    <div class="comment-user-info-item">
+                                        <i class="fa-solid fa-calendar-days "></i>
+                                        <span>${formattedDateTime}</span>
+                                    </div>
+                                    <div class="comment-user-info-item">
+                                        <p class="comment-user-desc m-0 mt-3">${comment.comment}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    // Chèn HTML của bình luận vào danh sách bình luận
+                    if (comment.parent_comment_id == null) {
+                        // Nếu là bình luận cha, chèn vào cuối danh sách
+                        $('.comment-list').append(newCommentHTML);
+                    } else {
+                        // Nếu là bình luận con, tìm bình luận cha tương ứng và chèn vào dưới
+                        var parentComment = $(`.comment-user[data-id="${comment.parent_comment_id}"]`);
+                        parentComment.find('.reply-box').append(newCommentHTML);
+                    }
+                });
+                offset += comments.length;
+                $('#list-comment__data').data('comment-limit', offset);
+
+                // Kiểm tra nếu không còn comment mới, ẩn nút "hiển thị thêm bình luận"
+                if (comments.length < loadMoreCommentsCount) {
+                    $('#load-more-comments-btn').hide();
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
         }
     });
+});
 
 // Add click event listener to the entire body
-    $('body').on('click', function(e) {
-        $('.helper').remove(); // Remove error helpers
-        $('.input-error').removeClass('input-error'); // Remove input-error class
-    });
+$('body').on('click', function(e) {
+    $('.helper').remove(); // Remove error helpers
+    $('.input-error').removeClass('input-error'); // Remove input-error class
+});
 
 // Kiểm tra dữ liệu đầu vào đã nhập hay chưa ?
 function validateForm(formID) {
@@ -86,11 +169,11 @@ function validateForm(formID) {
 }
 
 // Check xem có đúng kiểu Email khi nhập vào không ?
-    function isValidEmail(email) {
-        // Basic email format validation using regular expression
-        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailPattern.test(email);
-    }
+function isValidEmail(email) {
+    // Basic email format validation using regular expression
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
 
 //    HIỂN THỊ COMMENT
     function appendNewComment(commentData, targetList) {

@@ -30,7 +30,8 @@ class User extends Authenticatable
         'password',
         'role',
         'level',
-        'score'
+        'score',
+        'google_id'
     ];
 
     /**

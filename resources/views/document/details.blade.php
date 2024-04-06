@@ -16,7 +16,9 @@
         <div class="container">
                 <div class="row">
                     <div class="col col-3">
-                        @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_news, 'title' => 'liên quan'])
+                        <div class="position-sticky" style="top: 20px">
+                            @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_news, 'title' => 'liên quan'])
+                        </div>
                     </div>
                     <div class="col col-9">
                         <div class="list-document mb-3">
@@ -149,12 +151,10 @@
                                 @endguest
 
 {{--    Comments Parent    --}}
-                                <div class="comment-list mt-5">
+                                <div class="comment-list mt-5 overflow-scroll h-75vh">
                                     @foreach($comments->sortByDesc('created_at') as $comment)
                                         @if($comment->parent_comment_id == null)
-                                            <div class="comment-user " data-comment-index="{{ $loop->index + 1 }}">
-                                                <p class="id_user d-none" >{{ $comment->id }}</p>
-
+                                            <div class="comment-user " data-id="{{ $comment->id }}" data-comment-index="{{ $loop->index + 1 }}">
                                                 <div class="comments-users d-flex mb-4">
                                                     <div class="comment-avata d-flex align-items-center justify-content-center me-3">
                                                         @if($comment->User->avatar == null)
@@ -182,7 +182,6 @@
                                                             <p class="reply-text  mt-2">
                                                                 <a class="reply-text__link fw-bold text-info" href="">
                                                                     Trả lời
-                                                                    <span class="id_user d-none" >{{ $comment->id }}</span>
                                                                 </a>
                                                             </p>
                                                             <!-- TEST -->
@@ -221,14 +220,12 @@
                                                                                     @if($comment_child->User->avatar == null)
                                                                                         <i class="fa-solid fa-user"></i>
                                                                                     @else
-                                                                                        <img width="50" height="50" class="rounded-circle" src="/temp/images/avatars/{{$comment_child->User->avatar}}" alt="Avatar">
+                                                                                        <img width="50" height="50" class="rounded-circle" src="/temp/images/avatars/2" alt="Avatar">
                                                                                     @endif
                                                                                 </div>
                                                                                 <div class="comment-user-info ">
                                                                                     <div class="comment-user-info-item">
-                                                                                        <div class="comment-list" id="commentList">
-                                                                                            <a href="">{{$comment_child->User->name}}</a>
-                                                                                        </div>
+                                                                                        <a href="">{{$comment_child->User->name}}</a>
                                                                                     </div>
                                                                                     <div class="comment-user-info-item">
                                                                                         <i class="fa-solid fa-calendar-days "></i>
@@ -253,14 +250,11 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                @if($initialCommentsCount < $comments->count())
-                                    <button id="loadMoreComments" class="btn btn-link">Hiển thị thêm bình luận</button>
-                                @endif
+                                <button data-doc-id="{{ $document->id }}" data-initComment="{{ $initialCommentsCount }}" data-loadComment="{{ $loadMoreCommentsCount }}" id="load-more-comments-btn" class="btn btn-primary fs-6 fw-bold mt-3">Xem thêm bình luận</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
     </div>
-
 @endsection

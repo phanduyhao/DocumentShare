@@ -7,8 +7,6 @@ use App\Models\User;
 use App\Models\UsersAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Auth\Authenticatable;
-use function Spatie\FlareClient\message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
@@ -111,10 +109,34 @@ class AuthController extends Controller
 
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user();
+        try {
 
-        // Xử lý dữ liệu người dùng và đăng nhập
-        return redirect('/');
+            $user = Socialite::driver('google')->user();
+
+            $finduser = User::where('google_id', $user->id)->first();
+
+            if($finduser){
+
+                Auth::login($finduser);
+
+                return redirect('/');
+
+            }else{
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id'=> $user->id,
+                    'password' => encrypt('123456dummy')
+                ]);
+
+                Auth::login($newUser);
+
+                return redirect('/');
+            }
+
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
 

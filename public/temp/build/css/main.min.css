@@ -112,7 +112,7 @@ label {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.14);
-  margin: 100px 0;
+  margin-top: 100px;
   width: 100%;
   overflow: hidden; }
 
@@ -457,7 +457,7 @@ input[type="number"]::-webkit-outer-spin-button {
   max-width: 700px; }
 
 .content {
-  padding: 70px 0; }
+  padding-top: 70px; }
 
 .content-url {
   padding-top: 20px; }
@@ -726,5 +726,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .z-index-5 {
   z-index: 5; }
+
+.h-75vh {
+  max-height: 75vh; }
 
 /*# sourceMappingURL=main.min.css.map */

@@ -2,7 +2,7 @@
 @section('content')
     <div class="main mt-5">
         <div class="container">
-            <div class="row py-5">
+            <div class="row pt-5">
                 <div class="col col-3">
                     <div class="pr-sub d-flex justify-content-center align-items-center py-2 px-3">
                         <div class="avata-user">

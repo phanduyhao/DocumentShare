@@ -16,7 +16,9 @@
         <div class="container">
                 <div class="row">
                     <div class="col col-3">
-                        @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_hots, 'title' => 'nổi bật'])
+                        <div class="position-sticky" style="top: 20px">
+                            @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_hots, 'title' => 'nổi bật'])
+                        </div>
                     </div>
                     <div class="col col-9">
                         <div class="list-document mb-5">

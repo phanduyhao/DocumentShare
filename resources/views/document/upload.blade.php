@@ -10,7 +10,7 @@
                         <label
                             class='form-label text-black fw-bold'
                             for='basic-default-fullname'
-                        >Up File(docx, pptx, pdf, xlsx) :</label>
+                        >Up File(docx, pptx, pdf, xlsx) * :</label>
                     </div>
                     <div class="col-8">
                         <input
@@ -26,7 +26,7 @@
                         <label
                             class='form-label text-black fw-bold'
                             for='basic-default-fullname'
-                        >Tên Tài liệu:</label>
+                        >Tên Tài liệu *:</label>
                     </div>
                     <div class="col-8">
                         <input
@@ -44,7 +44,7 @@
                         <label
                             class='form-label text-black fw-bold'
                             for='basic-default-company'
-                        >Slug:</label>
+                        >Slug *:</label>
                     </div>
                     <div class="col-8">
                         <input
@@ -94,26 +94,8 @@
                     <div class="col-4">
                         <label
                             class='form-label text-black fw-bold'
-                            for='basic-default-email'
-                        >Score:</label>
-                    </div>
-                    <div class='col-8'>
-                        <input
-                            type='number'
-                            id='score'
-                            max="50"
-                            class='form-control'
-                            placeholder='Input score < 50'
-                            name='score'
-                        />
-                    </div>
-                </div>
-                <div class='mb-3 row'>
-                    <div class="col-4">
-                        <label
-                            class='form-label text-black fw-bold'
                             for='basic-default-fullname'
-                        >Từ khóa:</label>
+                        >Từ khóa *:</label>
                     </div>
                     <div class="col-8">
                         <input
@@ -121,8 +103,8 @@
                             type='text'
                             class='form-control title input-field '
                             id='tag-store'
-                            placeholder='Input Title'
-                            name='title' data-require='Mời nhập Tiêu đề'
+                            placeholder='Input Tag'
+                            name='tag' data-require='Mời nhập Tiêu đề'
                         />
                     </div>
                 </div>
@@ -131,14 +113,14 @@
                         <input
                             type='text'
                             id='slug-tag'
-                            name='tag-slug'
+                            name='tag_slug'
                         />
                     </div>
                 </div>
                 <div class="form-group mb-3 row">
                     <div class="col-4">
                         <label class='form-label text-black fw-bold'
-                               for='basic-default-email'>Danh mục:
+                               for='basic-default-email'>Danh mục *:
                         </label>
                     </div>
                     <div class="col-8">
