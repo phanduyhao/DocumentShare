@@ -16,7 +16,7 @@
         <div class="container">
                 <div class="row">
                     <div class="col col-3">
-                        <div class="position-sticky" style="top: 20px">
+                        <div class="position-sticky z-index-5" style="top: 20px">
                             @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_hots, 'title' => 'nổi bật'])
                         </div>
                     </div>
