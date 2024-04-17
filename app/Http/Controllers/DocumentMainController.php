@@ -161,6 +161,7 @@ class DocumentMainController extends Controller
         }
     }
 
+//    hiển thị thêm bình luận
     public function loadComments(Request $request)
     {
         $document_id = $request->input('document_id');

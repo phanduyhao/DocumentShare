@@ -76,11 +76,6 @@
                                 <form action="">
                                     <button style="width: 85px" type="button" data-url="/admin/documents/{{$document->id}}" data-id="{{$document->id}}" class="btn btn-danger btnDeleteAsk mb-2 fw-bold" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </form>
-{{--                                <form enctype="multipart/form-data" class="form_document_update form-edit mb-2" id="form_document_update-{{$document->id}}" data-id="{{$document->id}}" method='post' action='{{ route('documents.ok',['document' => $document]) }}'>--}}
-{{--                                    @method('Patch')--}}
-{{--                                    @csrf--}}
-{{--                                    <button style="width: 85px" type='submit' class='btn btn-success fw-bold text-dark'>Duyệt</button>--}}
-{{--                                </form>--}}
                                 <a href="{{ route('documents.show', ['slug' => $document->slug]) }}" target="_blank" class="btn btn-success fw-bold text-dark px-0 mb-2" style="width: 85px">Xem xét</a>
                                 <form enctype="multipart/form-data" class="form_document_update form-edit" id="form_document_update-{{$document->id}}" data-id="{{$document->id}}" method='post' action='{{ route('documents.cancelAction',['document' => $document]) }}'>
                                     @method('Patch')

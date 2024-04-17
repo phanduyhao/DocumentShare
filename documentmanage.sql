@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th3 14, 2024 lúc 10:02 AM
+-- Thời gian đã tạo: Th4 17, 2024 lúc 01:06 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `parent_id` bigint UNSIGNED DEFAULT NULL,
-  `tag` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89,7 +89,9 @@ INSERT INTO `comments` (`id`, `user_id`, `document_id`, `comment`, `created_at`,
 (9, 8, 55, 'gfnf', '2023-12-14 07:39:42', '2023-12-14 07:39:42', NULL),
 (10, 8, 104, 'fdgg', '2023-12-14 08:11:10', '2023-12-14 08:11:10', NULL),
 (11, 8, 37, 'ggf', '2023-12-15 05:44:30', '2023-12-15 05:44:30', NULL),
-(12, 8, 37, 'ghhfgf', '2023-12-15 05:44:35', '2023-12-15 05:44:35', NULL);
+(12, 8, 37, 'ghhfgf', '2023-12-15 05:44:35', '2023-12-15 05:44:35', NULL),
+(13, 8, 106, 'được', '2024-04-08 09:00:56', '2024-04-08 09:00:56', NULL),
+(14, 8, 106, 'tốt', '2024-04-08 09:39:29', '2024-04-08 09:39:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -99,17 +101,17 @@ INSERT INTO `comments` (`id`, `user_id`, `document_id`, `comment`, `created_at`,
 
 CREATE TABLE `documents` (
   `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `cate_id` bigint UNSIGNED DEFAULT NULL,
   `score` int NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `size` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `source` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tag_id` bigint UNSIGNED DEFAULT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` bigint UNSIGNED DEFAULT NULL,
@@ -122,20 +124,20 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `title`, `slug`, `description`, `user_id`, `cate_id`, `score`, `type`, `size`, `source`, `tag_id`, `file`, `created_at`, `updated_at`, `status`, `rate`, `views`) VALUES
-(16, 'Mẫu giấy', 'mau-giay', NULL, 8, 20, 0, 'docx', '736.27 KB', NULL, NULL, '5B - MẪU GIẤY LÀM BÀI CHUYÊN MỤC NHÀ THÔNG THÁI', '2023-11-08 20:29:04', '2024-03-12 01:39:39', 3, 48.57, 0),
+(16, 'Mẫu giấy', 'mau-giay', NULL, 8, 20, 0, 'docx', '736.27 KB', NULL, NULL, '5B - MẪU GIẤY LÀM BÀI CHUYÊN MỤC NHÀ THÔNG THÁI', '2023-11-08 20:29:04', '2024-04-13 08:26:15', 3, 48.57, 1),
 (17, 'lịch thi', 'lich-thi', 'q', 8, 20, 5, 'xlsx', '34.98 KB', NULL, NULL, 'LỊCH THI GIỮA KỲ CỦA SINH VIÊN CHUYỂN ĐỔI_HK 1 2023-2024', '2023-11-09 00:58:51', '2024-02-24 09:00:57', 3, 76.08, 0),
 (20, '60 Khái niệm thường gặp nhất trong các đề thi NLXH', '2-60-khai-niem-thuong-gap-nhat-trong-cac-e-thi-nlxh', '60 Khái niệm thường gặp nhất trong các đề thi NLXH', 48, 20, 0, 'pdf', '220.63 KB', 'https://www.studocu.com/vn', NULL, '60-khai-niem-thuong-gap-nhat-trong-cac-de-thi-nlxh-phan-1', '2023-11-28 21:23:45', '2024-03-13 12:14:07', 1, 60.00, 6),
 (21, '154 nhận định lý luận văn học', '3-154-nhan-inh-ly-luan-van-hoc', '154 nhận định lý luận văn học', 48, 20, 0, 'pdf', '11520.21 KB', 'https://www.studocu.com/vn', NULL, '154-nhan-dinh-li-luan-van-hoc', '2023-11-28 21:24:38', '2023-11-28 21:24:38', 1, NULL, 0),
 (22, '185 nhận định văn học cực hay để áp dụng vào các NLVH', '4-185-nhan-inh-van-hoc-cuc-hay-e-ap-dung-vao-cac-nlvh', '185 nhận định văn học cực hay để áp dụng vào các NLVH', 48, 20, 0, 'pdf', '392.16 KB', 'https://www.studocu.com/vn', NULL, '185-nhan-dinh-van-hoc-185-nhan-dinh-van-hoc-cuc-hay-de-ap-dung-vao-cac-de-nghi-luan-van-hoc', '2023-11-28 21:25:40', '2023-11-28 21:25:40', 1, NULL, 0),
 (23, 'Bài tập tình huống môn luật hình sự', '5-bai-tap-tinh-huong-mon-luat-hinh-su', 'Bài tập tình huống môn luật hình sự', 48, 20, 0, 'pdf', '113.12 KB', 'https://www.studocu.com/vn', NULL, 'bt-tinh-huong-mon-luat-hinh-su', '2023-11-28 21:27:33', '2023-11-28 21:27:33', 1, NULL, 0),
-(24, 'Dẫn chứng NLXH hot nhất', '6-dan-chung-nlxh-hot-nhat', 'Một số dẫn chứng NLXH nổi bật', 48, 20, 2, 'pdf', '214.51 KB', 'https://www.studocu.com/vn', NULL, 'dan-chung-nlxh-hot-nhat-nlxh-hot', '2023-11-28 21:28:33', '2024-03-13 12:25:42', 1, NULL, 1),
+(24, 'Dẫn chứng NLXH hot nhất', '6-dan-chung-nlxh-hot-nhat', 'Một số dẫn chứng NLXH nổi bật', 48, 20, 2, 'pdf', '214.51 KB', 'https://www.studocu.com/vn', NULL, 'dan-chung-nlxh-hot-nhat-nlxh-hot', '2023-11-28 21:28:33', '2024-04-13 08:48:05', 1, NULL, 3),
 (25, 'Dẫn chứng về các nhân vât', '7-dan-chung-ve-cac-nhan-vat', 'Dẫn chứng về các nhân vât', 48, 20, 0, 'pdf', '299.59 KB', 'https://www.studocu.com/vn', NULL, 'dan-chung-ve-cac-nhan-vat', '2023-11-28 21:29:24', '2023-11-28 21:29:24', 1, NULL, 0),
 (26, 'Lí luận xã hội nhận định', '8-li-luan-xa-hoi-nhan-inh', 'Lí luận xã hội nhận định', 48, 20, 3, 'pdf', '260.16 KB', 'https://www.studocu.com/vn', NULL, 'li-luan-van-hoc-nhan-dinh', '2023-11-29 07:54:13', '2023-11-29 07:54:13', 1, NULL, 0),
 (27, 'Tổng hợp lí luận văn học tổng hợp kiến thức lí luận văn học', '9-tong-hop-li-luan-van-hoc-tong-hop-kien-thuc-li-luan-van-hoc', 'Tổng hợp lí luận văn học tổng hợp kiến thức lí luận văn học', 48, 20, 3, 'pdf', '466.88 KB', 'https://www.studocu.com/vn', NULL, 'tong-hop-li-luan-van-hoc-tong-hop-kien-thuc-li-luan-van-hoc', '2023-11-29 07:54:49', '2023-11-29 07:54:49', 1, NULL, 0),
 (28, 'Bài tập kỹ năng cá nhân kỹ năng mềm', '10-bai-tap-ky-nang-ca-nhan-ky-nang-mem', 'Bài tập kỹ năng cá nhân kỹ năng mềm', 48, 22, 0, 'pdf', '305.2 KB', 'https://www.studocu.com/vn', NULL, 'bai-tap-ky-nang-ca-nhan-ky-nang-mem', '2023-11-29 08:00:44', '2023-11-29 08:00:44', 1, NULL, 0),
 (29, 'Báo cáo kỹ năm mềm', '11-bao-cao-ky-nam-mem', 'Báo cáo kỹ năm mềm', 48, 22, 2, 'pdf', '288.72 KB', 'https://www.studocu.com/vn', NULL, 'bao-cao-ky-nang-mem', '2023-11-29 08:01:19', '2023-11-29 08:01:19', 1, NULL, 0),
 (30, 'Báo cáo kỹ năm mềm', '12-bao-cao-ky-nam-mem', 'Báo cáo kỹ năm mềm', 48, 22, 0, 'pdf', '251.45 KB', 'https://www.studocu.com/vn', NULL, 'baocaokynangmem-this-is-my-document', '2023-11-29 08:02:12', '2023-11-29 08:02:12', 1, NULL, 0),
-(31, 'Câu hỏi trắc nghiệm kỹ năng mềm có đáp án', '13-cau-hoi-trac-nghiem-ky-nang-mem-co-ap-an', 'Câu hỏi trắc nghiệm kỹ năng mềm có đáp án', 48, 22, 3, 'pdf', '182.97 KB', 'https://www.studocu.com/vn', NULL, 'cau-hoi-trac-nghiem-ky-nang-mem-co-dap-an', '2023-11-29 08:04:00', '2023-11-29 08:04:00', 1, NULL, 0),
+(31, 'Câu hỏi trắc nghiệm kỹ năng mềm có đáp án', '13-cau-hoi-trac-nghiem-ky-nang-mem-co-ap-an', 'Câu hỏi trắc nghiệm kỹ năng mềm có đáp án', 48, 22, 3, 'pdf', '182.97 KB', 'https://www.studocu.com/vn', NULL, 'cau-hoi-trac-nghiem-ky-nang-mem-co-dap-an', '2023-11-29 08:04:00', '2024-04-12 09:42:53', 1, NULL, 1),
 (32, 'Câu hỏi về kỹ năng giao tiếp ôn thi kết thúc học phần', '14-cau-hoi-ve-ky-nang-giao-tiep-on-thi-ket-thuc-hoc-phan', 'Câu hỏi về kỹ năng giao tiếp ôn thi kết thúc học phần', 48, 22, 0, 'pdf', '169.58 KB', 'https://www.studocu.com/vn', NULL, 'cau-hoi-ve-ky-nang-giao-tiep-on-thi-ket-thuc-hoc-phan', '2023-11-29 08:05:23', '2023-11-29 08:05:23', 1, NULL, 0),
 (33, 'Kỹ năng lắng nghe', '15-ky-nang-lang-nghe', 'Kỹ năng lắng nghe', 48, 22, 0, 'pdf', '191.78 KB', 'https://www.studocu.com/vn', NULL, 'ki-nang-lang-nghe-knln', '2023-11-29 08:06:16', '2023-11-29 08:06:16', 1, NULL, 0),
 (34, 'Kỹ năng mềm - Tài liệu ôn tập', '16-ky-nang-mem-tai-lieu-on-tap', 'Kỹ năng mềm - Tài liệu ôn tập', 48, 22, 1, 'pdf', '389.23 KB', 'https://www.studocu.com/vn', NULL, 'knm-tai-lieu-on-tap', '2023-11-29 08:07:34', '2023-11-29 08:07:34', 1, NULL, 0),
@@ -161,7 +163,7 @@ INSERT INTO `documents` (`id`, `title`, `slug`, `description`, `user_id`, `cate_
 (54, 'Trắc nghiệm DLNN 50 câu dẫn luận ngôn ngữ', '36-trac-nghiem-dlnn-50-cau-dan-luan-ngon-ngu', 'Trắc nghiệm DLNN 50 câu dẫn luận ngôn ngữ', 48, 25, 2, 'pdf', '214.91 KB', 'https://www.studocu.com/vn', NULL, 'trac-nghiem-dlnn-50-cau-dan-luan-ngon-ngu', '2023-11-29 09:33:50', '2023-11-29 09:33:50', 1, NULL, 0),
 (55, 'Bài tập 1of4 Kết nối dữ liệu', '37-bai-tap-1of4-ket-noi-du-lieu', 'Bài tập 1of4 Kết nối dữ liệu', 48, 26, 0, 'pdf', '147.02 KB', 'https://www.studocu.com/vn', NULL, 'bai-tap-1of4-ket-noi-du-lieu', '2023-11-29 09:34:59', '2024-03-13 08:17:38', 1, NULL, 2),
 (56, 'Câu hỏi ôn tập học phần hệ thống thông tin quản lý', '38-cau-hoi-on-tap-hoc-phan-he-thong-thong-tin-quan-ly', 'Câu hỏi ôn tập học phần hệ thống thông tin quản lý', 48, 26, 2, 'pdf', '489.3 KB', 'https://www.studocu.com/vn', NULL, 'cau-hoi-on-tap-hoc-phan-he-thong-thong-tin-quan-ly', '2023-11-29 09:36:10', '2024-02-25 08:48:06', 1, NULL, 0),
-(57, 'Câu hỏi trắc nghiệm mạng máy tính', '39-cau-hoi-trac-nghiem-mang-may-tinh', 'Câu hỏi trắc nghiệm mạng máy tính', 48, 26, 0, 'pdf', '249.55 KB', 'https://www.studocu.com/vn', NULL, 'cau-hoi-trac-nghiem-mang-may-tinh-on-tap-tham-khao-1', '2023-11-29 10:06:02', '2023-11-29 10:06:02', 1, NULL, 0),
+(57, 'Câu hỏi trắc nghiệm mạng máy tính', '39-cau-hoi-trac-nghiem-mang-may-tinh', 'Câu hỏi trắc nghiệm mạng máy tính', 48, 26, 0, 'pdf', '249.55 KB', 'https://www.studocu.com/vn', NULL, 'cau-hoi-trac-nghiem-mang-may-tinh-on-tap-tham-khao-1', '2023-11-29 10:06:02', '2024-04-13 08:48:09', 1, NULL, 1),
 (58, 'Giới thiệu và cài đặt python', '40-gioi-thieu-va-cai-at-python', 'Giới thiệu và cài đặt python', 48, 26, 0, 'pdf', '1027.12 KB', 'https://www.studocu.com/vn', NULL, 'lab-1-gioi-thieu-va-cai-dat-python', '2023-11-29 10:06:31', '2023-11-29 10:06:31', 1, 60.00, 0),
 (59, 'Vòng lặp while for nâng cao', '41-vong-lap-while-for-nang-cao', 'Vòng lặp while for nâng cao', 48, 26, 0, 'pdf', '91.21 KB', 'https://www.studocu.com/vn', NULL, 'lab-7-vong-lap-while-for-nang-cao', '2023-11-29 10:06:56', '2023-11-29 10:06:56', 1, 80.00, 0),
 (60, 'Nội dung Digital Marketing', '42-noi-dung-digital-marketing', 'Nội dung Digital Marketing', 48, 26, 0, 'pdf', '139.9 KB', 'https://www.studocu.com/vn', NULL, 'ndung-digital-marketing', '2023-11-29 10:07:49', '2023-11-29 10:07:49', 1, NULL, 0),
@@ -210,12 +212,44 @@ INSERT INTO `documents` (`id`, `title`, `slug`, `description`, `user_id`, `cate_
 (103, 'Sổ chi tiết các tài khoản', '85-so-chi-tiet-cac-tai-khoan', 'Sổ chi tiết các tài khoản', 48, 32, 0, 'pdf', '141.28 KB', 'https://www.studocu.com/vn', NULL, 'so-chi-tiet-cac-tai-khoan', '2023-11-29 20:30:25', '2023-11-29 20:30:25', 1, NULL, 0),
 (104, 'Câu hỏi mẫu 60 CSDL Nâng cao GK', '86-cau-hoi-mau-60-csdl-nang-cao-gk', 'Các câu hỏi mẫu thi giữa kỳ môn cơ sở dữ liệu nâng cao', 8, 26, 2, 'docx', '20.53 KB', NULL, NULL, 'Cau hoi mau 60 csdl nang cao GK', '2023-12-14 06:37:59', '2023-12-14 06:37:59', 1, 60.00, 0),
 (105, 'Slide báo cáo lập trình web bán quần áo', '87-slide-bao-cao-lap-trinh-web-ban-quan-ao', 'Slide báo cáo lập trình web bán quần áo bằng ASP NET CORE 6', 8, 26, 0, 'pptx', '7700.84 KB', NULL, NULL, 'Slide', '2023-12-15 02:19:39', '2023-12-15 02:19:39', 1, NULL, 0),
-(106, 'Báo cáo đồ án lập trình web bán quần áo', '88-bao-cao-o-an-lap-trinh-web-ban-quan-ao', NULL, 8, 26, 0, 'docx', '10708.32 KB', NULL, NULL, 'Báo cáo', '2023-12-15 02:29:49', '2023-12-15 02:29:49', 1, NULL, 0),
+(106, 'Báo cáo đồ án lập trình web bán quần áo', '88-bao-cao-o-an-lap-trinh-web-ban-quan-ao', NULL, 8, 26, 0, 'docx', '10708.32 KB', NULL, NULL, 'Báo cáo', '2023-12-15 02:29:49', '2024-04-13 08:25:52', 1, 90.00, 4),
 (107, 'Hướng dẫn viết báo cáo ĐACS', '89-huong-dan-viet-bao-cao-acs', 'Hướng dẫn viết báo cáo Đồ án cơ sở ngành', 8, 26, 0, 'docx', '34.73 KB', NULL, NULL, '4. Huong dan viet DACS nganh', '2023-12-15 02:43:30', '2023-12-15 02:43:30', 1, 100.00, 0),
 (108, 'Câu hỏi ôn tập GK môn ATTT', '90-cau-hoi-on-tap-gk-mon-attt', 'Câu hỏi ôn tập GK môn An toàn thông tin', 8, 26, 0, 'docx', '74.6 KB', NULL, NULL, 'Cau hoi on tap GK', '2023-12-15 02:57:01', '2023-12-15 02:57:01', 1, NULL, 0),
 (109, 'Ôn thi giữa kỳ môn Trí tuệ nhân tạo', '91-on-thi-giua-ky-mon-tri-tue-nhan-tao', 'Ôn thi giữa kỳ môn Trí tuệ nhân tạo', 8, 26, 0, 'docx', '16.98 KB', NULL, NULL, 'Ôn thi GK', '2023-12-15 02:58:40', '2023-12-15 02:58:40', 1, NULL, 0),
 (110, 'Phần writing thi B1', '92-phan-writing-thi-b1', 'Tài liệu Writing thi B1', 8, 31, 0, 'docx', '34.85 KB', NULL, NULL, 'Writing', '2023-12-15 03:04:58', '2024-03-13 20:59:59', 1, NULL, 4),
 (111, 'Slide Đếm số ngón tay Python', '93-slide-em-so-ngon-tay-python', 'Slide Đếm số ngón tay bằng Python OpenCV môn Xử lý ảnh', 8, 38, 3, 'pptx', '1782.01 KB', NULL, NULL, 'ĐẾM SNT', '2023-12-18 02:01:47', '2023-12-18 02:01:47', 1, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `document_interactions`
+--
+
+CREATE TABLE `document_interactions` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `document_id` bigint UNSIGNED NOT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` tinyint UNSIGNED DEFAULT NULL,
+  `comment_id` bigint UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `document_interactions`
+--
+
+INSERT INTO `document_interactions` (`id`, `user_id`, `document_id`, `action`, `rating`, `comment_id`, `created_at`, `updated_at`) VALUES
+(1, 8, 107, 'favorite', NULL, NULL, '2024-04-08 08:45:40', '2024-04-08 08:45:40'),
+(2, 8, 106, 'comment', NULL, 13, '2024-04-08 09:00:56', '2024-04-08 09:00:56'),
+(3, 8, 105, 'download', NULL, NULL, '2024-04-08 09:02:27', '2024-04-08 09:02:27'),
+(4, 8, 106, 'rate', 80, NULL, '2024-04-08 09:02:35', '2024-04-08 09:02:35'),
+(5, 8, 104, 'favorite', NULL, NULL, '2024-04-08 09:38:51', '2024-04-08 09:38:51'),
+(6, 8, 105, 'download', NULL, NULL, '2024-04-08 09:39:11', '2024-04-08 09:39:11'),
+(7, 8, 106, 'comment', NULL, 14, '2024-04-08 09:39:29', '2024-04-08 09:39:29'),
+(8, 8, 106, 'rate', 100, NULL, '2024-04-08 09:39:52', '2024-04-08 09:39:52'),
+(9, 8, 20, 'download', NULL, NULL, '2024-04-12 09:44:08', '2024-04-12 09:44:08');
 
 -- --------------------------------------------------------
 
@@ -245,7 +279,10 @@ INSERT INTO `downloads` (`id`, `document_id`, `created_at`, `updated_at`, `user_
 (12, 107, '2024-01-06 01:48:18', '2024-01-06 01:48:18', 8),
 (13, 20, '2024-01-30 04:11:50', '2024-01-30 04:11:50', 8),
 (14, 16, '2024-03-12 01:39:42', '2024-03-12 01:39:42', 8),
-(15, 20, '2024-03-12 08:26:43', '2024-03-12 08:26:43', 8);
+(15, 20, '2024-03-12 08:26:43', '2024-03-12 08:26:43', 8),
+(16, 105, '2024-04-08 09:02:27', '2024-04-08 09:02:27', 8),
+(17, 105, '2024-04-08 09:39:11', '2024-04-08 09:39:11', 8),
+(18, 20, '2024-04-12 09:44:08', '2024-04-12 09:44:08', 8);
 
 -- --------------------------------------------------------
 
@@ -255,11 +292,11 @@ INSERT INTO `downloads` (`id`, `document_id`, `created_at`, `updated_at`, `user_
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -288,7 +325,13 @@ INSERT INTO `favourites` (`id`, `user_id`, `document_id`, `created_at`, `updated
 (9, 48, 101, '2023-12-06 02:13:27', '2023-12-06 02:13:27'),
 (15, 8, 20, '2024-01-04 10:13:11', '2024-01-04 10:13:11'),
 (17, 8, 43, '2024-01-30 04:13:06', '2024-01-30 04:13:06'),
-(18, 8, 21, '2024-01-30 06:36:55', '2024-01-30 06:36:55');
+(18, 8, 21, '2024-01-30 06:36:55', '2024-01-30 06:36:55'),
+(23, 8, 27, '2024-04-08 08:30:51', '2024-04-08 08:30:51'),
+(24, 8, 26, '2024-04-08 08:31:02', '2024-04-08 08:31:02'),
+(26, 8, 31, '2024-04-08 08:32:09', '2024-04-08 08:32:09'),
+(27, 8, 111, '2024-04-08 08:32:19', '2024-04-08 08:32:19'),
+(30, 8, 110, '2024-04-08 08:34:06', '2024-04-08 08:34:06'),
+(31, 8, 109, '2024-04-08 08:39:46', '2024-04-08 08:39:46');
 
 -- --------------------------------------------------------
 
@@ -298,9 +341,9 @@ INSERT INTO `favourites` (`id`, `user_id`, `document_id`, `created_at`, `updated
 
 CREATE TABLE `feedback` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contents` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contents` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -335,7 +378,7 @@ CREATE TABLE `files` (
   `document_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -353,9 +396,9 @@ INSERT INTO `files` (`id`, `file`, `size`, `document_id`, `created_at`, `updated
 
 CREATE TABLE `menus` (
   `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `active` blob,
   `level` int DEFAULT NULL,
   `parent_id` bigint UNSIGNED DEFAULT NULL,
@@ -383,7 +426,7 @@ INSERT INTO `menus` (`id`, `title`, `slug`, `desc`, `active`, `level`, `parent_i
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -440,7 +483,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (46, '2024_02_21_160255_update_doc', 40),
 (47, '2024_03_13_144000_update_doc', 41),
 (48, '2024_03_14_041658_update_user', 42),
-(49, '2024_03_14_044427_create_history_payment', 43);
+(49, '2024_03_14_044427_create_history_payment', 43),
+(50, '2024_04_08_140634_create_doc_interactions_table', 44),
+(51, '2024_03_14_143412_create_history_payment', 45);
 
 -- --------------------------------------------------------
 
@@ -449,8 +494,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -473,11 +518,26 @@ INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `payment_histories` (
   `id` bigint UNSIGNED NOT NULL,
+  `order_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `amount_money` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `amount_money` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_number` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TransactionStatus` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `BankCode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TransactionNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '0:chưa thanh toán, 1:đã thanh toán,  2:Hủy',
+  `vnp_BankTranNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vnp_ResponseCode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `payment_histories`
+--
+
+INSERT INTO `payment_histories` (`id`, `order_code`, `user_id`, `amount_money`, `card_number`, `TransactionStatus`, `BankCode`, `TransactionNo`, `payment_status`, `vnp_BankTranNo`, `vnp_ResponseCode`, `created_at`, `updated_at`) VALUES
+(1, 'HL6C5DUBVA', 8, '10000', NULL, '1', 'NCB', '14377535', NULL, 'VNP14377535', '00', '2024-04-13 14:55:39', '2024-04-13 08:04:57');
 
 -- --------------------------------------------------------
 
@@ -487,11 +547,11 @@ CREATE TABLE `payment_histories` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -570,7 +630,9 @@ INSERT INTO `rates` (`id`, `user_id`, `document_id`, `rates`, `created_at`, `upd
 (51, 8, 37, 0.00, '2023-12-15 05:45:04', '2023-12-15 05:45:04'),
 (52, 8, 37, 0.00, '2023-12-15 05:45:04', '2023-12-15 05:45:04'),
 (53, 8, 37, 100.00, '2024-01-06 01:32:20', '2024-01-06 01:32:20'),
-(54, 8, 107, 100.00, '2024-01-06 01:53:23', '2024-01-06 01:53:23');
+(54, 8, 107, 100.00, '2024-01-06 01:53:23', '2024-01-06 01:53:23'),
+(55, 8, 106, 80.00, '2024-04-08 09:02:35', '2024-04-08 09:02:35'),
+(56, 8, 106, 100.00, '2024-04-08 09:39:52', '2024-04-08 09:39:52');
 
 -- --------------------------------------------------------
 
@@ -579,11 +641,11 @@ INSERT INTO `rates` (`id`, `user_id`, `document_id`, `rates`, `created_at`, `upd
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -592,8 +654,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('0LfSlNeh2Oou9OniFYNI14q5ZMwOD4jobXTv6LEr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiejlUOEFCNUIzUUh3SUc2dUFDQ1hUOFU0VjQyZEtDQ3h0bWloRzBGMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9kb2N1bWVudG1hbmFnZS50ZXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1710400380),
-('W3M2lMB5zDfmpCEEs1fqCRiOxYp591iszQfHCFdz', 8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoieHJJdUQzUTlpTlgzazFOVkZDc2pZVUNJaVJmbkhIYUZYb2hTMUZwQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9kb2N1bWVudG1hbmFnZS50ZXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODt9', 1710392389);
+('kBPW1zy60akpcQXBE5d8L81tky3CPvnXW4GDInyS', 8, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidjQxV3o4M3dqc2plZmQ5VW83N1RMc3BUTkJXdEpwdTc5em5JeFZwQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzE6Imh0dHA6Ly9kb2N1bWVudG1hbmFnZS50ZXN0L2NoaXRpZXQvMzktY2F1LWhvaS10cmFjLW5naGllbS1tYW5nLW1heS10aW5oIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6ODt9', 1713023295);
 
 -- --------------------------------------------------------
 
@@ -625,9 +686,9 @@ INSERT INTO `settings` (`id`, `score_register`, `score_doc_ok`, `docs_home`, `cr
 
 CREATE TABLE `slides` (
   `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `active` blob,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -650,7 +711,7 @@ INSERT INTO `slides` (`id`, `title`, `link`, `image`, `active`, `created_at`, `u
 
 CREATE TABLE `statuses` (
   `id` bigint UNSIGNED NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -672,8 +733,8 @@ INSERT INTO `statuses` (`id`, `status`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `tags` (
   `id` bigint UNSIGNED NOT NULL,
-  `tag_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `document_id` int DEFAULT NULL,
   `cate_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -700,21 +761,21 @@ INSERT INTO `tags` (`id`, `tag_name`, `slug`, `document_id`, `cate_id`, `created
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` date DEFAULT NULL,
   `level` int DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sex` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `score` int DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `payment_money` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
+  `payment_money` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -722,7 +783,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `phone`, `date`, `level`, `avatar`, `sex`, `score`, `remember_token`, `created_at`, `updated_at`, `payment_money`) VALUES
-(8, 'Phan Duy Hào1234dsfdsf', 'haomrvuii@gmail.com', NULL, '$2y$10$yBgPfB7z7LNBlDWI/bnhn.9GXuqZJQ4PD.zbPYXNe8j.bBzUy47sq', 'admin', NULL, NULL, 1, 'phan-duy-hao1234dsfdsf.jpg', NULL, 1, NULL, '2023-09-27 10:28:19', '2023-12-14 06:51:34', '0'),
+(8, 'Phan Duy Hào1234dsfdsf', 'haomrvuii@gmail.com', NULL, '$2y$10$yBgPfB7z7LNBlDWI/bnhn.9GXuqZJQ4PD.zbPYXNe8j.bBzUy47sq', 'admin', NULL, NULL, 1, 'phan-duy-hao1234dsfdsf.jpg', NULL, 11, NULL, '2023-09-27 10:28:19', '2024-04-13 08:04:57', '0'),
 (19, 'Tho Mai Huy', 'test@vinhuni.edu.vn', NULL, '$2y$10$M2WpUN7lwxyyB8b55bG1IuuH.OXgow6W.gfuS9K57iCI/j1z/g0xu', 'user', NULL, NULL, 0, NULL, NULL, 0, NULL, '2023-10-02 19:06:39', '2023-10-02 19:06:39', '0'),
 (48, 'Duy Hào123567', 'hao@gmail.com', NULL, '$2y$10$NAYieRu9VdcTt8YFet/va..CBm2nBSp6PdIzgS6skHKFG7.J/AIyy', 'admin', '0855840100', '2023-12-11', 1, 'duy-hao123567.jpg', 'Nam', 0, NULL, '2023-10-07 19:47:49', '2023-12-07 21:19:29', '0'),
 (49, 'Tho Mai Huy', '19574802010116@vinhuni.edu.vn', NULL, '$2y$10$UZDupdWr2Z5Ph7DYwSfQnulOB0VN4F4fO7Kf5k4fkH1BkDmIqP/gC', 'admin', NULL, NULL, 1, 'tho-mai-huy.jpg', NULL, 0, NULL, '2023-10-07 20:19:47', '2023-10-07 20:19:47', '0'),
@@ -760,6 +821,15 @@ ALTER TABLE `documents`
   ADD KEY `documents_user_id_foreign` (`user_id`),
   ADD KEY `documents_cate_id_foreign` (`cate_id`),
   ADD KEY `documents_status_foreign` (`status`);
+
+--
+-- Chỉ mục cho bảng `document_interactions`
+--
+ALTER TABLE `document_interactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `document_interactions_user_id_foreign` (`user_id`),
+  ADD KEY `document_interactions_document_id_foreign` (`document_id`),
+  ADD KEY `document_interactions_comment_id_foreign` (`comment_id`);
 
 --
 -- Chỉ mục cho bảng `downloads`
@@ -819,7 +889,7 @@ ALTER TABLE `password_reset_tokens`
 --
 ALTER TABLE `payment_histories`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `payment_histories_user_id_foreign` (`user_id`);
+  ADD UNIQUE KEY `payment_histories_order_code_unique` (`order_code`);
 
 --
 -- Chỉ mục cho bảng `personal_access_tokens`
@@ -890,7 +960,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `documents`
@@ -899,10 +969,16 @@ ALTER TABLE `documents`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
+-- AUTO_INCREMENT cho bảng `document_interactions`
+--
+ALTER TABLE `document_interactions`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT cho bảng `downloads`
 --
 ALTER TABLE `downloads`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -914,7 +990,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `favourites`
 --
 ALTER TABLE `favourites`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `feedback`
@@ -938,13 +1014,13 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT cho bảng `payment_histories`
 --
 ALTER TABLE `payment_histories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -956,7 +1032,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `rates`
 --
 ALTER TABLE `rates`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT cho bảng `settings`
@@ -1007,6 +1083,14 @@ ALTER TABLE `documents`
   ADD CONSTRAINT `documents_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Các ràng buộc cho bảng `document_interactions`
+--
+ALTER TABLE `document_interactions`
+  ADD CONSTRAINT `document_interactions_comment_id_foreign` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `document_interactions_document_id_foreign` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `document_interactions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
 -- Các ràng buộc cho bảng `downloads`
 --
 ALTER TABLE `downloads`
@@ -1018,12 +1102,6 @@ ALTER TABLE `downloads`
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_document_id_foreign` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `favourites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Các ràng buộc cho bảng `payment_histories`
---
-ALTER TABLE `payment_histories`
-  ADD CONSTRAINT `payment_histories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `rates`

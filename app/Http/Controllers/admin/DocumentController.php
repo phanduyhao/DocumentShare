@@ -33,13 +33,15 @@ class DocumentController extends Controller
                 $query->whereNull('score')
                     ->orWhere('score', 0);
             })
-            ->paginate(7);
+            ->orderBy('updated_at', 'asc')
+            ->paginate(10);
 
 //        Lấy các tài liệu Có Score # Null hoặc Score > 0;
         $document_vips = Document::where('status', '1')
             ->whereNotNull('score')
             ->where('score', '>', 0)
-            ->paginate(7);
+            ->orderBy('updated_at', 'asc')
+            ->paginate(10);
 
         return view('admin.document.index',compact('documents','document_vips','cates','tags','count_docs'),[
             'title' => 'Tài liệu đã duyệt'
@@ -70,18 +72,19 @@ class DocumentController extends Controller
     }
 
 //    Duyệt bài
-    public function ok(Request $request, Document $document)
-    {
+    public function ok(Document $document, Request $request){
+        $user = User::find($document->user_id);
         $score = Setting::first();
+        $user->score = $score->score_doc_ok;
+        $user->save();
         $document->status = 1;
-        $document->score = $score->score_doc_ok;
+        $document->score = $request->score;
         $document->save();
-        // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
-        return redirect()->back();
+        return redirect()->route('documents.loading');
     }
 
 //    Hủy bài
-    public function cancelAction(Request $request, Document $document)
+    public function cancelAction(Document $document)
     {
         $document->status = 3;
         $document->save();

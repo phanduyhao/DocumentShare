@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DocInteraction;
 use App\Models\Document;
 use App\Models\Download;
 use App\Models\Favourite;
@@ -18,8 +19,13 @@ class ActionController extends Controller
     public function download(Request $request) {
         $download = new Download;
         $download->document_id = $request->input('document_id');
-        $download->user_id = $request->input('user_id');
+        $download->user_id = Auth::id();
         $download->save();
+        $interaction = new DocInteraction();
+        $interaction->user_id = Auth::id();
+        $interaction->document_id = $request->input('document_id');
+        $interaction->action = 'download';
+        $interaction->save();
         return response()->json(['message' => 'Tải xuống đã được ghi nhận.']);
     }
 
@@ -50,13 +56,17 @@ class ActionController extends Controller
 //    Favourite
     public function favourite(Request $request) {
         $documentId = $request->input('document_id');
-        $userId = $request->input('user_id');
+        $userId = Auth::id();
 
         // Kiểm tra xem đã có bản ghi có user_id và document_id tương ứng chưa
         $existingRecord = Favourite::where('document_id', $documentId)
             ->where('user_id', $userId)
             ->first();
-
+        $interaction = new DocInteraction();
+        $interaction->user_id = Auth::id();
+        $interaction->document_id = $documentId;
+        $interaction->action = 'favorite';
+        $interaction->save();
         if (!$existingRecord) {
             $favourite = new Favourite;
             $favourite->document_id = $documentId;
@@ -84,9 +94,15 @@ class ActionController extends Controller
     public function rate(Request $request){
         $rate = new Rate;
         $rate->document_id = $request->input('document_id');
-        $rate->user_id = $request->input('user_id');
+        $rate->user_id = Auth::id();
         $rate->rates = $request->input('rate');
         $rate->save();
+        $interaction = new DocInteraction();
+        $interaction->user_id = Auth::id();
+        $interaction->document_id = $request->input('document_id');
+        $interaction->action = 'rate';
+        $interaction->rating = $request->input('rate');
+        $interaction->save();
         event(new RateCreated($rate));
 
         return response()->json(['success' => true, 'message' => 'Đánh giá thành công!']);

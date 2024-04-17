@@ -1,7 +1,7 @@
 /*
 Error: File to import not found or unreadable: ../node_modules/boxicons/css/boxicons.
-       Load path: D:/laragon/www/DocumentManage/public/temp/admin/fonts
-        on line 4 of D:\laragon\www\DocumentManage\public\temp\admin\fonts\boxicons.scss
+       Load path: I:/laragon/www/DocumentManage/public/temp/admin/fonts
+        on line 4 of I:\laragon\www\DocumentManage\public\temp\admin\fonts\boxicons.scss
 
 1: $boxicons-font-path: 'boxicons';
 2: $boxicons-font-size-base: 16px;
@@ -14,7 +14,7 @@ Error: File to import not found or unreadable: ../node_modules/boxicons/css/boxi
 9:     line-height: 1;
 
 Backtrace:
-D:\laragon\www\DocumentManage\public\temp\admin\fonts\boxicons.scss:4
+I:\laragon\www\DocumentManage\public\temp\admin\fonts\boxicons.scss:4
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:45:in `import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -52,4 +52,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../node_modules/boxicons/css/boxicons.\A        Load path: D:/laragon/www/DocumentManage/public/temp/admin/fonts\A         on line 4 of D:\laragon\www\DocumentManage\public\temp\admin\fonts\boxicons.scss\A \A 1: $boxicons-font-path: 'boxicons';\A 2: $boxicons-font-size-base: 16px;\A 3: \A 4: @import '../node_modules/boxicons/css/boxicons';\A 5: \A 6: .bx {\A 7:     vertical-align: middle;\A 8:     font-size: 1.15rem;\A 9:     line-height: 1;"; }
+  content: "Error: File to import not found or unreadable: ../node_modules/boxicons/css/boxicons.\A        Load path: I:/laragon/www/DocumentManage/public/temp/admin/fonts\A         on line 4 of I:\laragon\www\DocumentManage\public\temp\admin\fonts\boxicons.scss\A \A 1: $boxicons-font-path: 'boxicons';\A 2: $boxicons-font-size-base: 16px;\A 3: \A 4: @import '../node_modules/boxicons/css/boxicons';\A 5: \A 6: .bx {\A 7:     vertical-align: middle;\A 8:     font-size: 1.15rem;\A 9:     line-height: 1;"; }

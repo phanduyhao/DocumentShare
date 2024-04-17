@@ -48,8 +48,8 @@
                     <div class="content-product pt-4">
                         <div class="row gx-3 ps-3 pe-3 position-relative">
                             @foreach($docs as $doc)
-                            <div class="col-lg-4 col-md-3 col-sm-6 col-12 mb-3">
-                                <div class="docs-item border border-1 mx-2 position-relative">
+                                <div class="col-lg-4 col-md-3 col-sm-6 col-12 mb-3">
+                                    <div class="docs-item border border-1 mx-2 position-relative">
                                         <div class="position-absolute end-0 z-index-5 d-flex flex-column h-50 justify-content-around action-contain">
                                             <a data-id="{{$doc->Document->id}}" data-author="{{$doc->Document->user_id}}" data-score-doc="{{$doc->Document->score}}" @auth data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" @endauth href="/temp/filesOrigin/{{$doc->Document->file}}.{{$doc->Document->type}}" download class="download-file btn-action">
                                                 <i class="fa-solid fa-download"></i>
@@ -95,7 +95,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            </div>
+                                </div>
                             @endforeach
                             <div class="pagination mt-4 pb-4">
                                 {{ $docs->links() }}

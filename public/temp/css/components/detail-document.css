@@ -1,0 +1,103 @@
+.rating:hover {
+  cursor: pointer; }
+.rating .filled-stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.parameter-docunment {
+  padding: 10px 0 10px 0; }
+
+.btn-download span {
+  text-transform: uppercase;
+  font-size: 18px; }
+
+.related-document {
+  border: 1px solid #b5b5b5;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
+.related-document-item {
+  border-bottom: 1px solid #b5b5b5;
+  cursor: pointer; }
+
+.related-document-item:hover {
+  background-color: #e0e0e0; }
+
+.related-document-item a {
+  text-decoration: none;
+  color: #5c5c5c; }
+
+.related-document-item i {
+  color: #5c5c5c; }
+
+/* -----------------------------comments----- */
+.comment-avata {
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px; }
+
+.comment-avata i {
+  font-size: 20px;
+  color: #2a70b8; }
+
+.comment-user-info {
+  flex: 1; }
+
+.comment-user-info-item a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600; }
+
+.comment-user-info-item i {
+  font-size: 15px; }
+
+.comment-user-info-item span {
+  font-size: 14px;
+  color: #b5b5b5; }
+
+.comment-user-desc {
+  font-size: 15px; }
+
+.btn-action i {
+  transition: .2s all;
+  font-size: 25px; }
+
+.btn-action:hover i {
+  color: rgba(42, 112, 184, 0.95);
+  transition: .2s all; }
+
+.pagination nav {
+  margin: 0 auto; }
+  .pagination nav div:nth-child(1) {
+    display: none; }
+  .pagination nav div:nth-child(2) span {
+    box-shadow: none !important; }
+    .pagination nav div:nth-child(2) span span span {
+      padding: 10px 14px !important;
+      border: none !important;
+      margin: 0 5px;
+      background-color: rgba(42, 112, 184, 0.95) !important;
+      color: white; }
+    .pagination nav div:nth-child(2) span a {
+      padding: 10px 14px !important;
+      border: none !important;
+      margin: 0 5px;
+      transition: all 0.3s; }
+      .pagination nav div:nth-child(2) span a:hover {
+        background-color: rgba(42, 112, 184, 0.95) !important;
+        color: white;
+        transition: all 0.3s; }
+.pagination svg {
+  width: 20px; }
+
+#pdfContainer {
+  height: 900px; }
+  #pdfContainer canvas {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px; }
+
+/*# sourceMappingURL=detail-document.css.map */

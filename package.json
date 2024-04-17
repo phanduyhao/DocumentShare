@@ -8,7 +8,7 @@
         "Create Storage image": "php artisan storage:link",
         "makeController": "php artisan make:controller PageController ",
         "makeController Full Class": "php artisan make:controller test --resource",
-        "makeModel-Controller-Migration": "php artisan make:model Feedback -mcr",
+        "makeModel-Controller-Migration": "php artisan make:model DocInteraction -mcr",
         "RunPHPCommand": " php artisan tinker ",
         "CreatePass": "echo bcrypt('12345')",
         "CreateMigration": "php artisan make:migration createHistoryPayment",

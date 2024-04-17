@@ -119,7 +119,6 @@ $(document).ready(function() {
                     url: "/download",
                     data: {
                         document_id: documentId,
-                        user_id: userId,
                     },
                     success: function(response) {
                         // AJAX thành công, cập nhật điểm của người dùng
@@ -192,7 +191,6 @@ $(document).ready(function() {
                     url: "/unfavourite", // Đặt đúng đường dẫn của bạn
                     data: {
                         document_id: documentId,
-                        user_id: userId,
                     },
                     success: function(response) {
                         if(response.success) {
@@ -216,7 +214,6 @@ $(document).ready(function() {
                     url: "/favourite", // Đặt đúng đường dẫn của bạn
                     data: {
                         document_id: documentId,
-                        user_id: userId,
                     },
                     success: function(response) {
                         if(response.success) {
@@ -262,7 +259,6 @@ $(document).ready(function() {
                     url: "/rate", // Đổi thành đường dẫn thích hợp của bạn
                     data: {
                         document_id: documentId,
-                        user_id: userId,
                         rate: widthNumber
                     },
                     success: function(response) {

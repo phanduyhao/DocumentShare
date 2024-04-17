@@ -1,6 +1,6 @@
 /*
 Error: Invalid CSS after "...mage: url(light": expected ")", was ".str-replace("
-        on line 44 of D:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-auth.scss
+        on line 44 of I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-auth.scss
 
 39:             height: 148px;
 40:             content: ' ';
@@ -15,7 +15,7 @@ Error: Invalid CSS after "...mage: url(light": expected ")", was ".str-replace("
 49:                 ),
 
 Backtrace:
-D:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-auth.scss:44
+I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-auth.scss:44
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1278:in `expected'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/script/lexer.rb:231:in `expected!'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/script/parser.rb:730:in `assert_tok'
@@ -73,4 +73,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"...mage: url(light\": expected \")\", was \".str-replace(\"\A         on line 44 of D:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-auth.scss\A \A 39:             height: 148px;\A 40:             content: ' ';\A 41:             position: absolute;\A 42:             top: -40px;\A 43:             right: -40px;\A 44:             background-image: url(light.str-replace(\A 45:                 light.str-replace(\A 46:                     $auth-basic-top-svg,\A 47:                     'currentColor',\A 48:                     light.$primary\A 49:                 ),"; }
+  content: "Error: Invalid CSS after \"...mage: url(light\": expected \")\", was \".str-replace(\"\A         on line 44 of I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-auth.scss\A \A 39:             height: 148px;\A 40:             content: ' ';\A 41:             position: absolute;\A 42:             top: -40px;\A 43:             right: -40px;\A 44:             background-image: url(light.str-replace(\A 45:                 light.str-replace(\A 46:                     $auth-basic-top-svg,\A 47:                     'currentColor',\A 48:                     light.$primary\A 49:                 ),"; }

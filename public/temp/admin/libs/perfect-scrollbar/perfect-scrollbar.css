@@ -1,6 +1,6 @@
 /*
 Error: Invalid CSS after "...nd-color: light": expected ";", was ".$gray-400;"
-        on line 59 of D:\laragon\www\DocumentManage\public\temp\admin\libs\perfect-scrollbar\perfect-scrollbar.scss
+        on line 59 of I:\laragon\www\DocumentManage\public\temp\admin\libs\perfect-scrollbar\perfect-scrollbar.scss
 
 54: // Light layout
 55: @if $enable-light-style {
@@ -15,7 +15,7 @@ Error: Invalid CSS after "...nd-color: light": expected ";", was ".$gray-400;"
 64:         .ps__rail-x:focus,
 
 Backtrace:
-D:\laragon\www\DocumentManage\public\temp\admin\libs\perfect-scrollbar\perfect-scrollbar.scss:59
+I:\laragon\www\DocumentManage\public\temp\admin\libs\perfect-scrollbar\perfect-scrollbar.scss:59
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1278:in `expected'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1208:in `expected'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1203:in `tok!'
@@ -56,4 +56,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"...nd-color: light\": expected \";\", was \".$gray-400;\"\A         on line 59 of D:\laragon\www\DocumentManage\public\temp\admin\libs\perfect-scrollbar\perfect-scrollbar.scss\A \A 54: // Light layout\A 55: @if $enable-light-style {\A 56:     .light-style {\A 57:         .ps__thumb-x,\A 58:         .ps__thumb-y {\A 59:             background-color: light.$gray-400;\A 60:         }\A 61: \A 62:         .ps__rail-x:hover,\A 63:         .ps__rail-y:hover,\A 64:         .ps__rail-x:focus,"; }
+  content: "Error: Invalid CSS after \"...nd-color: light\": expected \";\", was \".$gray-400;\"\A         on line 59 of I:\laragon\www\DocumentManage\public\temp\admin\libs\perfect-scrollbar\perfect-scrollbar.scss\A \A 54: // Light layout\A 55: @if $enable-light-style {\A 56:     .light-style {\A 57:         .ps__thumb-x,\A 58:         .ps__thumb-y {\A 59:             background-color: light.$gray-400;\A 60:         }\A 61: \A 62:         .ps__rail-x:hover,\A 63:         .ps__rail-y:hover,\A 64:         .ps__rail-x:focus,"; }

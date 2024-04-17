@@ -1,8 +1,8 @@
 /*
 Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss/functions.
-       Load path: D:/laragon/www/DocumentManage/public/temp/admin/scss/pages
-        on line 2 of D:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss
-        from line 5 of D:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-account-settings.scss
+       Load path: I:/laragon/www/DocumentManage/public/temp/admin/scss/pages
+        on line 2 of I:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss
+        from line 5 of I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-account-settings.scss
 
 1: // * Account Settings
 2: // *******************************************************************************
@@ -13,8 +13,8 @@ Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss
 7: .api-key-actions {
 
 Backtrace:
-D:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss:2
-D:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-account-settings.scss:5
+I:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss:2
+I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-account-settings.scss:5
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:45:in `import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -65,4 +65,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss/functions.\A        Load path: D:/laragon/www/DocumentManage/public/temp/admin/scss/pages\A         on line 2 of D:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss\A         from line 5 of D:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-account-settings.scss\A \A 1: // * Account Settings\A 2: // *******************************************************************************\A 3: \A 4: @import '../_custom-variables/pages';\A 5: @import '../_bootstrap-extended/include';\A 6: \A 7: .api-key-actions {"; }
+  content: "Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss/functions.\A        Load path: I:/laragon/www/DocumentManage/public/temp/admin/scss/pages\A         on line 2 of I:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss\A         from line 5 of I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-account-settings.scss\A \A 1: // * Account Settings\A 2: // *******************************************************************************\A 3: \A 4: @import '../_custom-variables/pages';\A 5: @import '../_bootstrap-extended/include';\A 6: \A 7: .api-key-actions {"; }
