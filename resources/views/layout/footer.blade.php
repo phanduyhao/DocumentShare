@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col col-2-5">
                 <div class="footer-item">
-                    <h4>Về HocMai</h4>
+                    <h4>Về DocFGC</h4>
                     <ul class="footer-item-list-info">
                         <li class="footer-item-list-info">
                             <a href="">Giới thiệu</a>
@@ -13,9 +13,6 @@
                         </li>
                         <li class="footer-item-list-info">
                             <a href="">Quy chế hoạt động</a>
-                        </li>
-                        <li class="footer-item-list-info">
-                            <a href="">Tuyển dụng</a>
                         </li>
                     </ul>
                 </div>

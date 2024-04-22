@@ -23,10 +23,8 @@ class SlideController extends Controller
         $this->validate($request,[
             'title' => 'required', // Kiểm tra đã nhập Email chưa, có đúng định dạng Email không ?
             'image' => 'required', // Kiểm tra đã nhập mật khẩu chưa ?
-            'link' => 'required'
         ],[
             'title.required' => 'Vui lòng nhập tiêu đề Slide !',
-            'link.required' => 'Vui lòng nhập link !',
             'image.required' => 'Vui lòng thêm ảnh!'
         ] );
         // Kiểm tra xem cate_id có tồn tại trong bảng Cate hay không
@@ -58,7 +56,7 @@ class SlideController extends Controller
         $image = $request->file('image'); // Lấy file ảnh từ file Upload
         if ($image) {
             $fileName = Str::slug($title) . '.jpg'; // Tên ảnh theo Slug Title
-            $image->move(public_path('temp/images/slides'), $fileName); // Di chuyển ảnh vào thư mục này
+            $image->move(public_path('temp/images/slide'), $fileName); // Di chuyển ảnh vào thư mục này
 
             $slide->image = $fileName; // Lưu tên file ảnh theo slug Title
         }

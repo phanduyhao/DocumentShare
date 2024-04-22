@@ -25,7 +25,7 @@ class ProfileController extends Controller
 
     public function favourite(){
         $favourites = Favourite::where('user_id',Auth::id())->get();
-        $docs = Favourite::where('user_id',Auth::id())->paginate(8);
+        $docs = Favourite::where('user_id',Auth::id())->paginate(9);
         return view('user.favourite_docs',compact('docs','favourites'),[
             'title' => 'Tài liệu yêu thích'
         ]);

@@ -167,7 +167,7 @@
                                                 class='form-control title input-field '
                                                 id='title-edit-{{$slide->id}}'
                                                 placeholder='Nhập tiêu đề'
-                                                value="{{$slide->Title}}"
+                                                value="{{$slide->title}}"
                                                 name='title' data-require='Mời nhập Tiêu đề'
                                             />
                                         </div>
@@ -180,9 +180,9 @@
                                                 type='text'
                                                 class='form-control slug input-field'
                                                 id='slug-edit-{{$slide->id}}'
-                                                value="{{$slide->slug}}"
+                                                value="{{$slide->link}}"
                                                 placeholder='Nhập Slug'
-                                                name='slug' data-require='Mời nhập Slug'
+                                                name='link' data-require='Mời nhập Slug'
                                             />
                                         </div>
                                         <div class="form-check me-3">

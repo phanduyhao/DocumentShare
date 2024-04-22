@@ -9,9 +9,9 @@
         </div>
         <div class="main-slide-nav slick-slider slide container position-absolute top-0 bottom-0 start-0 end-0 d-flex align-items-center mb-0">
             @foreach($slides as $slide)
-                <a href="{{$slide->link}}" class="d-flex justify-content-center">
-                    <img class="w-100 rounded-3" src="/temp/images/slide/{{$slide->image}}" alt="">
-                </a>
+                {{-- <a href="{{$slide->link}}" class="d-flex justify-content-center"> --}}
+                    <img class="rounded-3" src="/temp/images/slide/{{$slide->image}}" alt="">
+                {{-- </a> --}}
             @endforeach
         </div>
         <div class="container">

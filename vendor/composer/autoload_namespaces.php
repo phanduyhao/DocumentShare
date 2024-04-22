@@ -7,6 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'ML\\IRI' => array($vendorDir . '/ml/iri'),
-    'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
     'ConvertApi\\' => array($vendorDir . '/convertapi/convertapi-php/lib'),
 );
