@@ -163,7 +163,6 @@ function validateForm(formID) {
                 $input.addClass('input-error');
             }
         }
-
     });
     return checkValid;
 }

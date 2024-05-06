@@ -106,18 +106,20 @@
                     @else
                       <div class="d-flex align-items-center h-100">
                           <div class="upload">
-                              <a href="{{route('uploadPage')}}" class="">
-                                  <i class="fa-solid fa-upload fs-5"></i>
+                              <a href="{{route('uploadPage')}}" class=" d-flex align-items-center text-nowrap fw-bold p-2 border rounded">
+                                  <i class="fa-solid fa-upload fs-5 me-2"></i>
+                                  Upload
                               </a>
                           </div>
                           <div class="header-infor position-relative ms-4">
-                              <a href="{{route('profile')}}" class="user">
-                                  <i class="fa-solid fa-user fs-5"></i>
+                              <a href="{{route('profile')}}" class="user d-flex align-items-center text-nowrap fw-bold p-2 border rounded">
+                                  <i class="fa-solid fa-user fs-5 me-2"></i>
+                                  Trang cá nhân
                               </a>
                           </div>
                           <form action="{{route('logout')}}" method="post" class="logout ms-4">
                               @csrf
-                              <button type="submit" class="dropdown-item d-flex align-items-center">
+                              <button type="submit" class="dropdown-item btn btn-primary d-flex align-items-center p-2 border rounded">
                                   <span class="align-middle fw-semibold">Đăng xuất</span>
                                   <i class="fa-solid fa-right-to-bracket fs-5 ms-2"></i>
                               </button>

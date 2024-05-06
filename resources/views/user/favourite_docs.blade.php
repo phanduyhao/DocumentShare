@@ -17,17 +17,20 @@
                         </div>
                     </div>
                     <div class="pr-sub mt-3 ">
-                        <div class="pr-sub-nav">
+                        <div class="pr-sub-nav border-bottom">
                             <a href="{{route('profile')}}" class="pr-sub-nav-item">Thông tin cá nhân</a>
                         </div>
-                        <div class="pr-sub-nav">
+                        <div class="pr-sub-nav border-bottom">
                             <a href="#" class="pr-sub-nav-item">Cập nhật thông tin</a>
                         </div>
-                        <div class="pr-sub-nav">
+                        <div class="pr-sub-nav border-bottom">
                             <a href="#" class="pr-sub-nav-item">Thay đổi mật khẩu</a>
                         </div>
-                        <div class="pr-sub-nav">
+                        <div class="pr-sub-nav border-bottom">
                             <a href="{{route('favourite')}}" class="pr-sub-nav-item">Tài liệu yêu thích</a>
+                        </div>
+                        <div class="pr-sub-nav border-bottom">
+                            <a href="{{route('paymentHistory')}}" class="pr-sub-nav-item">Lịch sử nạp tiền</a>
                         </div>
                         <form action="{{route('logout')}}" method="post" class="logout pr-sub-nav">
                             @csrf

@@ -37,7 +37,7 @@ use App\Http\Controllers\PaymentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/',[HomeMainController::class,'welcome']);
+Route::get('/',[HomeMainController::class,'welcome'])->name('home');
 
 
 // Đăng ký
@@ -123,6 +123,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/change-password', [ProfileController::class,'resetPassword'])->name('profile.resetPass');
     Route::post('/upload-docs', [DocumentMainController::class,'upload'])->name('upload');
     Route::get('/favourite-docs', [ProfileController::class,'favourite'])->name('favourite');
+    Route::get('/payment-histories', [ProfileController::class,'paymentHistory'])->name('paymentHistory');
 
 //    Vào Admin
     Route::middleware(['auth', 'checkLevel'])->group(function() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use App\Models\Favourite;
+use App\Models\Payment_History;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,7 @@ class ProfileController extends Controller
         ]);
     }
 
+    // Tài liệu yêu thích
     public function favourite(){
         $favourites = Favourite::where('user_id',Auth::id())->get();
         $docs = Favourite::where('user_id',Auth::id())->paginate(9);
@@ -31,6 +33,7 @@ class ProfileController extends Controller
         ]);
     }
 
+    // Cập nhật thông tin
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
@@ -63,6 +66,7 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
+    // Đổi mật khẩu
     public function resetPassword(Request $request)
     {
         $user = Auth::user();
@@ -82,6 +86,8 @@ class ProfileController extends Controller
             return response()->json(['success' => false, 'errors' => ['old_pass' => 'Mật khẩu hiện tại không chính xác']]);
         }
     }
+
+    // Tự động cộng điểm khi tài liệu được tải xuống
     public function plusScoreUserByDocDown(Request $request)
     {
         $userId = $request->input('author_id');
@@ -95,5 +101,13 @@ class ProfileController extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => true]);
+    }
+
+    // Lịch sử nạp tiền
+    public function paymentHistory(){
+        $payment_histories = Payment_History::where('user_id', '=', Auth::user()->id)->orderByDesc('created_at')->get();
+        return view('user.payment_history', compact('payment_histories'),[
+            'title' => 'Lịch sử nạp tiền'
+        ]);
     }
 }

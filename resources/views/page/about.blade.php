@@ -9,7 +9,7 @@
             <p>Docs Share là trang website thuộc lĩnh vực học tập dành cho học sinh, phụ huynh và giáo viên. Đây là nền
                 tảng chia sẻ miễn phí các nguồn tài liệu hay, bổ ích, đa dạng cho người dùng, và luôn được cập nhật, bổ sung
                 thêm mỗi ngày.</p>
-            <p style="text-align: center;"><img src="https://i.vdoc.vn/data/image/2023/03/04/Docs Share-homepage.png"
+            <p style="text-align: center;"><img src="/temp/images/home.png"
                     alt="trang chủ Docs Share" width="700" height="414"></p>
             <h3>2. Mục tiêu</h3>
             <p>Docs Share được thành lập từ năm 2024 với mục tiêu trở thành trang mạng chia sẻ tài liệu học tập uy tín nhất. Giúp người dùng
