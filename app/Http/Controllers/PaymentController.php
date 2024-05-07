@@ -17,7 +17,6 @@ class PaymentController extends Controller
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-//        $vnp_Returnurl = route('checkout.complete', ['code' => $checkout->order_code]);
         $vnp_Returnurl = route('checkout.complete', ['code' => $checkout->order_code, 'amount_money' => $request->amount_money]);
         $vnp_TmnCode = "TERQDSEC";
         $vnp_HashSecret = "XDVHXUYMZCAWUPORNPNVANCNAXBPOSSM";
@@ -28,11 +27,6 @@ class PaymentController extends Controller
         $vnp_Amount =  $request->amount_money * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = $request->bank_code;
-
-        // Thêm mã ngân hàng vào mảng dữ liệu
-        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-            $inputData['vnp_BankCode'] = $vnp_BankCode;
-        }
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -85,22 +79,30 @@ class PaymentController extends Controller
         if ($maCode) {
             $checkout = Payment_History::where("order_code", $maCode)->first();
             if ($checkout) {
-                if ($request->isMethod('get') && $request->filled('vnp_ResponseCode')) {
-                    $checkout->BankCode = $request->input('vnp_BankCode');
-                    $checkout->TransactionNo = $request->input('vnp_TransactionNo');
-                    $checkout->vnp_BankTranNo = $request->input('vnp_BankTranNo');
-                    $checkout->vnp_ResponseCode = $request->input('vnp_ResponseCode');
-                    $checkout->save();
-                }
-                $user = Auth::user();
                 $score = $amount_money / 1000;
                 if(!($score < 50)){
                     $score_more = $score / 100 * 10;
                     $score += $score_more;
                 }
+                if ($request->isMethod('get') && $request->filled('vnp_ResponseCode')) {
+                    $checkout->BankCode = $request->input('vnp_BankCode');
+                    $checkout->TransactionNo = $request->input('vnp_TransactionNo');
+                    $checkout->vnp_BankTranNo = $request->input('vnp_BankTranNo');
+                    $checkout->vnp_ResponseCode = $request->input('vnp_ResponseCode');
+                    $checkout->score = $score;
+                    $checkout->save();
+                    if($request->input('vnp_BankTranNo') == null) {
+                        $check = false;
+                    }
+                }
+                $user = Auth::user();
                 $user->score += $score;
                 $user->save();
-                return view('vnpay.complete', compact("checkout", "amount_money"),[
+            }
+            if($request->input('vnp_BankTranNo') == null){
+                return redirect()->route('home');
+            }else{
+                return view('vnpay.complete', compact("checkout", "amount_money", "score"),[
                     'title' => 'Thanh toán thành công!'
                 ]);
             }

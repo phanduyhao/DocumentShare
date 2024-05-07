@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use App\Models\Favourite;
 use App\Models\Menu;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -32,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('name', $name)->with('role', $role);
         });
         View::composer('layout.header', function ($view) {
-            $menus = Menu::all();
+            $menus = Menu::where('active', 1)->get();
             $view->with('menus', $menus);
         });
         View::composer('component.list_cates', function ($view) {

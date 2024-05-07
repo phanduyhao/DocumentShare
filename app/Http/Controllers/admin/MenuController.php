@@ -47,7 +47,7 @@ class MenuController extends Controller
     {
         $this->validate($request,[
             'title' => 'required',
-            'slug' => 'required|unique:menus',
+            'slug' => 'required|unique:menus,slug,'.$menu->id,
         ],[
             'title.required' => 'Vui lòng nhập tiêu đề !',
             'slug.required' => 'Vui lòng nhập slug',

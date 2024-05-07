@@ -22,16 +22,13 @@
                     <h4>Dịch vụ</h4>
                     <ul class="footer-item-list-info">
                         <li class="footer-item-list-info">
-                            <a href="">Thư viện</a>
+                            <a href="">Tài liệu</a>
                         </li>
                         <li class="footer-item-list-info">
-                            <a href="">Ôn luyện</a>
+                            <a href="">Liên hệ</a>
                         </li>
                         <li class="footer-item-list-info">
-                            <a href="">Speakup - Tiếng Anh 1 kèm 1 Online</a>
-                        </li>
-                        <li class="footer-item-list-info">
-                            <a href="">ICANTECH - Đào tạo Công nghệ &amp; Lập trình</a>
+                            <a href="">Đăng tài liệu</a>
                         </li>
                     </ul>
                 </div>
