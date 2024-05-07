@@ -1,12 +1,12 @@
 /*
 Error: File to import not found or unreadable: ../../node_modules/highlight.js/styles/atom-one-light.
-       Load path: I:/laragon/www/DocumentManage/public/temp/admin/libs/highlight
-        on line 1 of I:\laragon\www\DocumentManage\public\temp\admin\libs\highlight\highlight.scss
+       Load path: D:/laragon/www/DocumentShare/public/temp/admin/libs/highlight
+        on line 1 of D:\laragon\www\DocumentShare\public\temp\admin\libs\highlight\highlight.scss
 
 1: @import '../../node_modules/highlight.js/styles/atom-one-light';
 
 Backtrace:
-I:\laragon\www\DocumentManage\public\temp\admin\libs\highlight\highlight.scss:1
+D:\laragon\www\DocumentShare\public\temp\admin\libs\highlight\highlight.scss:1
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:45:in `import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -44,4 +44,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../../node_modules/highlight.js/styles/atom-one-light.\A        Load path: I:/laragon/www/DocumentManage/public/temp/admin/libs/highlight\A         on line 1 of I:\laragon\www\DocumentManage\public\temp\admin\libs\highlight\highlight.scss\A \A 1: @import '../../node_modules/highlight.js/styles/atom-one-light';"; }
+  content: "Error: File to import not found or unreadable: ../../node_modules/highlight.js/styles/atom-one-light.\A        Load path: D:/laragon/www/DocumentShare/public/temp/admin/libs/highlight\A         on line 1 of D:\laragon\www\DocumentShare\public\temp\admin\libs\highlight\highlight.scss\A \A 1: @import '../../node_modules/highlight.js/styles/atom-one-light';"; }

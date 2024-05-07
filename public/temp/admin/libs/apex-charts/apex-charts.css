@@ -1,6 +1,6 @@
 /*
 Error: Invalid CSS after "...ckground: light": expected ";", was ".$white;"
-        on line 13 of I:\laragon\www\DocumentManage\public\temp\admin\libs\apex-charts\apex-charts.scss
+        on line 13 of D:\laragon\www\DocumentShare\public\temp\admin\libs\apex-charts\apex-charts.scss
 
 8: // Light style
 9: @if $enable-light-style {
@@ -15,7 +15,7 @@ Error: Invalid CSS after "...ckground: light": expected ";", was ".$white;"
 18:                     border-color: light.$border-color;
 
 Backtrace:
-I:\laragon\www\DocumentManage\public\temp\admin\libs\apex-charts\apex-charts.scss:13
+D:\laragon\www\DocumentShare\public\temp\admin\libs\apex-charts\apex-charts.scss:13
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1278:in `expected'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1208:in `expected'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/scss/parser.rb:1203:in `tok!'
@@ -60,4 +60,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"...ckground: light\": expected \";\", was \".$white;\"\A         on line 13 of I:\laragon\www\DocumentManage\public\temp\admin\libs\apex-charts\apex-charts.scss\A \A 8: // Light style\A 9: @if $enable-light-style {\A 10:     .light-style {\A 11:         .apexcharts-canvas {\A 12:             .apexcharts-tooltip {\A 13:                 background: light.$white;\A 14:                 border-color: light.$border-color;\A 15:                 box-shadow: light.$popover-box-shadow;\A 16:                 .apexcharts-tooltip-title {\A 17:                     background: light.$white;\A 18:                     border-color: light.$border-color;"; }
+  content: "Error: Invalid CSS after \"...ckground: light\": expected \";\", was \".$white;\"\A         on line 13 of D:\laragon\www\DocumentShare\public\temp\admin\libs\apex-charts\apex-charts.scss\A \A 8: // Light style\A 9: @if $enable-light-style {\A 10:     .light-style {\A 11:         .apexcharts-canvas {\A 12:             .apexcharts-tooltip {\A 13:                 background: light.$white;\A 14:                 border-color: light.$border-color;\A 15:                 box-shadow: light.$popover-box-shadow;\A 16:                 .apexcharts-tooltip-title {\A 17:                     background: light.$white;\A 18:                     border-color: light.$border-color;"; }
