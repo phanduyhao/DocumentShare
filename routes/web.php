@@ -136,6 +136,7 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/userAdmin',[UsersController::class,'store'])->name('user.store');
             Route::patch('/userAdmin/{user}',[UsersController::class,'update'])->name('user.update');
             Route::delete('/users/{id}', [UsersController::class,'destroy'])->name('users.destroy');
+            Route::get('/users/payment', [UsersController::class,'paymentList'])->name('paymentAdmin');
 
 //            Slide
             Route::resource('slides', SlideController::class);

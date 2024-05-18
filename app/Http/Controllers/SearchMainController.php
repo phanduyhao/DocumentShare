@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Document;
 use App\Models\Favourite;
-use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class SearchMainController extends Controller
 {
     public function search(Request $request)

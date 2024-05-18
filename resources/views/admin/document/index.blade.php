@@ -411,9 +411,7 @@
                                         <p class="position-relative mb-0" style="width: max-content">
                                             <iframe src="/temp/files/{{$document_vip->file }}" width="220px"></iframe>
                                             <a data-id="{{$document_vip->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document_vip->slug]) }}">
-                                                <a href="" data-id="{{$document_vip->id}}" class="position-absolute end-0 z-3 me-3 btn-favourite">
-                                                    <i class='bx bxs-heart fs-3 icon-favourite' ></i>
-                                                </a>
+                                             
                                             </a>
                                         </p>
                                     </td>
