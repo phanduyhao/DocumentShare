@@ -16,9 +16,8 @@
         <div class="container">
             <div class="row">
                 <div class="col col-3">
-                    <div class="lib-sidebar">
-                        <h4 class="lib-header mb-0">Tất cả tài liệu</h4>
-                        @include('component.list_cates')
+                    <div class="position-sticky z-index-5" style="top: 20px">
+                        @include('component.left-cates',['tags'=>$tags, 'docs' => $doc_hots, 'title' => 'nổi bật'])
                     </div>
                 </div>
                 <div class="col col-9">

@@ -1,8 +1,8 @@
 /*
 Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss/functions.
-       Load path: I:/laragon/www/DocumentManage/public/temp/admin/scss/pages
-        on line 2 of I:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss
-        from line 4 of I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-misc.scss
+       Load path: D:/laragon/www/DocumentShare/public/temp/admin/scss/pages
+        on line 2 of D:/laragon/www/DocumentShare/public/temp/admin/scss/_bootstrap-extended/_include.scss
+        from line 4 of D:\laragon\www\DocumentShare\public\temp\admin\scss\pages\page-misc.scss
 
 1: // * Miscellaneous
 2: // *******************************************************************************
@@ -13,8 +13,8 @@ Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss
 7:     display: flex;
 
 Backtrace:
-I:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss:2
-I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-misc.scss:4
+D:/laragon/www/DocumentShare/public/temp/admin/scss/_bootstrap-extended/_include.scss:2
+D:\laragon\www\DocumentShare\public\temp\admin\scss\pages\page-misc.scss:4
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:45:in `import'
 C:/Program Files (x86)/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -65,4 +65,4 @@ C:/Program Files (x86)/Koala/bin/sass:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss/functions.\A        Load path: I:/laragon/www/DocumentManage/public/temp/admin/scss/pages\A         on line 2 of I:/laragon/www/DocumentManage/public/temp/admin/scss/_bootstrap-extended/_include.scss\A         from line 4 of I:\laragon\www\DocumentManage\public\temp\admin\scss\pages\page-misc.scss\A \A 1: // * Miscellaneous\A 2: // *******************************************************************************\A 3: \A 4: @import '../_bootstrap-extended/include';\A 5: \A 6: .misc-wrapper {\A 7:     display: flex;"; }
+  content: "Error: File to import not found or unreadable: ../../node_modules/bootstrap/scss/functions.\A        Load path: D:/laragon/www/DocumentShare/public/temp/admin/scss/pages\A         on line 2 of D:/laragon/www/DocumentShare/public/temp/admin/scss/_bootstrap-extended/_include.scss\A         from line 4 of D:\laragon\www\DocumentShare\public\temp\admin\scss\pages\page-misc.scss\A \A 1: // * Miscellaneous\A 2: // *******************************************************************************\A 3: \A 4: @import '../_bootstrap-extended/include';\A 5: \A 6: .misc-wrapper {\A 7:     display: flex;"; }

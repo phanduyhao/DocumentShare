@@ -381,9 +381,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="pagination mt-4 pb-4">
-                            {{ $documents->links() }}
-                        </div>
+                        @include('component.paginate',['docs'=>$documents])
                     </div>
                 </div>
 {{--                Tài liệu Vip                --}}
@@ -611,9 +609,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="pagination mt-4 pb-4">
-                            {{ $document_vips->links() }}
-                        </div>
+                        @include('component.paginate',['docs'=>$document_vips])
                     </div>
                 </div>
             </div>

@@ -17,9 +17,10 @@ class SearchMainController extends Controller
         $tags = Tag::all();
         $keyword = $request->input('keyword');
         $count_docs = Document::count();
+        $doc_hots = Document::where('status',1)->where('score','>',0)->take(3)->get();
 
         // Tìm kiếm tài liệu theo tên
-        $documentsByName = Document::where('title', 'like', '%' . $keyword . '%')->get();
+        $documentsByName = Document::where('title', 'like', '%' . $keyword . '%')->where('status',1)->get();
 
         // Tìm kiếm tài liệu theo danh mục
         $documentsByCategory = Document::whereHas('category', function ($query) use ($keyword) {
@@ -37,7 +38,7 @@ class SearchMainController extends Controller
             'path' => Paginator::resolveCurrentPath(),
         ]);
 
-        return view('layout.search', compact('searchResults', 'cates', 'tags', 'count_docs', 'favourites','keyword'), [
+        return view('layout.search', compact('searchResults', 'cates', 'tags', 'count_docs', 'favourites','keyword', 'doc_hots'), [
             'title' => 'Kết quả tìm kiếm cho từ khóa " ' . $keyword . ' "'
         ]);
     }
