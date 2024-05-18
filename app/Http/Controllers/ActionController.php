@@ -79,11 +79,10 @@ class ActionController extends Controller
 //    Bỏ thích
     public function unfavourite(Request $request) {
         $documentId = $request->input('document_id');
-        $userId = $request->input('user_id');
 
         // Xóa bản ghi khỏi bảng favourites
         Favourite::where('document_id', $documentId)
-            ->where('user_id', $userId)
+            ->where('user_id', Auth::id())
             ->delete();
 
         return response()->json(['success' => true, 'message' => 'Đã bỏ yêu thích!']);
@@ -107,15 +106,6 @@ class ActionController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Đánh giá thành công!']);
     }
-
-//    AVG Rating
-//
-//    public function avg_rate(Request $request){
-//        $averageRates = DB::table('rates')
-//            ->select('document_id', DB::raw('AVG(rates) as average_rate'))
-//            ->groupBy('document_id')
-//            ->get();
-//    }
 
     public function upload(Request $request){
         $this->validate($request,[

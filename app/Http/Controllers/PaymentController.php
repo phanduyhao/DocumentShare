@@ -18,8 +18,8 @@ class PaymentController extends Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = route('checkout.complete', ['code' => $checkout->order_code, 'amount_money' => $request->amount_money]);
-        $vnp_TmnCode = "TERQDSEC";
-        $vnp_HashSecret = "XDVHXUYMZCAWUPORNPNVANCNAXBPOSSM";
+        $vnp_TmnCode = "17AY5EOG";
+        $vnp_HashSecret = "1GJ1Z7RJW93EQMSV7NANEDLF8TXUBSKX";
         $code_cart = rand(00, 9999);
         $vnp_TxnRef = $code_cart;
         $vnp_OrderInfo = "Thanh toán đơn hàng test";

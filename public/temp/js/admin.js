@@ -119,7 +119,7 @@ $(document).ready(function () {
     }
 });
 
-// Xóa dữ liệu không load lại trang
+// Xóa dữ liệu
 $(document).ready(function () {
     $('.btnDeleteAsk').on('click', function () {
         const id = $(this).data('id');

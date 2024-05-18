@@ -8,8 +8,6 @@ use App\Models\Favourite;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\LengthAwarePaginator;
 class SearchMainController extends Controller
 {
     public function search(Request $request)
