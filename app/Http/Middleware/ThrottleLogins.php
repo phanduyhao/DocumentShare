@@ -16,8 +16,8 @@ class ThrottleLogins
      */
     public function handle($request, Closure $next)
     {
-        $maxAttempts = 10; // Số lần nhập sai tối đa
-        $decayMinutes = 2; // Khoảng thời gian giữa các lần thử
+        $maxAttempts = 3; // Số lần nhập sai tối đa
+        $decayMinutes = 1; // Khoảng thời gian giữa các lần thử
 
         if ($this->hasTooManyLoginAttempts($request, $maxAttempts, $decayMinutes)) {
             return $this->sendLockoutResponse($request, $decayMinutes);
