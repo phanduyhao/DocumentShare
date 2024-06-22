@@ -439,7 +439,7 @@
                                         </div>
                                     </td>
                                     <td class="">
-                                        <button type="button" data-url="/admin/documents/{{$document_vip->id}}" data-id="{{$document_vip->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                                        <button type="button" data-url="/admin/documents/{{$document_vip->id}}" data-id="{{$document_vip->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal{{$document_vip->id}}">Xóa</button>
                                         <button type="button" data-id="{{$document_vip->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document_vip->id}}">Sửa</button>
                                         <a data-id="{{$document_vip->id}}" data-score-doc="{{$document_vip->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document_vip->file }}.{{$document_vip->type}}" download class="download-file">
                                             <i class='bx bxs-downvote fs-3' ></i>
@@ -447,11 +447,11 @@
                                     </td>
 
                                     <!-- Modal Delete -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal{{$document_vip->id}}" tabindex="-1" aria-labelledby="deleteModal{{$document_vip->id}}Label" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Bạn có chắc chắn xóa bản ghi này vĩnh viễn không ?</h1>
+                                                    <h1 class="modal-title fs-5" id="deleteModalLabel{{$document_vip->id}}">Bạn có chắc chắn xóa bản ghi này vĩnh viễn không ?</h1>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="delete-forever btn btn-danger" data-id="{{ $document_vip->id }}">Xóa</button>

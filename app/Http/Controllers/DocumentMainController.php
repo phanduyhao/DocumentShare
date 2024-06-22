@@ -112,7 +112,8 @@ class DocumentMainController extends Controller
 
         // Chuyển hướng về trang hiển thị danh sách document hoặc trang khác tùy theo yêu cầu của bạn
         return view('document.up_success',[
-            'title' => 'Tải lên thành công!'
+            'title' => 'Tải lên thành công!',
+            'document' => $document
         ]);
     }
 

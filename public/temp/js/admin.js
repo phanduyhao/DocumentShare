@@ -136,9 +136,9 @@ $(document).ready(function () {
                     $(`tr[data-id="${id}"]`).remove(); // Xóa hàng trong bảng
                     window.location.reload()
                 },
-                error: function(error){
-                    alert('Bạn không có quyền thực hiện hành động này!')
-                }
+                // error: function(error){
+                //     alert('Bạn không có quyền thực hiện hành động này!')
+                // }
             });
         });
     });

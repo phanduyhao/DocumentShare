@@ -35,14 +35,14 @@ class DocumentController extends Controller
                 $query->whereNull('score')
                     ->orWhere('score', 0);
             })
-            ->orderBy('updated_at', 'asc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
 //        Lấy các tài liệu Có Score # Null hoặc Score > 0;
         $document_vips = Document::where('status', '1')
             ->whereNotNull('score')
             ->where('score', '>', 0)
-            ->orderBy('updated_at', 'asc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
         return view('admin.document.index',compact('documents','document_vips','cates','tags','count_docs'),[
@@ -167,12 +167,10 @@ class DocumentController extends Controller
         $this->validate($request,[
             'title' => 'required',
             'slug' => 'required|unique:documents',
-            'file' => 'required',
         ],[
             'title.required' => 'Vui lòng nhập tiêu đề !',
             'slug.required' => 'Vui lòng nhập slug',
-            'slug.unique' => 'Slug này đã có',
-            'file.required' => 'Vui lòng upload file',
+            'slug.unique' => 'Slug này đã có'
         ]);
 
         $document->title = $request->title;
@@ -201,10 +199,10 @@ class DocumentController extends Controller
             copy($tempFilePath, $destinationPath . '/' . $fileName);
             // Xóa tệp tin tạm thời
             unlink($tempFilePath);
+            $document->type = $fileExtension;
         }
         $document->description = $request->desc;
         $document->slug = $request->slug;
-        $document->type = $fileExtension;
         if($request->score == null){
             $document->score = 0;
         }else{
