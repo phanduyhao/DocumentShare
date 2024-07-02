@@ -160,10 +160,14 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
 {{--                Tài liệu thường             --}}
-                @include('admin.document.document',['documents'=>$documents])
+                <div class="tab-pane fade show active" id="pills-doc-normal" role="tabpanel" aria-labelledby="pills-doc-normal-tab" tabindex="0">
+                    @include('admin.document.document',['documents'=>$documents])
+                </div>
 
 {{--                Tài liệu Vip                --}}
-                @include('admin.document.document',['documents'=>$document_vips])
+                <div class="tab-pane fade" id="pills-doc-vip" role="tabpanel" aria-labelledby="pills-doc-vip-tab" tabindex="0">
+                    @include('admin.document.document',['documents'=>$document_vips])
+                </div>
             </div>
 
         </div>
