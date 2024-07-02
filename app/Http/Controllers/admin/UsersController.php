@@ -6,9 +6,8 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Payment_History;
 class UsersController extends Controller
 {
     /**
@@ -26,6 +25,14 @@ class UsersController extends Controller
         $users = User::where('level','!=','0')->orderBy('level', 'asc')->paginate(10);
         return view('admin.user.userAdmin',compact('users'),[
             'title' => 'Tải khoản quản trị'
+        ]);
+    }
+
+    public function paymentList(){
+        $payments_oks = Payment_History::where('vnp_BankTranNo','!=','null')->get();
+        $payments_nots = Payment_History::where('vnp_BankTranNo',null)->get();
+        return view('admin.user.paymentAdmin',compact('payments_nots', 'payments_oks'),[
+            'title' => 'Lịch sử giao dịch'
         ]);
     }
 

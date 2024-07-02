@@ -41,10 +41,10 @@
                             <a href="">Trung tâm hỗ trợ</a>
                         </li>
                         <li class="footer-item-list-info">
-                            <a href=""> Email: hotro@hocmai.vn</a>
+                            <a href=""> Email: haomrvuii@hocmai.vn</a>
                         </li>
                         <li class="footer-item-list-info">
-                            <a href=""> Đường dây nóng: 1900 6933</a>
+                            <a href=""> Đường dây nóng: +84 855 840 100</a>
                         </li>
                     </ul>
                 </div>
@@ -54,13 +54,13 @@
                     <h4>Dành cho đối tác</h4>
                     <ul class="footer-item-list-info">
                         <li class="footer-item-list-info">
-                            <a href=""> Email: info@hocmai.vn</a>
+                            <a href=""> Email: haomrvuii@hocmai.vn</a>
                         </li>
                         <li class="footer-item-list-info">
-                            <a href="">Tel: +84 (24) 3519-0591</a>
+                            <a href="">Tel: +84 855 840 100</a>
                         </li>
                         <li class="footer-item-list-info">
-                            <a href="">Fax: +84 (24) 3519-0587 </a>
+                            <a href="">Fax: +84 855 840 100</a>
                         </li>
                     </ul>
                 </div>

@@ -54,6 +54,9 @@
                                 <div class="col-lg-4 col-md-3 col-sm-6 col-12 mb-3">
                                     <div class="docs-item border border-1 mx-2 position-relative">
                                         <div class="position-absolute end-0 z-index-5 d-flex flex-column h-50 justify-content-around action-contain">
+                                            <a href="" data-user-id="{{ Auth::id() }}" data-id="{{$doc->Document->id}}" class="btn-favourite btn-action">
+                                                <i class="fa-solid fa-heart icon-favourite text-danger"></i>
+                                            </a>
                                             <a data-id="{{$doc->Document->id}}" data-author="{{$doc->Document->user_id}}" data-score-doc="{{$doc->Document->score}}" @auth data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" @endauth href="/temp/filesOrigin/{{$doc->Document->file}}.{{$doc->Document->type}}" download class="download-file btn-action">
                                                 <i class="fa-solid fa-download"></i>
                                             </a>

@@ -16,7 +16,6 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Level</th>
-                        <th>Created_at</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -31,7 +30,6 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->role}}</td>
                         <td>{{$user->level}}</td>
-                        <td>{{$user->created_at}}</td>
                         <td>
                             <button type="button" data-url="/admin/users/{{$user->id}}" data-id="{{$user->id}}" class="btn btn-danger btnDeleteAsk px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                         </td>

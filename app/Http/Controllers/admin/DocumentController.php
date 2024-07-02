@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Document;
+use App\Models\Tag;
 use App\Models\Rate;
-use App\Models\Setting;
 use App\Models\User;
 use App\Models\status;
-use App\Models\Tag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
+use App\Models\Setting;
+use App\Models\Category;
+use App\Models\Document;
+use App\Models\Download;
 use ConvertApi\ConvertApi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use function Termwind\ValueObjects\p;
 
 class DocumentController extends Controller
@@ -233,8 +235,10 @@ class DocumentController extends Controller
 //    Xem chi tiết
     public function show($slug)
     {
+        
         $document = Document::where('slug', $slug)->first();
         $document_id = $document->id;
+        $totalDownloads = Download::where('document_id', $document_id)->count();
         $rate_tb = Rate::where('document_id',$document_id)->get();
         if($document){
            $comments = Comment::all();
@@ -257,7 +261,7 @@ class DocumentController extends Controller
            }
            $filename = $document->file;
 
-           return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments','rate_tb'),[
+           return view('admin.document.details', compact('filename','document','username','cate_title','tag_name','status','comments','rate_tb','totalDownloads'),[
                'title' => $filename
            ]);
        }

@@ -27,7 +27,6 @@ class AppServiceProvider extends ServiceProvider
             $user = Auth::user();
             $name = $user->name;
             $role = $user->role;
-
             $view->with('name', $name)->with('role', $role);
         });
         View::composer('layout.header', function ($view) {

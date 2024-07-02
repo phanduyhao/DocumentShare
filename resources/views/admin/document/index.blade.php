@@ -164,6 +164,66 @@
 
 {{--                Tài liệu Vip                --}}
                 @include('admin.document.document',['documents'=>$document_vips])
+                <div class="tab-pane fade" id="pills-doc-vip" role="tabpanel" aria-labelledby="pills-doc-vip-tab" tabindex="0">
+                    <div class="table-responsive text-nowrap">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Title</th>
+                                <th>File</th>
+                                <th>Type</th>
+                                <th>Size</th>
+                                <th>Category</th>
+                                <th>Tag</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                            @foreach($document_vips as $document_vip)
+                                <tr data-id="{{$document_vip->id}}">
+                                    <td> {{ $loop->iteration }}</td>
+                                    <td>{{$document_vip->title}}</td>
+                                    <td style="width: 250px">
+                                        <p class="position-relative mb-0" style="width: max-content">
+                                            <iframe src="/temp/files/{{$document_vip->file }}" width="220px"></iframe>
+                                            <a data-id="{{$document_vip->id}}" class="position-absolute start-0 btn-show__details-file top-0 bottom-0 end-0" target="_blank" href="{{ route('documents.show', ['slug' =>$document_vip->slug]) }}">
+                                             
+                                            </a>
+                                        </p>
+                                    </td>
+                                    <td>{{$document_vip->type}}</td>
+                                    <td>{{$document_vip->size}}</td>
+                                    <td>
+                                        @if($document_vip->cate_id != null)
+                                            {{$document_vip->Category->title}}
+                                        @else
+                                            Chưa chọn danh mục
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($document_vip->tag_id != null)
+                                            {{$document_vip->Tag->tag_name}}
+                                        @else
+                                            Chưa có thẻ tag
+                                        @endif
+                                    </td>
+                                    <td>{{$document_vip->score}}</td>
+                                    <td class="">
+                                        <div class="d-flex align-items-center">
+                                            <i class='bx bx-check fs-2 fw-bold text-success'></i>
+                                            <h5 class="info-details ms-4 mb-0 text-success">{{$document_vip->Status->status}}</h5>
+                                        </div>
+                                    </td>
+                                    <td class="">
+                                        <button type="button" data-url="/admin/documents/{{$document_vip->id}}" data-id="{{$document_vip->id}}" class="btn btn-danger btnDeleteAsk me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                                        <button type="button" data-id="{{$document_vip->id}}" class="btn btn-edit btn-info btnEditDocument text-dark me-2 px-2 py-1 fw-bolder" data-bs-toggle="modal" data-bs-target="#editDocument{{$document_vip->id}}">Sửa</button>
+                                        <a data-id="{{$document_vip->id}}" data-score-doc="{{$document_vip->score}}" data-score-user="{{ Auth::user()->score }}" data-user-id="{{ Auth::id() }}" href="/temp/filesOrigin/{{$document_vip->file }}.{{$document_vip->type}}" download class="download-file">
+                                            <i class='bx bxs-downvote fs-3' ></i>
+                                        </a>
+                                    </td>
 
             </div>
 
