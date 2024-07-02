@@ -38,7 +38,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        try {
+        // try {
             $this->authorize('create', User::class);
             $this->validate($request,[
                 'name' => 'required',
@@ -70,14 +70,14 @@ class UsersController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
             return redirect()->back();
-        } catch (AuthorizationException $e) {
-            abort(403, 'Bạn không có quyền thực hiện');
-        }
+        // } catch (AuthorizationException $e) {
+        //     abort(403, 'Bạn không có quyền thực hiện');
+        // }
     }
 
     public function update(Request $request, User $user)
     {
-         try {
+        //  try {
             $this->authorize('create', User::class);
             $this->authorize('update', $user);
             $this->validate($request,[
@@ -110,20 +110,20 @@ class UsersController extends Controller
              }
              $user->save();
             return redirect()->back();
-         } catch (AuthorizationException $e) {
-             abort(403, 'Bạn không có quyền thực hiện');
-         }
+        //  } catch (AuthorizationException $e) {
+        //      abort(403, 'Bạn không có quyền thực hiện');
+        //  }
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        try {
+        // try {
             $this->authorize('delete', $user);
             $user->delete();
             return response()->json(['message' => 'Người dùng đã được xóa thành công']);
-        } catch (AuthorizationException $e) {
-            abort(403, 'Bạn không có quyền thực hiện hành động này!');
-        }
+        // } catch (AuthorizationException $e) {
+        //     abort(403, 'Bạn không có quyền thực hiện hành động này!');
+        // }
     }
 }
