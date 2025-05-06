@@ -22,16 +22,18 @@ class SearchMainController extends Controller
         $count_docs = Document::count();
         $doc_hots = Document::where('status',1)->where('score','>',0)->take(3)->get();
 
-        // Tìm kiếm tài liệu theo tên
-        $documentsByName = Document::where('title', 'like', '%' . $keyword . '%')->where('status',1)->get();
+      // Tìm kiếm tài liệu theo tên
+      $documentsByName = Document::where('title', 'like', '%' . $keyword . '%')->get();
 
-        // Tìm kiếm tài liệu theo danh mục
-        $documentsByCategory = Document::whereHas('category', function ($query) use ($keyword) {
-            $query->where('title', 'like', '%' . $keyword . '%');
-        })->get();
+      // Tìm kiếm tài liệu theo danh mục
+      $documentsByCategory = Document::whereHas('category', function ($query) use ($keyword) {
+          $query->where('title', 'like', '%' . $keyword . '%');
+      })->get();
+
+      // Kết hợp kết quả từ cả hai truy vấn
+      $searchResults = $documentsByName->merge($documentsByCategory);
 
         // Kết hợp kết quả từ cả hai truy vấn
-        $searchResults = $documentsByName->merge($documentsByCategory);
 
         // Phân trang kết quả
         $currentPage = Paginator::resolveCurrentPage('page') ?: 1;

@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0",
-        "convertapi/convertapi-php": "^1.7",
+        "convertapi/convertapi-php": "^2.0",
         "embed/embed": "^4.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",

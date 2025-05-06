@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbc5564e85df7ac250d14864081a2d95",
+    "content-hash": "3fdafadc196fd15051f508928222799b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -339,25 +339,25 @@
         },
         {
             "name": "convertapi/convertapi-php",
-            "version": "v1.7.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ConvertAPI/convertapi-php.git",
-                "reference": "72dc773a1c840e7e33ced8cece6e751a9d38ba1e"
+                "reference": "a4c67b10a4e300536170ea729248a92de70efd36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ConvertAPI/convertapi-php/zipball/72dc773a1c840e7e33ced8cece6e751a9d38ba1e",
-                "reference": "72dc773a1c840e7e33ced8cece6e751a9d38ba1e",
+                "url": "https://api.github.com/repos/ConvertAPI/convertapi-php/zipball/a4c67b10a4e300536170ea729248a92de70efd36",
+                "reference": "a4c67b10a4e300536170ea729248a92de70efd36",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
-                "php": ">=5.4.0"
+                "php": ">=8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~10.0"
             },
             "type": "library",
             "autoload": {
@@ -385,9 +385,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ConvertAPI/convertapi-php/issues",
-                "source": "https://github.com/ConvertAPI/convertapi-php/tree/v1.7.0"
+                "source": "https://github.com/ConvertAPI/convertapi-php/tree/v2.0.0"
             },
-            "time": "2023-07-18T19:30:59+00:00"
+            "time": "2024-02-16T14:30:01+00:00"
         },
         {
             "name": "dasprid/enum",

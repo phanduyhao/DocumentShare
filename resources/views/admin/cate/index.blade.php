@@ -83,7 +83,7 @@
                                            for='basic-default-email'>Parent Id</label>
                                     <select name="parent_id" class="form-control" id="parent_id">
                                         <option value="">Chọn danh mục cha</option>
-                                        @foreach($cates as $cate)
+                                        @foreach($cate_options as $cate)
                                             <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
                                         @endforeach
                                     </select>
@@ -232,7 +232,7 @@
                                             @else
                                                 <option value="">Chọn danh mục cha</option>
                                             @endif
-                                            @foreach($cates as $cate)
+                                            @foreach($cate_options as $cate)
                                                 <option value="{{ $cate->id }}">{{ $cate->id }}-{{ $cate->title }}</option>
                                             @endforeach
                                         </select>

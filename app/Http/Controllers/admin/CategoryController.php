@@ -7,6 +7,7 @@ use App\Http\Requests\Categories;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
         $tags = Tag::all();
         $count_cates = Category::count();
         $cates = Category::paginate(10);
-        return view('admin.cate.index',compact('cates','tags','count_cates'),[
+        $cate_options = Category::all(); 
+        return view('admin.cate.index',compact('cates','tags','count_cates','cate_options'),[
             'title' => 'Quản lý danh mục'
         ]);
     }
@@ -48,7 +50,10 @@ class CategoryController extends Controller
     {
         $this->validate($request,[
             'title' => 'required',
-            'slug' => 'required|unique:categories',
+            'slug' => [
+                'required',
+                Rule::unique('categories')->ignore($cate),
+            ],
         ],[
             'title.required' => 'Vui lòng nhập tiêu đề !',
             'slug.required' => 'Vui lòng nhập slug',

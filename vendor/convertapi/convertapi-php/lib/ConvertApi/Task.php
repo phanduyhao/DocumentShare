@@ -6,6 +6,11 @@ class Task
 {
     const DEFAULT_URL_FORMAT = 'url';
 
+    private ?string $fromFormat;
+    private ?string $toFormat;
+    private array $params;
+    private ?int $conversionTimeout;
+
     function __construct($fromFormat, $toFormat, $params, $conversionTimeout = null)
     {
         $this->fromFormat = $fromFormat;
@@ -16,11 +21,11 @@ class Task
 
     function run()
     {
-        $params = array_merge(
-            $this->normalizedParams(),
+        $params = array_replace(
             [
                 'StoreFile' => true,
-            ]
+            ],
+            $this->normalizedParams()
         );
 
         if ($this->conversionTimeout) {

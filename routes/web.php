@@ -92,7 +92,7 @@ Route::get('/load-comments',[DocumentMainController::class,'loadComments'])->nam
 
 Route::middleware(['auth'])->group(function() {
 
-//    NẠP TIỀN VNPAY
+    //    NẠP TIỀN VNPAY
     Route::post("checkout/Payment", [PaymentController::class, "payment"])->name("checkout.payment.vnpay");
     Route::get("checkout/complete/{code}", [PaymentController::class, "complete"])->name("checkout.complete");
 
@@ -100,7 +100,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/upload',[DocumentMainController::class,'uploadPage'])->name('uploadPage');
 
     // Comment
-    Route::post('sendComment',[CommentMainController::class,'store'])->name('sendComment');
+    Route::post('sendComment',action: [CommentMainController::class,'store'])->name('sendComment');
 
 //    Download
     Route::post('/download', [ActionController::class,'download']);
